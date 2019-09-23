@@ -1,0 +1,9 @@
+﻿@model Page;
+@{
+    ViewData["Meta"] = new string[3] { Model.MetaTitle, Model.MetaKeyword, Model.MetaDescription };
+    //ViewData["Meta"] = new string[3] { "MetaTitle", "MetaKeyword", "MetaDescription" };
+    //Layout = "~/Views/Shared/_LayoutSite.cshtml";
+    Layout = null;
+}
+
+@Html.Raw(Model.Description)

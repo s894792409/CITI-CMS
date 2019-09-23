@@ -1,0 +1,12 @@
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\bin\Debug\netcoreapp2.1\appsettings.json
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\bin\Debug\netcoreapp2.1\CMS.deps.json
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\bin\Debug\netcoreapp2.1\CMS.runtimeconfig.json
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\bin\Debug\netcoreapp2.1\CMS.runtimeconfig.dev.json
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\bin\Debug\netcoreapp2.1\CMS.dll
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\bin\Debug\netcoreapp2.1\CMS.pdb
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\obj\Debug\netcoreapp2.1\CMS.csprojAssemblyReference.cache
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\obj\Debug\netcoreapp2.1\CMS.csproj.CoreCompileInputs.cache
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\obj\Debug\netcoreapp2.1\CMS.AssemblyInfoInputs.cache
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\obj\Debug\netcoreapp2.1\CMS.AssemblyInfo.cs
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\obj\Debug\netcoreapp2.1\CMS.dll
+C:\Users\L33540.NYPSIT\Downloads\ASP.NET-Core-CMS-master\CMS\CMS\obj\Debug\netcoreapp2.1\CMS.pdb

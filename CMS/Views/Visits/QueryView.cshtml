@@ -1,0 +1,27 @@
+﻿@model CMS.Models.ViewModels.Visits
+@{
+    //Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>QueryView</title>
+</head>
+<body>
+    <p align="center" style="font-size:50px;margin-top:50px;" class="title">Query Visit</p>
+    <p align="center">
+        <a class="h1NewPage" asp-action="Create">Create New</a>
+        <a class="h1NewPage" asp-action="Index">All Visit</a>
+    </p>
+    <div style="align-content:center;">
+        <form asp-action="QueryVisit">
+            <p align="center">Please enter the company name of the query:</p>
+            <p align="center"><input type="text" asp-for="companyName" /></p>
+            <p align="center"><input type="submit" value="submit" /></p>
+        </form>
+    </div>
+</body>
+</html>
