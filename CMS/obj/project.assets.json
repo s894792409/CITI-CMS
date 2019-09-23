@@ -13618,11 +13618,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\L33540.NYPSIT\\Desktop\\CMSTest2\\ASP.NET-Core-CMS-master\\CMS\\CMS\\CMS.csproj",
+      "projectUniqueName": "C:\\Users\\L33540.NYPSIT\\Desktop\\CMSTest2\\ASP.NET-Core-CMS-master\\CMS\\CITI-CMS\\CMS\\CMS.csproj",
       "projectName": "CMS",
-      "projectPath": "C:\\Users\\L33540.NYPSIT\\Desktop\\CMSTest2\\ASP.NET-Core-CMS-master\\CMS\\CMS\\CMS.csproj",
+      "projectPath": "C:\\Users\\L33540.NYPSIT\\Desktop\\CMSTest2\\ASP.NET-Core-CMS-master\\CMS\\CITI-CMS\\CMS\\CMS.csproj",
       "packagesPath": "C:\\Users\\L33540.NYPSIT\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\L33540.NYPSIT\\Desktop\\CMSTest2\\ASP.NET-Core-CMS-master\\CMS\\CMS\\obj\\",
+      "outputPath": "C:\\Users\\L33540.NYPSIT\\Desktop\\CMSTest2\\ASP.NET-Core-CMS-master\\CMS\\CITI-CMS\\CMS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

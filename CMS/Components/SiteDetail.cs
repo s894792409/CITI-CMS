@@ -56,7 +56,7 @@ namespace CMS.Components
             Menu menu = new Menu();
             using (var context = new CMSContext())
             {
-                menu = context.Menu.Where(x => x.Name == "Main").FirstOrDefault();
+                menu = context.Menu.Where(x => x.Name == "menuTest1").FirstOrDefault();
             }
             return View((object)BindMenu(menu));
         }
@@ -103,6 +103,7 @@ namespace CMS.Components
             }
             mainString = mainString + "</ul>";
             return mainString;
+            //return "";
         }
 
         string CreateMenuItem(MenuJsonChild child)

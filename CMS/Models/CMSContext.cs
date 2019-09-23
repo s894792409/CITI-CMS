@@ -235,6 +235,10 @@ namespace CMS.Models
 
             });
         }
+
+        public DbSet<CMS.Models.ViewModels.Preset> Preset { get; set; }
+
+        public DbSet<CMS.Models.ViewModels.Theme> Theme { get; set; }
  
     }
 }

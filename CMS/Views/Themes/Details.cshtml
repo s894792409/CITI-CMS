@@ -1,0 +1,36 @@
+﻿@model CMS.Models.ViewModels.Theme
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Theme</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.backgroundColor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.backgroundColor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.fontStyle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.fontStyle)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.themeId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -11,10 +11,13 @@ namespace CMS.Models.ViewModels
         [Key]
         public int presetId { get; set;}
         [Required]
+        [Display(Name ="Created Date")]
         public DateTime dateCreated { get; set; }
         [Required]
+        [Display(Name = "Theme ID")]
         public int themeId { get; set; }
         [Required]
+        [Display(Name = "Visit Id")]
         public int visitId { get; set; }
     }
 }

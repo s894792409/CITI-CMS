@@ -34,3 +34,15 @@ C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CMS\obj\Debu
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CMS\obj\Debug\netcoreapp2.0\CMS.AssemblyInfo.cs
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CMS\obj\Debug\netcoreapp2.0\CMS.dll
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CMS\obj\Debug\netcoreapp2.0\CMS.pdb
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\bin\Debug\netcoreapp2.0\appsettings.json
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\bin\Debug\netcoreapp2.0\CMS.deps.json
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\bin\Debug\netcoreapp2.0\CMS.runtimeconfig.json
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\bin\Debug\netcoreapp2.0\CMS.runtimeconfig.dev.json
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\bin\Debug\netcoreapp2.0\CMS.dll
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\bin\Debug\netcoreapp2.0\CMS.pdb
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Debug\netcoreapp2.0\CMS.csprojAssemblyReference.cache
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Debug\netcoreapp2.0\CMS.csproj.CoreCompileInputs.cache
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Debug\netcoreapp2.0\CMS.AssemblyInfoInputs.cache
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Debug\netcoreapp2.0\CMS.AssemblyInfo.cs
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Debug\netcoreapp2.0\CMS.dll
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Debug\netcoreapp2.0\CMS.pdb
