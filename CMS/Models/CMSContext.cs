@@ -239,6 +239,14 @@ namespace CMS.Models
         public DbSet<CMS.Models.ViewModels.Preset> Preset { get; set; }
 
         public DbSet<CMS.Models.ViewModels.Theme> Theme { get; set; }
+
+        public DbSet<CMS.Models.ViewModels.Student> Student { get; set; }
+
+        public DbSet<CMS.Models.ViewModels.Projects> Projects { get; set; }
+
+        public DbSet<CMS.Models.ViewModels.Awards> Awards { get; set; }
+
+        public DbSet<CMS.Models.ViewModels.ShortCourses> ShortCourses { get; set; }
  
     }
 }

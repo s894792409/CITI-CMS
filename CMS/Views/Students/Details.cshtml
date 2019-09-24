@@ -1,0 +1,42 @@
+﻿@model CMS.Models.ViewModels.Student
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.studentName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.studentName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.projectId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.projectId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.studentYear)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.studentYear)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.studentAdmin">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

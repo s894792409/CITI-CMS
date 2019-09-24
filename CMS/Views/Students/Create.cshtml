@@ -1,0 +1,45 @@
+﻿@model CMS.Models.ViewModels.Student
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="studentAdmin" class="control-label"></label>
+                <input asp-for="studentAdmin" class="form-control" />
+                <span asp-validation-for="studentAdmin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="studentName" class="control-label"></label>
+                <input asp-for="studentName" class="form-control" />
+                <span asp-validation-for="studentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="projectId" class="control-label"></label>
+                <input asp-for="projectId" class="form-control" />
+                <span asp-validation-for="projectId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="studentYear" class="control-label"></label>
+                <input asp-for="studentYear" class="form-control" />
+                <span asp-validation-for="studentYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

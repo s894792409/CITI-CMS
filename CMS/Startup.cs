@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CMS.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace CMS
 {
@@ -32,13 +35,18 @@ namespace CMS
             /*Identity Login Url */
             services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Login");
 
-            services.AddMvc()
-                .AddJsonOptions(options =>
-                {
-                    //Set date configurations
-                    //options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-                    options.SerializerSettings.DateFormatString = "dd MMM yyyy,hh:mm"; // month must be capital. otherwise it gives minutes.
-                });
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            //    .AddJsonOptions(options =>
+            //    {
+            //        //Set date configurations
+            //        //options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+            //        options.SerializerSettings.DateFormatString = "dd MMM yyyy,hh:mm"; // month must be capital. otherwise it gives minutes.
+            //    });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options =>
+            {
+               // options.SerializerSettings.DateFormatString = "dd MMM yyyy,hh:mm";
+            });
         }
 
           
@@ -48,7 +56,7 @@ namespace CMS
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
+               // app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -58,6 +66,7 @@ namespace CMS
             }
 
             app.UseStaticFiles();
+          
 
             /*Identity*/
             app.UseAuthentication();

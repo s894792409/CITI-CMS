@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,8 +11,8 @@ namespace CMS.Models.ViewModels
     {
         [Key]
         public int themeId { get; set;}
-        [Required]
         [Display(Name ="Created Date")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime dateCreated { get; set; }
         [Required]
         [Display(Name ="Background Color")]

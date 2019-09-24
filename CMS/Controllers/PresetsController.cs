@@ -24,6 +24,13 @@ namespace CMS.Controllers
         {
             return View(await _context.Preset.ToListAsync());
         }
+        public ActionResult QueryTheme(int? id) {
+            Preset preset = new Preset();
+            preset.themeId = (int)id;
+            TempData["model"] = preset;
+            return RedirectToAction("Themes", "QueryTheme");
+        }
+        
         // GET: Presets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -57,7 +64,7 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                preset.dateCreated = DateTime.Now.Date;
+                preset.dateCreated = DateTime.Now;
                 _context.Add(preset);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -49,6 +49,26 @@ namespace CMS.Controllers
             return View();
         }
 
+        //
+        // POST: /Home/AfterLogin
+        public ActionResult QueryTheme(Preset model)
+        {
+            Theme theme = new Theme();
+            var list = from m in _context.Theme
+                       select m;
+
+
+
+
+            // return View("ViewTheme",list.ToList());
+            return View();
+        }
+
+        public ActionResult QueryTheme()
+        {
+            return QueryTheme(TempData["model"] as Preset);
+        }
+
         // POST: Themes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -58,7 +78,7 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                theme.dateCreated = DateTime.Now.Date;
+                theme.dateCreated = DateTime.Now;
                 _context.Add(theme);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -98,6 +118,7 @@ namespace CMS.Controllers
             {
                 try
                 {
+                  
                     _context.Update(theme);
                     await _context.SaveChangesAsync();
                 }

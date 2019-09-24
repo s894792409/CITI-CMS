@@ -1,0 +1,51 @@
+﻿@model CMS.Models.ViewModels.Awards
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Awards</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.awardName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.awardName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.awardLevel)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.awardLevel)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.noOfRecipients)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.noOfRecipients)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.awardType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.awardType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="awardId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

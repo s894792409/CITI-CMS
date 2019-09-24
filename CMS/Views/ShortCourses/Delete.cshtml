@@ -1,0 +1,51 @@
+﻿@model CMS.Models.ViewModels.ShortCourses
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ShortCourses</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.courseName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.courseName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.courseSubject)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.courseSubject)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.courseInstructor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.courseInstructor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.courseVenue)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.courseVenue)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="courseId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

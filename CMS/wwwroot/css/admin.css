@@ -67,6 +67,7 @@ a {
     /* main level link */
     #nav a {
         color: #FFFFFF;
+        width :auto;
         cursor: pointer;
     }
 
@@ -83,16 +84,17 @@ a {
         display: none;
         margin: 0;
         padding: 0;
-        width: 185px;
+        width: 90%;
         position: absolute;
         top: 5px;
-        left: 90px;
+        left: 50px;
         background: #333;
         list-style: none outside none;
     }
 
         #nav ul li {
             padding: 5px;
+            padding-left:inherit;
         }
 /*End*/
 

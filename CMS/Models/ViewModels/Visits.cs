@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,6 +28,7 @@ namespace CMS.Models.ViewModels
         public int visitTypeId { get; set; }
         [Display(Name = "Created Date ")]
         [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime dateCreated { get; set; }
 
     }

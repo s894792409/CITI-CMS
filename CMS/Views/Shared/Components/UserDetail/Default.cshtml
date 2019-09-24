@@ -18,7 +18,7 @@
                 </li>
             </ul>
         </li>
-        <li class="mediaIcon">
+        @*<li class="mediaIcon">
             <a>Media</a>
             <ul>
                 <li>
@@ -62,7 +62,7 @@
                     <a asp-controller="Menu" asp-action="Add" asp-route-id="">Add Menu</a>
                 </li>
             </ul>
-        </li>
+        </li>*@
         <li class="accountIcon">
             <a>Account</a>
             <ul>
@@ -112,6 +112,62 @@
                 </li>
                 <li>
                     <a asp-controller="Themes" asp-action="Index">All Themes</a>
+                </li>
+            </ul>
+        </li>
+        <li class="siteIcon">
+            <a>student information</a>
+            <ul>
+                <li>
+                    <a asp-controller="Students" asp-action="Index">All Student</a>
+                </li>
+                <li>
+                    <a asp-controller="Students" asp-action="Create">Add Student</a>
+                </li>
+                <li>
+                    <a asp-controller="Students" asp-action="QueryView">Query Student</a>
+                </li>
+            </ul>
+        </li>
+        <li class="siteIcon">
+            <a>Projects information</a>
+            <ul>
+                <li>
+                    <a asp-controller="Projects" asp-action="Index">All Projects</a>
+                </li>
+                <li>
+                    <a asp-controller="Projects" asp-action="create">Add Project</a>
+                </li>
+                <li>
+                    <a asp-controller="Projects" asp-action="Index">Query Project</a>
+                </li>
+            </ul>
+        </li>
+        <li class="siteIcon">
+            <a>Awards</a>
+            <ul>
+                <li>
+                    <a asp-controller="Awards" asp-action="Index">All Awards</a>
+                </li>
+                <li>
+                    <a asp-controller="Awards" asp-action="create">Add Awards</a>
+                </li>
+                <li>
+                    <a asp-controller="Awards" asp-action="Index">Query Awards</a>
+                </li>
+            </ul>
+        </li>
+        <li class="siteIcon">
+            <a>Short Courses</a>
+            <ul>
+                <li>
+                    <a asp-controller="ShortCourses" asp-action="Index">All Short Courses</a>
+                </li>
+                <li>
+                    <a asp-controller="ShortCourses" asp-action="create">Add Short Courses</a>
+                </li>
+                <li>
+                    <a asp-controller="ShortCourses" asp-action="Index">Query Short Courses</a>
                 </li>
             </ul>
         </li>
