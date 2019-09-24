@@ -61,6 +61,9 @@ namespace CMS.Controllers
         // GET: Students/Create
         public IActionResult Create()
         {
+            var projectlist = _context.Projects.ToList();
+            var projectSelect = new SelectList(projectlist, "projectId", "projectName");
+            ViewBag.projectselect = projectSelect;
             return View();
         }
 

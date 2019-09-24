@@ -13,7 +13,6 @@ namespace CMS.Models.ViewModels
         public int presetId { get; set;}
         
         [Display(Name ="Created Date")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime dateCreated { get; set; }
         [Required]
         [Display(Name = "Theme ID")]

@@ -24,8 +24,7 @@ namespace CMS.Models.ViewModels
         [Required]
         public string courseVenue { get; set; }
         [Display(Name = "Created Date ")]
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        
         public DateTime dateCreated { get; set; }
 
     }

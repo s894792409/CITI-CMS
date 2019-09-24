@@ -15,7 +15,7 @@ namespace CMS.Models.ViewModels
        [Required]
         [Display(Name = "Student Name")]
         public string studentName { get; set; }
-        [Required]
+        
         [Display(Name = "Project Id")]
         public int projectId { get; set; }
         [Required]
@@ -23,7 +23,6 @@ namespace CMS.Models.ViewModels
         public int studentYear { get; set; }
         [Required]
         [Display(Name = "Created Date")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime dateCreated { get; set; }
 
     }

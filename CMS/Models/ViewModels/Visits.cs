@@ -28,7 +28,6 @@ namespace CMS.Models.ViewModels
         public int visitTypeId { get; set; }
         [Display(Name = "Created Date ")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime dateCreated { get; set; }
 
     }

@@ -45,7 +45,7 @@ namespace CMS
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options =>
             {
-               // options.SerializerSettings.DateFormatString = "dd MMM yyyy,hh:mm";
+               options.SerializerSettings.DateFormatString = "dd MMM yyyy,hh:mm";
             });
         }
 

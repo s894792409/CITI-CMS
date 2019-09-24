@@ -13,24 +13,23 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.dateCreated)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.themeId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.visitId)
-                </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.themeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.visitId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateCreated)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.dateCreated)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.themeId)
             </td>
@@ -38,10 +37,18 @@
                 @Html.DisplayFor(modelItem => item.visitId)
             </td>
             <td>
+                @using System.Globalization;
+                @{
+                    string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                }
+                @Html.DisplayFor(modelItem => datecreated)
+            </td>
+            <td>
                 <a asp-action="Edit" asp-route-id="@item.presetId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.presetId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.presetId">Delete</a>
             </td>
+
         </tr>
 }
     </tbody>

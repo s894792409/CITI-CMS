@@ -99,6 +99,8 @@ namespace CMS.Controllers
             {
                 try
                 {
+                   // var list = await _context.ShortCourses.SingleOrDefaultAsync(m => m.courseId == id);
+                    //shortCourses.dateCreated = list.dateCreated;
                     _context.Update(shortCourses);
                     await _context.SaveChangesAsync();
                 }

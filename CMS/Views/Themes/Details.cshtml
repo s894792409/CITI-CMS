@@ -14,7 +14,11 @@
             @Html.DisplayNameFor(model => model.dateCreated)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.dateCreated)
+            @using System.Globalization;
+            @{
+                string datecreated = Model.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+            }
+            @Html.DisplayFor(modelItem => datecreated)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.backgroundColor)

@@ -25,7 +25,6 @@ namespace CMS.Models.ViewModels
         public string awardType { get; set; }
         [Display(Name = "Created Date ")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime dateCreated { get; set; }
 
     }

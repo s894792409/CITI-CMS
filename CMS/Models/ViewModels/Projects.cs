@@ -22,7 +22,6 @@ namespace CMS.Models.ViewModels
         public int noOfStudents { get; set; }
         [Required]
         [Display(Name = "Created Date")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime dateCreated { get; set; }
 
     }

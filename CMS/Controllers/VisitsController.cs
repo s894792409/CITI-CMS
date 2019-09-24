@@ -50,7 +50,8 @@ namespace CMS.Controllers
             var VisitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
             var selectList = new SelectList(VisitTypelist, "visitTypeId", "visitType");
             ViewBag.visitTypes = selectList;
-            var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
+            //var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
+            var CompanyTypelist = _context.CompanyType.ToList();
             var companySelectList = new SelectList(CompanyTypelist, "companyTypeId", "companyType");
             ViewBag.CompanyType = companySelectList;
             return View();
@@ -71,10 +72,12 @@ namespace CMS.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            var VisitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
+            //var VisitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
+            var VisitTypelist = _context.VisitType.ToList();
             var selectList = new SelectList(VisitTypelist, "visitTypeId", "visitType");
             ViewBag.visitTypes = selectList;
-            var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
+            // var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
+            var CompanyTypelist= _context.CompanyType.ToList();
             var companySelectList = new SelectList(CompanyTypelist, "companyTypeId", "companyType");
             ViewBag.CompanyType = companySelectList;
             return View(visits);

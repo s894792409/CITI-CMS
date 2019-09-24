@@ -40,7 +40,11 @@
                 @Html.DisplayFor(modelItem => item.noOfStudents)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dateCreated)
+                @using System.Globalization;
+                @{
+                    string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                }
+                @Html.DisplayFor(modelItem => datecreated)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.projectId">Edit</a> |
