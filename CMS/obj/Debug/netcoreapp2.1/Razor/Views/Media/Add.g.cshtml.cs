@@ -112,7 +112,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\n    ");
             EndContext();
             BeginContext(194, 183, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d7749c3dc71b4245847901263a4d96bf", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "13da0aa99b974d399c75acaeada93908", async() => {
                 BeginContext(261, 109, true);
                 WriteLiteral("\n        <input type=\"file\" multiple name=\"mediaUpload\" />\n        <button type=\"submit\">Submit</button>\n    ");
                 EndContext();
@@ -167,7 +167,7 @@ WriteAttributeValue("", 578, Url.Content(p.url), 578, 19, false);
             WriteLiteral(" />\n                    ");
             EndContext();
             BeginContext(622, 52, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1df9ddf9ac974a468aa3d43f2a97ef8e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8ec4d52595a3468e948ec4c5775db86a", async() => {
                 BeginContext(666, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
