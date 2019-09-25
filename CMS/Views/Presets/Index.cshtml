@@ -34,7 +34,20 @@
                 @Html.DisplayFor(modelItem => item.themeId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.visitId)
+                @{
+                    CMSContext context = new CMSContext();
+                    Visits visit =  context.Visits.SingleOrDefault(s=>s.visitId ==item.visitId);
+                    string name = "";
+                    if (visit != null)
+                    {
+                        name = visit.companyName;
+                    }
+                    else {
+                        name = "Not find this visit!";
+                    }
+
+                 }
+                @Html.DisplayFor(modelItem => name)
             </td>
             <td>
                 @using System.Globalization;

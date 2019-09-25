@@ -15,10 +15,10 @@ namespace CMS.Models.ViewModels
         [Display(Name ="Created Date")]
         public DateTime dateCreated { get; set; }
         [Required]
-        [Display(Name = "Theme ID")]
+        [Display(Name = "Theme Id")]
         public int themeId { get; set; }
         [Required]
-        [Display(Name = "Visit Id")]
+        [Display(Name = "Visit Company")]
         public int visitId { get; set; }
     }
 }

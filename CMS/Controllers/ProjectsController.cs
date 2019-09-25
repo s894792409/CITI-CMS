@@ -24,6 +24,22 @@ namespace CMS.Controllers
         {
             return View(await _context.Projects.ToListAsync());
         }
+        public IActionResult QueryView()
+        {
+            return View();
+        }
+        public async Task<IActionResult> QueryProject(Projects projects)
+        {
+            var list =await _context.Projects.ToListAsync();
+            List<Projects> list2=new List<Projects>();
+            foreach (Projects project in list) {
+                if (project.projectName == projects.projectName) {
+                    list2.Add(project);
+                }
+            }
+            list2.ToList();
+            return View(list2);
+        }
 
         // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -54,10 +70,11 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("projectId,projectName,projectState,noOfStudents")] Projects projects)
+        public async Task<IActionResult> Create([Bind("projectId,projectName,projectState")] Projects projects)
         {
             if (ModelState.IsValid)
             {
+                projects.noOfStudents = 0;
                 projects.dateCreated = DateTime.Now;
                 _context.Add(projects);
                 await _context.SaveChangesAsync();
@@ -87,7 +104,7 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("projectId,projectName,projectState,noOfStudents")] Projects projects)
+        public async Task<IActionResult> Edit(int id, [Bind("projectId,projectName,projectState,noOfStudents,dateCreated")] Projects projects)
         {
             if (id != projects.projectId)
             {

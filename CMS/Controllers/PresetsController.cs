@@ -52,6 +52,9 @@ namespace CMS.Controllers
         // GET: Presets/Create
         public IActionResult Create()
         {
+            var list = _context.Visits.ToList();
+            var selectlist = new SelectList(list, "visitId", "companyName");
+            ViewBag.selectlist = selectlist;
             return View();
         }
 
@@ -85,6 +88,9 @@ namespace CMS.Controllers
             {
                 return NotFound();
             }
+            var list = _context.Visits.ToList();
+            var selectlist = new SelectList(list, "visitId", "companyName");
+            ViewBag.selectlist = selectlist;
             return View(preset);
         }
 

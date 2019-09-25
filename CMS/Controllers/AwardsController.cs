@@ -81,13 +81,28 @@ namespace CMS.Controllers
             }
             return View(awards);
         }
+        public IActionResult QueryView()
+        {
+            return View();
+        }
+        public async Task<IActionResult> QueryAwards(Awards awards)
+        {
+            var list = from m in _context.Awards
+                       select m;
 
+            if (!String.IsNullOrEmpty(awards.awardName))
+            {
+                list = list.Where(s => s.awardName.Contains(awards.awardName));
+            }
+
+            return View(await list.ToListAsync());
+        }
         // POST: Awards/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("awardId,awardName,awardLevel,noOfRecipients,awardType")] Awards awards)
+        public async Task<IActionResult> Edit(int id, [Bind("awardId,awardName,awardLevel,noOfRecipients,awardType,dateCreated")] Awards awards)
         {
             if (id != awards.awardId)
             {

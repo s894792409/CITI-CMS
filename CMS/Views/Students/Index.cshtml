@@ -34,7 +34,20 @@
                 @Html.DisplayFor(modelItem => item.studentName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.projectId)
+                @{ 
+                    CMSContext context = new CMSContext();
+                    string name = "";
+                    if (item.projectId == 0)
+                    {
+                        name = "null";
+                    }
+                    else
+                    {
+                        var project = context.Projects.SingleOrDefault(p => p.projectId == item.projectId);
+                        name = project.projectName;
+                    }
+                }
+                @Html.DisplayFor(modelItem =>name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.studentYear)
@@ -47,8 +60,8 @@
                 @Html.DisplayFor(modelItem => datecreated)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.studentAdmin">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.studentAdmin">Details</a> |
+                <a asp-action="Edit" asp-route-id="@item.studentAdmin">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.studentAdmin">Details</a> 
                 <a asp-action="Delete" asp-route-id="@item.studentAdmin">Delete</a>
             </td>
         </tr>

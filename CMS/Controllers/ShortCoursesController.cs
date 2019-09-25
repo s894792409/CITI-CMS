@@ -42,6 +42,24 @@ namespace CMS.Controllers
 
             return View(shortCourses);
         }
+        public IActionResult QueryView()
+        {
+            return View();
+        }
+        public async Task<IActionResult> QueryShortCourses(ShortCourses projects)
+        {
+            var list = await _context.ShortCourses.ToListAsync();
+            List<ShortCourses> list2 = new List<ShortCourses>();
+            foreach (ShortCourses project in list)
+            {
+                if (project.courseName == projects.courseName)
+                {
+                    list2.Add(project);
+                }
+            }
+            list2.ToList();
+            return View(list2);
+        }
 
         // GET: ShortCourses/Create
         public IActionResult Create()

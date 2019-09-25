@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="visitId" class="control-label"></label>
-                <input asp-for="visitId" class="form-control" />
+                <select asp-for="visitId" class="form-control" asp-items="@ViewBag.selectlist "></select>
                 <span asp-validation-for="visitId" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -1,0 +1,11 @@
+﻿@model ShortCourses
+@{
+    ViewData["Title"] = "QueryView";
+}
+
+<h2>QueryView</h2>
+<form asp-action="QueryShortCourses">
+    <p>Please enter the Short Courses name:</p>
+<input asp-for="courseName" type="text"/>
+    <input type="submit" value="submit" />
+</form>

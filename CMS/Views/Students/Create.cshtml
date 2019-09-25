@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label asp-for="studentAdmin" class="control-label"></label>
                 <input asp-for="studentAdmin" class="form-control" />
-                <span asp-validation-for="studentAdmin" class="text-danger"></span>
+                <span asp-validation-for="studentAdmin" class="text-danger">@ViewBag.error</span>
             </div>
             <div class="form-group">
                 <label asp-for="studentName" class="control-label"></label>

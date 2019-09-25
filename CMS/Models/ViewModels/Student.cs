@@ -10,13 +10,14 @@ namespace CMS.Models.ViewModels
     public class Student
     {
         [Key]
+        [Required]
         [Display(Name = "Student Admin")]
         public string studentAdmin { get; set; }
-       [Required]
+        [Required]
         [Display(Name = "Student Name")]
         public string studentName { get; set; }
         
-        [Display(Name = "Project Id")]
+        [Display(Name = "Project")]
         public int projectId { get; set; }
         [Required]
         [Display(Name = "student's Age")]

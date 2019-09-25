@@ -76,10 +76,26 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                student.dateCreated = DateTime.Now;
-                _context.Add(student);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //var project = await _context.Projects.SingleOrDefaultAsync(m => m.projectId == student.projectId);
+                //        project.noOfStudents += 1;
+                //        _context.Update(project);
+                //        await _context.SaveChangesAsync();
+                var check = await _context.Student.SingleOrDefaultAsync(s => s.studentAdmin == student.studentAdmin);
+                if (check == null)
+                {
+                    student.dateCreated = DateTime.Now;
+                    _context.Add(student);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else {
+                    ViewBag.error = "The student Admin already exists!";
+                    var projectlist = _context.Projects.ToList();
+                    var projectSelect = new SelectList(projectlist, "projectId", "projectName");
+                    ViewBag.projectselect = projectSelect;
+                    return View();
+                }
+                
             }
             return View(student);
         }
@@ -97,6 +113,9 @@ namespace CMS.Controllers
             {
                 return NotFound();
             }
+            var projectlist = _context.Projects.ToList();
+            var projectSelect = new SelectList(projectlist, "projectId", "projectName");
+            ViewBag.projectselect = projectSelect;
             return View(student);
         }
 
@@ -105,7 +124,7 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("studentAdmin,studentName,projectId,studentYear")] Student student)
+        public async Task<IActionResult> Edit(string id, [Bind("studentAdmin,studentName,projectId,studentYear,dateCreated")] Student student)
         {
             if (id != student.studentAdmin)
             {
@@ -118,6 +137,7 @@ namespace CMS.Controllers
                 {
                     _context.Update(student);
                     await _context.SaveChangesAsync();
+                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
