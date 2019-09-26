@@ -55,6 +55,9 @@ namespace CMS.Controllers
             var list = _context.Visits.ToList();
             var selectlist = new SelectList(list, "visitId", "companyName");
             ViewBag.selectlist = selectlist;
+            var themelist = _context.Theme.ToList();
+            var namelist = new SelectList(themelist, "themeId", "themeName");
+            ViewBag.namelist = namelist;
             return View();
         }
 
@@ -72,6 +75,12 @@ namespace CMS.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            var list = _context.Visits.ToList();
+            var selectlist = new SelectList(list, "visitId", "companyName");
+            ViewBag.selectlist = selectlist;
+            var themelist = _context.Theme.ToList();
+            var namelist = new SelectList(themelist, "themeId", "themeName");
+            ViewBag.namelist = namelist;
             return View(preset);
         }
 
@@ -91,6 +100,9 @@ namespace CMS.Controllers
             var list = _context.Visits.ToList();
             var selectlist = new SelectList(list, "visitId", "companyName");
             ViewBag.selectlist = selectlist;
+            var themelist = _context.Theme.ToList();
+            var namelist = new SelectList(themelist, "themeId", "themeName");
+            ViewBag.namelist = namelist;
             return View(preset);
         }
 
@@ -126,6 +138,12 @@ namespace CMS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            var list = _context.Visits.ToList();
+            var selectlist = new SelectList(list, "visitId", "companyName");
+            ViewBag.selectlist = selectlist;
+            var themelist = _context.Theme.ToList();
+            var namelist = new SelectList(themelist, "themeId", "themeName");
+            ViewBag.namelist = namelist;
             return View(preset);
         }
 

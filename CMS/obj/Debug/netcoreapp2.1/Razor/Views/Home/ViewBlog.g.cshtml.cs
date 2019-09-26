@@ -147,7 +147,7 @@ WriteAttributeValue("", 785, Model.Name, 785, 11, false);
             WriteLiteral("                    <ul>\n                        <li>\n                            <a>\n                                <h3>");
             EndContext();
             BeginContext(1364, 87, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a982829bf024297b034dedd7f822531", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3a76744caeff44ecbab27fc34484c029", async() => {
                 BeginContext(1441, 6, false);
 #line 33 "C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\Views\Home\ViewBlog.cshtml"
                                                                                                            Write(p.Name);

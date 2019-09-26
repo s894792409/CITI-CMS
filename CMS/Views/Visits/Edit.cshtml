@@ -45,6 +45,7 @@
                 <select asp-for="visitTypeId" class="form-control" asp-items="ViewBag.visitTypes"></select>
                 <span asp-validation-for="visitTypeId" class="text-danger"></span>
             </div>
+            <input asp-for="dateCreated" style="display:none;"/>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

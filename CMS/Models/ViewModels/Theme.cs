@@ -19,5 +19,8 @@ namespace CMS.Models.ViewModels
         [Required]
         [Display(Name ="Font Style")]
         public string fontStyle { get; set; }
+        [Required]
+        [Display(Name = "Theme Name")]
+        public string themeName { get; set; }
     }
 }

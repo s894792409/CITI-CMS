@@ -12,15 +12,18 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.dateCreated)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.backgroundColor)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.fontStyle)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.themeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.backgroundColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fontStyle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateCreated)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -28,13 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.dateCreated)
+                @Html.DisplayFor(modelItem => item.themeName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.backgroundColor)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.fontStyle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateCreated)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.themeId">Edit</a> |

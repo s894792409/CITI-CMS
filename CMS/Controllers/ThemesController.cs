@@ -74,7 +74,7 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("themeId,dateCreated,backgroundColor,fontStyle")] Theme theme)
+        public async Task<IActionResult> Create([Bind("themeId,themeName,dateCreated,backgroundColor,fontStyle")] Theme theme)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +107,7 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("themeId,backgroundColor,fontStyle")] Theme theme)
+        public async Task<IActionResult> Edit(int id, [Bind("themeId,themeName,backgroundColor,fontStyle")] Theme theme)
         {
             if (id != theme.themeId)
             {
@@ -161,6 +161,13 @@ namespace CMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var use =   _context.Preset.AsNoTracking().Where(s=>s.themeId==id);
+            if (use != null) {
+                ViewBag.error= "This item is currently being used";
+                var theme1 = await _context.Theme.SingleOrDefaultAsync(m => m.themeId == id);
+                return View(theme1);
+            }
+            
             var theme = await _context.Theme.SingleOrDefaultAsync(m => m.themeId == id);
             _context.Theme.Remove(theme);
             await _context.SaveChangesAsync();

@@ -110,7 +110,7 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("visitId,companyName,companyTypeId,noOfPax,visitDate,visitTypeId")] Visits visits)
+        public async Task<IActionResult> Edit(int id, [Bind("visitId,companyName,companyTypeId,noOfPax,visitDate,visitTypeId,dateCreated")] Visits visits)
         {
             if (id != visits.visitId)
             {
@@ -119,6 +119,8 @@ namespace CMS.Controllers
 
             if (ModelState.IsValid)
             {
+               
+
                 try
                 {
                     _context.Update(visits);

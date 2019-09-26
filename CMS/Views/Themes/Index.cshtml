@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.themeId)
+                @Html.DisplayNameFor(model => model.themeName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.backgroundColor)
@@ -31,7 +31,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.themeId)
+                @Html.DisplayFor(modelItem => item.themeName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.backgroundColor)

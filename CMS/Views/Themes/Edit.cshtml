@@ -14,6 +14,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="themeId" />
             <div class="form-group">
+                <label asp-for="themeName" class="control-label"></label>
+                <input asp-for="themeName" class="form-control" />
+                <span asp-validation-for="themeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="backgroundColor" class="control-label"></label>
                 <input asp-for="backgroundColor" class="form-control" />
                 <span asp-validation-for="backgroundColor" class="text-danger"></span>

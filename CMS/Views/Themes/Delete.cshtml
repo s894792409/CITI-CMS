@@ -12,10 +12,10 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.dateCreated)
+            @Html.DisplayNameFor(model => model.themeName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.dateCreated)
+            @Html.DisplayFor(model => model.themeName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.backgroundColor)
@@ -29,11 +29,18 @@
         <dd>
             @Html.DisplayFor(model => model.fontStyle)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="themeId" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <input type="submit" value="Delete" class="btn btn-default" />
+        <p class="text-danger">@ViewBag.error</p>
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

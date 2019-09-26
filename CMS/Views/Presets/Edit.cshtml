@@ -17,8 +17,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="presetId" />
             <div class="form-group">
-                <label asp-for="themeId" class="control-label"></label>
-                <input asp-for="themeId" class="form-control" />
+                <label asp-for="themeId" class="control-label">Theme Name</label>
+                <select asp-for="themeId" class="form-control" asp-items="@ViewBag.namelist "></select>
                 <span asp-validation-for="themeId" class="text-danger"></span>
             </div>
             <div class="form-group">

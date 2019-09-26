@@ -43,10 +43,15 @@ namespace CMS
             //        options.SerializerSettings.DateFormatString = "dd MMM yyyy,hh:mm"; // month must be capital. otherwise it gives minutes.
             //    });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options =>
+            services.AddMvc(options =>
+            {
+                options.ReturnHttpNotAcceptable = true;
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options =>
             {
                options.SerializerSettings.DateFormatString = "dd MMM yyyy,hh:mm";
+             
             });
+            
         }
 
           
