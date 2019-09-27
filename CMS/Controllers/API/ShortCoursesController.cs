@@ -83,7 +83,9 @@ namespace CMS.Controllers.API
                 }
             }
 
-            return NoContent();
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         // POST: api/ShortCourses
@@ -98,7 +100,10 @@ namespace CMS.Controllers.API
             _context.ShortCourses.Add(shortCourses);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetShortCourses", new { id = shortCourses.courseId }, shortCourses);
+            //return CreatedAtAction("GetShortCourses", new { id = shortCourses.courseId }, shortCourses);
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         // DELETE: api/ShortCourses/5
@@ -119,7 +124,10 @@ namespace CMS.Controllers.API
             _context.ShortCourses.Remove(shortCourses);
             await _context.SaveChangesAsync();
 
-            return Ok(shortCourses);
+            // return Ok(shortCourses);
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         private bool ShortCoursesExists(int id)

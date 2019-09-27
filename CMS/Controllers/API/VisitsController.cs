@@ -94,7 +94,9 @@ namespace CMS.Controllers.API
                 }
             }
 
-            return Ok(visits);
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         // POST: api/Visits
@@ -109,7 +111,9 @@ namespace CMS.Controllers.API
             visits.dateCreated = DateTime.Now;
             _context.Visits.Add(visits);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetVisits", new { id = visits.visitId }, visits);
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         // DELETE: api/Visits/5
@@ -130,7 +134,9 @@ namespace CMS.Controllers.API
             _context.Visits.Remove(visits);
             await _context.SaveChangesAsync();
 
-            return Ok(visits);
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         private bool VisitsExists(int id)

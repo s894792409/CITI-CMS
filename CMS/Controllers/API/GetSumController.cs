@@ -55,7 +55,7 @@ namespace CMS.Controllers.API
             return Ok(sum);
         }
 
-        // GET: api/GetSum/5
+        // GET: api/GetSum/VisitsSum
         [HttpGet("{name}", Name = "Get")]
         public IActionResult Get(string name)
         {

@@ -6,6 +6,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\Yogesh\Desktop\GT</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\CITI2.0</_PublishTargetUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=L33540%3bDatabase=CMSCore%3bUser Id=sa%3bPassword=Sunyu%3b</Value>
+    </DestinationConnectionStrings>
+    <DestinationConnectionStrings Include="IdentityConnection">
+      <Value>Server=L33540%3bDatabase=CMSCoreIdentity%3bUser Id=sa%3bPassword=Sunyu%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
 </Project>

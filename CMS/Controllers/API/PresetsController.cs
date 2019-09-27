@@ -83,7 +83,9 @@ namespace CMS.Controllers.API
                 }
             }
 
-            return NoContent();
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         // POST: api/Presets
@@ -98,7 +100,9 @@ namespace CMS.Controllers.API
             _context.Preset.Add(preset);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPreset", new { id = preset.presetId }, preset);
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         // DELETE: api/Presets/5
@@ -119,7 +123,9 @@ namespace CMS.Controllers.API
             _context.Preset.Remove(preset);
             await _context.SaveChangesAsync();
 
-            return Ok(preset);
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         private bool PresetExists(int id)

@@ -16,6 +16,7 @@ namespace CMS.Controllers.API
     {
         private readonly CMSContext _context;
 
+
         public AwardsController()
         {
             _context = new CMSContext();
@@ -51,14 +52,19 @@ namespace CMS.Controllers.API
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAwards([FromRoute] int id, [FromBody] Awards awards)
         {
+
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                APIReturn re4 = new APIReturn();
+                re4.Status = "Failed";
+                return BadRequest(re4);
             }
 
             if (id != awards.awardId)
             {
-                return BadRequest();
+                APIReturn re2 = new APIReturn();
+                re2.Status = "Failed";
+                return BadRequest(re2);
             }
 
             //_context.Entry(awards).State = EntityState.Modified;
@@ -74,7 +80,9 @@ namespace CMS.Controllers.API
             {
                 if (!AwardsExists(id))
                 {
-                    return NotFound();
+                    APIReturn re1 = new APIReturn();
+                    re1.Status = "Failed";
+                    return BadRequest(re1);
                 }
                 else
                 {
@@ -82,13 +90,16 @@ namespace CMS.Controllers.API
                 }
             }
 
-            return NoContent();
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         // POST: api/Awards
         [HttpPost]
         public async Task<IActionResult> PostAwards([FromBody] Awards awards)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -97,7 +108,9 @@ namespace CMS.Controllers.API
             _context.Awards.Add(awards);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAwards", new { id = awards.awardId }, awards);
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         // DELETE: api/Awards/5
@@ -118,7 +131,9 @@ namespace CMS.Controllers.API
             _context.Awards.Remove(awards);
             await _context.SaveChangesAsync();
 
-            return Ok(awards);
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         private bool AwardsExists(int id)

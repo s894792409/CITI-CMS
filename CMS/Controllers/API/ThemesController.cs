@@ -28,18 +28,6 @@ namespace CMS.Controllers.API
             return _context.Theme;
         }
 
-        [HttpGet("get/sum")]
-        public async Task<IActionResult> GetSum()
-        {
-            var list = await _context.Theme.ToListAsync();
-            int i = 0;
-            foreach (Theme theme in list)
-            {
-                i++;
-            }
-
-            return Ok();
-        }
         //GET: api/Themes/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTheme([FromRoute] int id)
@@ -91,7 +79,9 @@ namespace CMS.Controllers.API
                 }
             }
 
-            return NoContent();
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         // POST: api/Themes
@@ -106,7 +96,9 @@ namespace CMS.Controllers.API
             _context.Theme.Add(theme);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTheme", new { id = theme.themeId }, theme);
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         // DELETE: api/Themes/5
@@ -127,7 +119,9 @@ namespace CMS.Controllers.API
             _context.Theme.Remove(theme);
             await _context.SaveChangesAsync();
 
-            return Ok(theme);
+            APIReturn re = new APIReturn();
+            re.Status = "success";
+            return Ok(re);
         }
 
         private bool ThemeExists(int id)
