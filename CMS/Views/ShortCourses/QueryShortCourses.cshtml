@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<CMS.Models.ViewModels.ShortCourses>
 
 @{
-    ViewData["Title"] = "QueryShortCourses";
+   // ViewData["Title"] = "QueryShortCourses";
 }
 
 <h2>QueryShortCourses</h2>
-<table class="table">
-    <thead>
+<table class="table table-striped">
+    <thead class="thead-light">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.courseName)
@@ -27,33 +27,34 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.courseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.courseSubject)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.courseInstructor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.courseVenue)
-            </td>
-            <td>
-                @using System.Globalization;
-                @{
-                    string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                }
-                @Html.DisplayFor(modelItem => datecreated)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.courseId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.courseId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.courseId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="line-height:40px;">
+                    @Html.DisplayFor(modelItem => item.courseName)
+                </td>
+                <td style="line-height:40px;">
+                    @Html.DisplayFor(modelItem => item.courseSubject)
+                </td>
+                <td style="line-height:40px;">
+                    @Html.DisplayFor(modelItem => item.courseInstructor)
+                </td>
+                <td style="line-height:40px;">
+                    @Html.DisplayFor(modelItem => item.courseVenue)
+                </td>
+                <td style="line-height:40px;">
+                    @using System.Globalization;
+                    @{
+                        string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                    }
+                    @Html.DisplayFor(modelItem => datecreated)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.courseId" class="btn btn-primary">Edit</a>
+                    @*<a asp-action="Details" asp-route-id="@item.courseId" class="btn btn-info">Details</a> *@
+                    <a asp-action="Delete" asp-route-id="@item.courseId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

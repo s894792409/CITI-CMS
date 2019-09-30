@@ -14,88 +14,89 @@
 </head>
 <body>
 
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <h4>Visits</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.companyName)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.companyName)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.companyTypeId)
-            </dt>
-            <dd>
-                @{
-                    var _context = new CMSContext();
-                    string companytype = null;
-                    var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
+    <h3 style="">Are you sure you want to delete this?</h3>
+    <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Visits</div>
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.companyName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.companyName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.companyTypeId)
+                </dt>
+                <dd>
+                    @{
+                        var _context = new CMSContext();
+                        string companytype = null;
+                        var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
 
-                    foreach (CompanyType companyType in CompanyTypelist)
-                    {
-                        if (companyType.companyTypeId == Model.companyTypeId)
+                        foreach (CompanyType companyType in CompanyTypelist)
                         {
-                            companytype = companyType.companyType;
-                            break;
+                            if (companyType.companyTypeId == Model.companyTypeId)
+                            {
+                                companytype = companyType.companyType;
+                                break;
+                            }
                         }
                     }
-                }
-                @Html.DisplayFor(modelItem => companytype)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.noOfPax)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.noOfPax)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.visitDate)
-            </dt>
-            <dd>
-                @{
-                    string date = Model.visitDate.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                }
-                @Html.DisplayFor(modelItem => date)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.visitTypeId)
-            </dt>
-            <dd>
-                @{
-                    //var _context = new CMSContext();
-                    string visitType = null;
-                    var visitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
+                    @Html.DisplayFor(modelItem => companytype)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.noOfPax)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.noOfPax)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.visitDate)
+                </dt>
+                <dd>
+                    @{
+                        string date = Model.visitDate.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                    }
+                    @Html.DisplayFor(modelItem => date)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.visitTypeId)
+                </dt>
+                <dd>
+                    @{
+                        //var _context = new CMSContext();
+                        string visitType = null;
+                        var visitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
 
-                    foreach (VisitType visitTypes in visitTypelist)
-                    {
-                        if (visitTypes.visitTypeId == Model.visitTypeId)
+                        foreach (VisitType visitTypes in visitTypelist)
                         {
-                            visitType = visitTypes.visitType;
-                            break;
+                            if (visitTypes.visitTypeId == Model.visitTypeId)
+                            {
+                                visitType = visitTypes.visitType;
+                                break;
+                            }
                         }
                     }
-                }
-                @Html.DisplayFor(modelItem => visitType)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.dateCreated)
-            </dt>
-            <dd>
-                @{
-                    string datecreated = Model.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                }
-                @Html.DisplayFor(modelItem => datecreated)
-            </dd>
-        </dl>
+                    @Html.DisplayFor(modelItem => visitType)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.dateCreated)
+                </dt>
+                <dd>
+                    @{
+                        string datecreated = Model.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                    }
+                    @Html.DisplayFor(modelItem => datecreated)
+                </dd>
+            </dl>
 
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="visitId" />
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
-        </form>
-    </div>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="visitId" />
+                <input type="submit" value="Delete" class="btn btn-outline-danger" /> 
+                <a asp-action="Index" class="btn btn-outline-info">Back to List</a>
+            </form>
+            </div>
+        </div>
 </body>
 </html>

@@ -3,11 +3,82 @@
 <header id="adminBar" class="col-sm-12">
     Welcome, @Model.UserName
 </header>
-<nav id="leftMenu" class="col-sm-3">
+<style type="text/css">
+    #nav1 {
+        list-style: none outside none;
+        padding: 0;
+        width: 30%
+    }
+
+        #nav1 > li {
+            padding-left: 35px;
+            padding-top: 7px;
+            padding-bottom: 20px;
+            position: relative;
+            width:100px;
+            height:auto;
+        }
+
+
+        #nav1 a {
+            color: #fff;
+            cursor: pointer;
+            width:10%;
+               
+        }
+
+            #nav1 a:hover {
+                color: #00b9eb
+            }
+
+        #nav1 li:hover > ul {
+            display: block
+        }
+
+        #nav1 ul {
+            display: none;
+            margin: 0;
+            padding: 0;
+            width: 185px;
+            position: absolute;
+            top: 5px;
+            left: 90px;
+            background: #333;
+            list-style: none outside none
+        }
+
+            #nav1 ul li {
+                padding: 5px
+            }
+    #nav1 li.pageIcon {
+        background: url("/images/page-icon.png") no-repeat
+    }
+
+    #nav1 li.mediaIcon {
+        background: url("/images/media-icon.png") no-repeat
+    }
+
+    #nav1 li.blogIcon {
+        background: url("/images/blog-icon.svg") no-repeat
+    }
+
+    #nav1 li.courseIcon {
+        background: url("/images/course-icon.png") no-repeat
+    }
+
+    #nav1 li.siteIcon {
+        background: url("/images/site-icon.png") no-repeat
+    }
+
+    #nav1 li.accountIcon {
+        background: url("/images/account-icon.png") no-repeat
+    }
+</style>
+<nav id="leftMenu" class="col-sm-3" style="height:100%;">
     @if (Model.Role == "Admin")
     {
-    <ul id="nav">
-        <li class="pageIcon">
+    <ul id="nav1">
+        @*<li class="pageIcon">
             <a>Pages</a>
             <ul>
                 <li>
@@ -18,7 +89,7 @@
                 </li>
             </ul>
         </li>
-        @*<li class="mediaIcon">
+        <li class="mediaIcon">
             <a>Media</a>
             <ul>
                 <li>
@@ -124,9 +195,6 @@
                 <li>
                     <a asp-controller="Students" asp-action="Create">Add Student</a>
                 </li>
-                <li>
-                    <a asp-controller="Students" asp-action="QueryView">Query Student</a>
-                </li>
             </ul>
         </li>
         <li class="siteIcon">
@@ -137,9 +205,6 @@
                 </li>
                 <li>
                     <a asp-controller="Projects" asp-action="create">Add Project</a>
-                </li>
-                <li>
-                    <a asp-controller="Projects" asp-action="QueryView">Query Project</a>
                 </li>
             </ul>
         </li>
@@ -152,12 +217,9 @@
                 <li>
                     <a asp-controller="Awards" asp-action="create">Add Awards</a>
                 </li>
-                <li>
-                    <a asp-controller="Awards" asp-action="QueryView">Query Awards</a>
-                </li>
             </ul>
         </li>
-        <li class="siteIcon">
+        <li class="siteIcon" style="padding-bottom:30px;">
             <a>Short Courses</a>
             <ul>
                 <li>
@@ -165,9 +227,6 @@
                 </li>
                 <li>
                     <a asp-controller="ShortCourses" asp-action="create">Add Short Courses</a>
-                </li>
-                <li>
-                    <a asp-controller="ShortCourses" asp-action="QueryView">Query Short Courses</a>
                 </li>
             </ul>
         </li>

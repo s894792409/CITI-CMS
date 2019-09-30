@@ -1,5 +1,6 @@
 ﻿@model Login
 @{
+    ViewData["Meta"] = new string[3] { "Login", "MetaKeyword", "MetaDescription" };
     Layout = null;
 }
 
@@ -9,33 +10,23 @@
     <title>Login - CMS</title>
     <link rel="stylesheet" asp-href-include="css/admin.css" />
 </head>
-<body>
-    <div id="wrapper" class="container">
-        <header id="adminBar">
-            Welcome to the CMS
-        </header>
-        <div id="contentBar">
-            <section id="contentFull">
-                @*<article>
-                        <h1>Login</h1>
-                        <h2>@ViewBag.Result</h2>
+<body  id="content">
+    <h1 id="adminBar" style="width: 100%; text-align: center;">Welcome to the CITI2.0 CMS</h1>
+    <div id="wrapper"  class="card" style="width: 400px; text-align: center;
+    background-color: #fff;
+    border-radius: 20px;
+    height: 250px;
+    margin: auto;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+">
 
-                        <form asp-action="Index" method="post">
-                            <div class="control">
-                                <label asp-for="UserName"></label>
-                                <input asp-for="UserName" class="form-control" />
-                                <span asp-validation-for="UserName" class="text-danger"></span>
-                            </div>
-                            <div class="control">
-                                <label asp-for="Password"></label>
-                                <input asp-for="Password" class="form-control" />
-                                <span asp-validation-for="Password" class="text-box"></span>
-                            </div>
-                            <div class="control">
-                                <button type="submit">Submit</button>
-                            </div>
-                        </form>
-                    </article>*@
+        <div >
+            <section>
+                
                 <article>
                     <h1>Login</h1>
                     <h2>@TempData["result"]</h2>
@@ -53,13 +44,12 @@
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                         <div class="control">
-                            <button type="submit">Submit</button>
+                            <button type="submit">Login</button>
                         </div>
                     </form>
                 </article>
             </section>
         </div>
-        <footer id="mainFooter">&copy; @DateTime.Now.Year - CITI CMS</footer>
     </div>
 </body>
 

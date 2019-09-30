@@ -12,6 +12,8 @@ using CMS.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace CMS
 {
@@ -51,7 +53,13 @@ namespace CMS
                options.SerializerSettings.DateFormatString = "dd MMM yyyy,hh:mm";
              
             });
-            
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.LoginPath = "/Login/Index";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+            });
+
         }
 
           
@@ -71,7 +79,6 @@ namespace CMS
             }
 
             app.UseStaticFiles();
-          
 
             /*Identity*/
             app.UseAuthentication();
@@ -174,6 +181,7 @@ namespace CMS
                 template: "{url}",
                 defaults: new { controller = "Home", action = "Page" });
                 /*End*/
+
             });
         }
     }

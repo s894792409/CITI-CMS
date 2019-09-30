@@ -7,69 +7,73 @@
     <title>Index</title>
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
+    <p align="center" style="font-size:50px;margin-top:50px;" class="title">All presets</p>
+    <p align="center">
+        <a class="h1NewPage" asp-action="Create">Create New</a>
+        <a class="h1NewPage" asp-action="QueryView">Query preset</a>
+    </p>
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
 
-            <th>
-                Theme Name
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.visitId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dateCreated)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
+                <th>
+                    Theme Name
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.visitId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dateCreated)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
 
-            <td>
-                @{ 
-                    CMSContext context = new CMSContext();
-                    var them= context.Theme.SingleOrDefault(n => n.themeId == item.themeId);
-                    var themename = them.themeName;
-                }
-                @Html.DisplayFor(modelItem => themename)
-            </td>
-            <td>
-                @{
-                    
-                    Visits visit =  context.Visits.SingleOrDefault(s=>s.visitId ==item.visitId);
-                    string name = "";
-                    if (visit != null)
-                    {
-                        name = visit.companyName;
-                    }
-                    else {
-                        name = "Not find this visit!";
-                    }
+                    <td style="line-height:40px;">
+                        @{
+                            CMSContext context = new CMSContext();
+                            var them = context.Theme.SingleOrDefault(n => n.themeId == item.themeId);
+                            var themename = them.themeName;
+                        }
+                        @Html.DisplayFor(modelItem => themename)
+                    </td>
+                    <td style="line-height:40px;">
+                        @{
 
-                 }
-                @Html.DisplayFor(modelItem => name)
-            </td>
-            <td>
-                @using System.Globalization;
-                @{
-                    string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                }
-                @Html.DisplayFor(modelItem => datecreated)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.presetId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.presetId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.presetId">Delete</a>
-            </td>
+                            Visits visit = context.Visits.SingleOrDefault(s => s.visitId == item.visitId);
+                            string name = "";
+                            if (visit != null)
+                            {
+                                name = visit.companyName;
+                            }
+                            else
+                            {
+                                name = "Not find this visit!";
+                            }
 
-        </tr>
-}
-    </tbody>
-</table>
+                        }
+                        @Html.DisplayFor(modelItem => name)
+                    </td>
+                    <td style="line-height:40px;">
+                        @using System.Globalization;
+                        @{
+                            string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                        }
+                        @Html.DisplayFor(modelItem => datecreated)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.presetId" class="btn btn-primary">Edit</a>
+                        @*<a asp-action="Details" asp-route-id="@item.presetId" class="btn btn-info">Details</a>*@
+                        <a asp-action="Delete" asp-route-id="@item.presetId" class="btn btn-danger">Delete</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
 </body>
 </html>

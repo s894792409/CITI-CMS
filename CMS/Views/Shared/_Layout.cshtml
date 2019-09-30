@@ -2,16 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>@ViewBag.Title - CMS</title>
     <link rel="stylesheet" href="~/css/bundlecss.min.css" />
+    <link rel="stylesheet" href="~/css/admin.css" />
 </head>
-<body>
-    <div id="wrapper" class="container-fluid">
-        <div class="row">
+<body style="height: 100%; padding: 0; margin: 0; ">
+    <div id="wrapper" class="container-fluid" style="height:100%; float: left; padding-bottom:0px;margin-bottom:0px;">
+        <div class="row" style="height:100%;">
             @await Component.InvokeAsync(nameof(UserDetail))
-            <section id="content" class="col-sm-9">@RenderBody()</section>
-            <footer id="mainFooter" class="col-sm-12">&copy; @DateTime.Now.Year - CITI CMS</footer>
+            <section id="content" class="col-sm-9"  >@RenderBody()</section>
+            <footer id="mainFooter" class="col-sm-12" style="padding-top:5px;">&copy; @DateTime.Now.Year - CITI CMS</footer>
         </div>
     </div>
     <script src="~/js/bundlejs.min.js"></script>

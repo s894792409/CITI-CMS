@@ -19,8 +19,8 @@
         <a class="h1NewPage" asp-action="Index">All Visit</a>
         <a class="h1NewPage" asp-action="QueryView">Continue to query</a>
     </p>
-    <table class="table">
-        <thead>
+    <table class="table table-striped">
+        <thead class="thead-light">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.companyName)
@@ -47,10 +47,10 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td style="line-height:40px;">
                         @Html.DisplayFor(modelItem => item.companyName)
                     </td>
-                    <td>
+                    <td style="line-height:40px;">
                         @{
                             var _context = new CMSContext();
                             string companytype = null;
@@ -67,16 +67,16 @@
                         }
                         @Html.DisplayFor(modelItem => companytype)
                     </td>
-                    <td>
+                    <td style="line-height:40px;">
                         @Html.DisplayFor(modelItem => item.noOfPax)
                     </td>
-                    <td>
+                    <td style="line-height:40px;">
                         @{
                             string date = item.visitDate.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
                         }
                         @Html.DisplayFor(modelItem => date)
                     </td>
-                    <td>
+                    <td style="line-height:40px;">
                         @{
                             //var _context = new CMSContext();
                             string visitType = null;
@@ -93,16 +93,16 @@
                         }
                         @Html.DisplayFor(modelItem => visitType)
                     </td>
-                    <td>
+                    <td style="line-height:40px;">
                         @{
                             string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
                         }
                         @Html.DisplayFor(modelItem => datecreated)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.visitId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.visitId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.visitId">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.visitId" class="btn btn-primary">Edit</a>
+                        @*<a asp-action="Details" asp-route-id="@item.visitId" class="btn btn-info">Details</a> *@
+                        <a asp-action="Delete" asp-route-id="@item.visitId" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             }

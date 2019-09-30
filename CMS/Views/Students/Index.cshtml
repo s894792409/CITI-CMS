@@ -1,70 +1,71 @@
 ﻿@model IEnumerable<CMS.Models.ViewModels.Student>
 
 @{
-    ViewData["Title"] = "Index";
+   // ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
+<p align="center" style="font-size:50px;margin-top:50px;" class="title">All students info</p>
+<p align="center">
+    <a class="h1NewPage" asp-action="Create">Create New</a>
+    <a class="h1NewPage" asp-action="QueryView">Query Visit</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-striped">
+    <thead class="thead-light">
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.studentName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.projectId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.studentYear)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.dateCreated)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.studentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.projectId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.studentYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateCreated)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.studentName)
-            </td>
-            <td>
-                @{ 
-                    CMSContext context = new CMSContext();
-                    string name = "";
-                    if (item.projectId == 0)
-                    {
-                        name = "null";
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="line-height:40px;">
+                    @Html.DisplayFor(modelItem => item.studentName)
+                </td>
+                <td style="line-height:40px;">
+                    @{
+                        CMSContext context = new CMSContext();
+                        string name = "";
+                        if (item.projectId == 0)
+                        {
+                            name = "null";
+                        }
+                        else
+                        {
+                            var project = context.Projects.SingleOrDefault(p => p.projectId == item.projectId);
+                            name = project.projectName;
+                        }
                     }
-                    else
-                    {
-                        var project = context.Projects.SingleOrDefault(p => p.projectId == item.projectId);
-                        name = project.projectName;
+                    @Html.DisplayFor(modelItem => name)
+                </td>
+                <td style="line-height:40px;">
+                    @Html.DisplayFor(modelItem => item.studentYear)
+                </td>
+                <td style="line-height:40px;">
+                    @using System.Globalization;
+                    @{
+                        string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
                     }
-                }
-                @Html.DisplayFor(modelItem =>name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.studentYear)
-            </td>
-            <td>
-                @using System.Globalization;
-                @{
-                    string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                }
-                @Html.DisplayFor(modelItem => datecreated)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.studentAdmin">Edit</a> 
-                <a asp-action="Details" asp-route-id="@item.studentAdmin">Details</a> 
-                <a asp-action="Delete" asp-route-id="@item.studentAdmin">Delete</a>
-            </td>
-        </tr>
-}
+                    @Html.DisplayFor(modelItem => datecreated)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.studentAdmin" class="btn btn-primary">Edit</a>
+                    @* <a asp-action="Details" asp-route-id="@item.studentAdmin" class="btn btn-info">Details</a>*@
+                    <a asp-action="Delete" asp-route-id="@item.studentAdmin" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

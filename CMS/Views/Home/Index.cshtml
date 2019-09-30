@@ -1,9 +1,26 @@
-﻿@model Page;
+﻿
 @{
-    ViewData["Meta"] = new string[3] { Model.MetaTitle, Model.MetaKeyword, Model.MetaDescription };
-    //ViewData["Meta"] = new string[3] { "MetaTitle", "MetaKeyword", "MetaDescription" };
-   // Layout = "~/Views/Shared/_LayoutSite.cshtml";
-    Layout = null;
+    //ViewData["Meta"] = new string[3] { Model.MetaTitle, Model.MetaKeyword, Model.MetaDescription };
+    ViewData["Meta"] = new string[3] { "Home", "MetaKeyword", "MetaDescription" };
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+   // Layout = null;
 }
 
-@Html.Raw(Model.Description)
+<div class="card" style="width: 500px; text-align: center;
+    border-radius: 20px;
+    height: 200px;
+    margin: auto;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+">
+    <div class="card-body" >
+        <h1 class="card-title">Welcome to CITI 2.0 CMS</h1>
+        <p class="card-text">Please click the button below to login</p>
+        <a asp-controller="Login" asp-action="index" class="btn btn-primary">Go to login</a>
+    </div>
+</div>
+
+

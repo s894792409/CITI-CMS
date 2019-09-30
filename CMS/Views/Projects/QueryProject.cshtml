@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<CMS.Models.ViewModels.Projects>
 
 @{
-    ViewData["Title"] = "QueryProject";
+   // ViewData["Title"] = "QueryProject";
 }
 
 <h2>QueryProject</h2>
 
-<table class="table">
-    <thead>
+<table class="table table-striped">
+    <thead class="thead-light">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.projectName)
@@ -25,30 +25,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.projectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.projectState)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.noOfStudents)
-            </td>
-            <td>
-                @using System.Globalization;
-                @{
-                    string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                }
-                @Html.DisplayFor(modelItem => datecreated)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.projectId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.projectId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.projectId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="line-height:40px;">
+                    @Html.DisplayFor(modelItem => item.projectName)
+                </td>
+                <td style="line-height:40px;">
+                    @Html.DisplayFor(modelItem => item.projectState)
+                </td>
+                <td style="line-height:40px;">
+                    @Html.DisplayFor(modelItem => item.noOfStudents)
+                </td>
+                <td style="line-height:40px;">
+                    @using System.Globalization;
+                    @{
+                        string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                    }
+                    @Html.DisplayFor(modelItem => datecreated)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.projectId" class="btn btn-primary">Edit</a>
+                    @*<a asp-action="Details" asp-route-id="@item.projectId" class="btn btn-info">Details</a> *@
+                    <a asp-action="Delete" asp-route-id="@item.projectId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

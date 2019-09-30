@@ -1,29 +1,29 @@
 ﻿@model IEnumerable<CMS.Models.ViewModels.Projects>
 
 @{
-    ViewData["Title"] = "Index";
+    //ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
+<p align="center" style="font-size:50px;margin-top:50px;" class="title">All projects</p>
+<p align="center">
+    <a class="h1NewPage" asp-action="Create">Create New</a>
+    <a class="h1NewPage" asp-action="QueryView">Query project</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-striped">
+    <thead class="thead-light">
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.projectName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.projectState)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.noOfStudents)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.dateCreated)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.projectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.projectState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.noOfStudents)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateCreated)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -35,17 +35,19 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td style="line-height:40px;">
                     @Html.DisplayFor(modelItem => item.projectName)
                 </td>
-                <td>
+                <td style="line-height:40px;">
                     @Html.DisplayFor(modelItem => item.projectState)
                 </td>
-                <td>
-                    @{ 
+                <td style="line-height:40px;">
+                    @{
                         int i = 0;
-                        foreach (Student student in list) {
-                            if (student.projectId == item.projectId) {
+                        foreach (Student student in list)
+                        {
+                            if (student.projectId == item.projectId)
+                            {
                                 i++;
                             }
                         }
@@ -54,17 +56,17 @@
                     }
                     @Html.DisplayFor(modelItem => i)
                 </td>
-                <td>
+                <td style="line-height:40px;">
                     @using System.Globalization;
                     @{
                         string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
                     }
                     @Html.DisplayFor(modelItem => datecreated)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.projectId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.projectId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.projectId">Delete</a>
+                <td style="line-height:40px;">
+                    <a asp-action="Edit" asp-route-id="@item.projectId" class="btn btn-primary">Edit</a>
+                    @*<a asp-action="Details" asp-route-id="@item.projectId" class="btn btn-info">Details</a>*@
+                    <a asp-action="Delete" asp-route-id="@item.projectId" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
