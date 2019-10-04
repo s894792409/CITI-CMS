@@ -45,9 +45,11 @@ namespace CMS.Controllers
                     {
                         var roles = await userManager.GetRolesAsync(user);
                         if (roles.FirstOrDefault() == "Admin")
-                            return Redirect(login.ReturnUrl == "/" ? "/Admin" : login.ReturnUrl);
+                            // return Redirect(login.ReturnUrl == "/" ? "/Admin" : login.ReturnUrl);
+                            return Redirect("/Admin");
                         else
-                            return Redirect(login.ReturnUrl == "/" ? "/User" : login.ReturnUrl);
+                            // return Redirect(login.ReturnUrl == "/" ? "/User" : login.ReturnUrl);
+                            return Redirect("/User");
                     }
                 }
             }

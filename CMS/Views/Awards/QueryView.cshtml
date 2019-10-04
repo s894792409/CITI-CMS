@@ -1,11 +1,17 @@
 ﻿@model CMS.Models.ViewModels.Awards
 @{
-    ViewData["Title"] = "QueryView";
+   //ViewData["Title"] = "QueryView";
 }
 
-<h2>QueryView</h2>
-<form asp-action="QueryAwards">
-    <p>Please enter the Awards name:</p>
-    <input asp-for="awardName" />
-    <input type="submit" value="submit" />
-</form>
+<p align="center" style="font-size:50px;margin-top:50px;" class="title">Query Awards</p>
+<p align="center">
+    <a class="h1NewPage" asp-action="Create">Create New</a>
+    <a class="h1NewPage" asp-action="Index">All Awards</a>
+</p>
+<div style="max-width: 25rem;position:absolute;left:0px;right:0px;margin:auto;">
+    <form asp-action="QueryAwards">
+        <p align="center" style="font-size:20px">Please enter the company name of the query:</p>
+        <p align="center"><input type="text" asp-for="awardName" /></p>
+        <p align="center"><input type="submit" class="btn btn-primary" value="submit" /></p>
+    </form>
+</div>

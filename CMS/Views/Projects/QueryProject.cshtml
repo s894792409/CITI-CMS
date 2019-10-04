@@ -1,10 +1,15 @@
 ﻿@model IEnumerable<CMS.Models.ViewModels.Projects>
 
 @{
-   // ViewData["Title"] = "QueryProject";
+    // ViewData["Title"] = "QueryProject";
 }
 
-<h2>QueryProject</h2>
+<p align="center" style="font-size:50px;margin-top:50px;" class="title">Search result</p>
+<p align="center">
+    <a class="h1NewPage" asp-action="Create">Create New</a>
+    <a class="h1NewPage" asp-action="Index">All Projects</a>
+    <a class="h1NewPage" asp-action="QueryView">Continue to query</a>
+</p>
 
 <table class="table table-striped">
     <thead class="thead-light">

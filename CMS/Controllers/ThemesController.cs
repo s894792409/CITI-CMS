@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CMS.Models;
 using CMS.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CMS.Controllers
 {
+    [Authorize]
     public class ThemesController : Controller
     {
         private readonly CMSContext _context;
@@ -173,7 +175,13 @@ namespace CMS.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        
+               public async Task<IActionResult> ViewTheme(int themeId)
+        {
+            var theme = await _context.Theme.SingleOrDefaultAsync(s=>s.themeId==themeId);
 
+            return View(theme);
+        }
         private bool ThemeExists(int id)
         {
             return _context.Theme.Any(e => e.themeId == id);

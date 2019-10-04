@@ -1,84 +1,118 @@
 ﻿@model LoggedUser
 
-<header id="adminBar" class="col-sm-12">
-    Welcome, @Model.UserName
-</header>
-<style type="text/css">
-    #nav1 {
-        list-style: none outside none;
-        padding: 0;
-        width: 30%
-    }
-
-        #nav1 > li {
-            padding-left: 35px;
-            padding-top: 7px;
-            padding-bottom: 20px;
-            position: relative;
-            width:100px;
-            height:auto;
-        }
-
-
-        #nav1 a {
-            color: #fff;
-            cursor: pointer;
-            width:10%;
-               
-        }
-
-            #nav1 a:hover {
-                color: #00b9eb
-            }
-
-        #nav1 li:hover > ul {
-            display: block
-        }
-
-        #nav1 ul {
-            display: none;
-            margin: 0;
+    <header id="adminBar" class="col-sm-12">
+        Welcome, @Model.UserName
+    </header>
+    <style type="text/css">
+        #nav1 {
+            list-style: none outside none;
             padding: 0;
-            width: 185px;
-            position: absolute;
-            top: 5px;
-            left: 90px;
-            background: #333;
-            list-style: none outside none
+            width: 30%;
+            flex-direction:row;
+            display: flex;
+            flex-wrap:wrap; 
+            flex:auto;
+           
         }
 
-            #nav1 ul li {
-                padding: 5px
+            #nav1 > li {
+                padding-left: 35px;
+                padding-top: 7px;
+                padding-bottom: 20px;
+                position: relative;
+                width: 150px;
+                background-color:#000000;
+                height: auto;
             }
-    #nav1 li.pageIcon {
-        background: url("/images/page-icon.png") no-repeat
-    }
+            #nav1 li {
+                background-color:#000000;
+            }
 
-    #nav1 li.mediaIcon {
-        background: url("/images/media-icon.png") no-repeat
-    }
 
-    #nav1 li.blogIcon {
-        background: url("/images/blog-icon.svg") no-repeat
-    }
+            #nav1 a {
+                color: #fff;
+                cursor: pointer;
+                width: 10%;
+            }
 
-    #nav1 li.courseIcon {
-        background: url("/images/course-icon.png") no-repeat
-    }
+                #nav1 a:hover {
+                    color: #00b9eb
+                }
 
-    #nav1 li.siteIcon {
-        background: url("/images/site-icon.png") no-repeat
-    }
+            #nav1 li:hover > ul {
+                display: block;
+            }
+            
+            #nav1 ul {
+                display: none;
+                margin: auto;
+                padding: 0;
+                width: 185px;
+                position: absolute;
+                top: 5px;
+                left: 90px;
+                bottom:0px;
+                list-style: none outside none
+            }
 
-    #nav1 li.accountIcon {
-        background: url("/images/account-icon.png") no-repeat
-    }
-</style>
-<nav id="leftMenu" class="col-sm-3" style="height:100%;">
-    @if (Model.Role == "Admin")
-    {
-    <ul id="nav1">
-        @*<li class="pageIcon">
+                #nav1 ul li {
+                    padding: 5px;
+                    background-color: #333;
+                    position: relative;
+                    z-index:99999;
+                }
+
+            #nav1 li.pageIcon {
+                background: url("/images/page-icon.png") no-repeat
+            }
+
+            #nav1 li.mediaIcon {
+                background: url("/images/media-icon.png") no-repeat
+            }
+
+            #nav1 li.blogIcon {
+                background: url("/images/blog-icon.svg") no-repeat
+            }
+
+            #nav1 li.courseIcon {
+                background: url("/images/course-icon.png") no-repeat
+            }
+
+            #nav1 li.siteIcon {
+                background: url("/images/site-icon.png") no-repeat
+            }
+
+            #nav1 li.accountIcon {
+                background: url("/images/account-icon.png") no-repeat
+            }
+
+            #nav1 li.awardIcon {
+                background: url("/images/award.png") no-repeat
+            }
+
+            #nav1 li.visitIcon {
+                background: url("/images/visitIcon.png") no-repeat
+            }
+            #nav1 li.studentIcon {
+                background: url("/images/studentIcon.png") no-repeat
+            }
+            #nav1 li.ProjectIcon {
+                background: url("/images/projectIcon.png") no-repeat
+            }
+            #nav1 li.shortCoursesIcon {
+                background: url("/images/shortCoursesIcon.png") no-repeat
+            }
+            #nav1 li.menuIcon {
+                background: url("/images/menuIcon.png") no-repeat
+            }
+            #nav1 li.ThemeIcon {
+                background: url("/images/ThemeIcon.png") no-repeat
+            }
+    </style>
+    <nav id="leftMenu" class="col-sm-3" style="height:100%;">
+        
+        <ul id="nav1">
+            @*<li class="pageIcon">
             <a>Pages</a>
             <ul>
                 <li>
@@ -134,140 +168,126 @@
                 </li>
             </ul>
         </li>*@
-        <li class="accountIcon">
-            <a>Account</a>
-            <ul>
-                <li><a asp-controller="Admin" asp-action="Role">Role</a></li>
-                <li><a asp-controller="Admin" asp-action="Logout">Logout</a></li>
-            </ul>
-        </li>
-        <li class="siteIcon">
-            <a>Visitors</a>
-            <ul>
-                <li>
-                    <a asp-controller="Visits" asp-action="Index">All Visit</a>
-                </li>
-                <li>
-                    <a asp-controller="Visits" asp-action="Create">Add Visit</a>
-                </li>
 
-            </ul>
-        </li>
-        <li class="siteIcon">
-            <a>Edit Company Type menu</a>
-            <ul>
-                <li>
-                    <a asp-controller="CompanyType" asp-action="Index">All Menu</a>
-                </li>
-                <li>
-                    <a asp-controller="CompanyType" asp-action="Create">Add Menu</a>
-                </li>
-            </ul>
-        </li>
-        <li class="siteIcon">
-            <a>Edit Visit Type menu</a>
-            <ul>
-                <li>
-                    <a asp-controller="VisitTypes" asp-action="Index">All Menu</a>
-                </li>
-                <li>
-                    <a asp-controller="VisitTypes" asp-action="Create">Add Menu</a>
-                </li>
-            </ul>
-        </li>
-        <li class="siteIcon">
-            <a>View Preset and Theme</a>
-            <ul>
-                <li>
-                    <a asp-controller="Presets" asp-action="Index">All Preset</a>
-                </li>
-                <li>
-                    <a asp-controller="Themes" asp-action="Index">All Themes</a>
-                </li>
-            </ul>
-        </li>
-        <li class="siteIcon">
-            <a>student information</a>
-            <ul>
-                <li>
-                    <a asp-controller="Students" asp-action="Index">All Student</a>
-                </li>
-                <li>
-                    <a asp-controller="Students" asp-action="Create">Add Student</a>
-                </li>
-            </ul>
-        </li>
-        <li class="siteIcon">
-            <a>Projects information</a>
-            <ul>
-                <li>
-                    <a asp-controller="Projects" asp-action="Index">All Projects</a>
-                </li>
-                <li>
-                    <a asp-controller="Projects" asp-action="create">Add Project</a>
-                </li>
-            </ul>
-        </li>
-        <li class="siteIcon">
-            <a>Awards</a>
-            <ul>
-                <li>
-                    <a asp-controller="Awards" asp-action="Index">All Awards</a>
-                </li>
-                <li>
-                    <a asp-controller="Awards" asp-action="create">Add Awards</a>
-                </li>
-            </ul>
-        </li>
-        <li class="siteIcon" style="padding-bottom:30px;">
-            <a>Short Courses</a>
-            <ul>
-                <li>
-                    <a asp-controller="ShortCourses" asp-action="Index">All Short Courses</a>
-                </li>
-                <li>
-                    <a asp-controller="ShortCourses" asp-action="create">Add Short Courses</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    }
-    else
-    {
-    <ul id="nav">
-        <li class="pageIcon">
-            <a>User</a>
-            <ul>
-                <li>
-                    <a asp-controller="User" asp-action="Edit">Edit</a>
-                </li>
-                <li>
-                    <a asp-controller="User" asp-action="Logout">Logout</a>
-                </li>
-            </ul>
-        </li>
-        <li class="siteIcon">
-            <a>Order</a>
-            <ul>
-                <li>
-                    <a asp-controller="User" asp-action="Order">Orders</a>
-                </li>
-            </ul>
-        </li>
+            <li class="visitIcon">
+                <a>Visits</a>
+                <ul>
+                    <li>
+                        <a asp-controller="Visits" asp-action="Index">All Visit</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Visits" asp-action="Create">Add Visit</a>
+                    </li>
 
-        <li class="siteIcon">
-            <a>Visitors</a>
-            <ul>
-                <li>
-                    <a asp-controller="Visitor" asp-action="Index">Add Visitors</a>
+                </ul>
+            </li>
+            <li class="menuIcon">
+                <a>Edit Company Type menu</a>
+                <ul>
+                    <li>
+                        <a asp-controller="CompanyType" asp-action="Index">All Menu</a>
+                    </li>
+                    <li>
+                        <a asp-controller="CompanyType" asp-action="Create">Add Menu</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menuIcon">
+                <a>Edit Visit Type menu</a>
+                <ul>
+                    <li>
+                        <a asp-controller="VisitTypes" asp-action="Index">All Menu</a>
+                    </li>
+                    <li>
+                        <a asp-controller="VisitTypes" asp-action="Create">Add Menu</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="ThemeIcon">
+                <a>View Preset and Theme</a>
+                <ul>
+                    <li>
+                        <a asp-controller="Presets" asp-action="Index">All Preset</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Themes" asp-action="Index">All Themes</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="studentIcon">
+                <a>student information</a>
+                <ul>
+                    <li>
+                        <a asp-controller="Students" asp-action="Index">All Student</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Students" asp-action="Create">Add Student</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="ProjectIcon">
+                <a>Projects information</a>
+                <ul>
+                    <li>
+                        <a asp-controller="Projects" asp-action="Index">All Projects</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Projects" asp-action="create">Add Project</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="awardIcon">
+                <a>Awards</a>
+                <ul>
+                    <li>
+                        <a asp-controller="Awards" asp-action="Index">All Awards</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Awards" asp-action="create">Add Awards</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="shortCoursesIcon" style="padding-bottom:30px;">
+                <a>Short Courses</a>
+                <ul>
+                    <li>
+                        <a asp-controller="ShortCourses" asp-action="Index">All Short Courses</a>
+                    </li>
+                    <li>
+                        <a asp-controller="ShortCourses" asp-action="create">Add Short Courses</a>
+                    </li>
+                </ul>
+            </li>
+            @if (Model.Role == "Admin")
+            {
+                <li class="accountIcon">
+                    <a>Account</a>
+
+                    <ul>
+                        <li><a asp-controller="User" asp-action="AllUser">All User</a></li>
+                        <li><a asp-controller="Admin" asp-action="CreateUser">Add User</a></li>
+                        <li><a asp-controller="Admin" asp-action="Role">Role</a></li>
+                        <li><a asp-controller="User" asp-action="Edit">Edit account info</a></li>
+                        <li><a asp-controller="Admin" asp-action="Logout">Logout</a></li>
+                    </ul>
+
                 </li>
-                <li>
-                    <a asp-controller="Visitor" asp-action="Index">Query Visitors</a>
+            }
+            else
+            {
+                <li class="pageIcon">
+                    <a>User</a>
+                    <ul>
+                        <li>
+                            <a asp-controller="User" asp-action="Edit">Edit</a>
+                        </li>
+                        <li>
+                            <a asp-controller="User" asp-action="Logout">Logout</a>
+                        </li>
+                    </ul>
                 </li>
+            }
             </ul>
-        </li>
+        
 
-    </ul>
-    }
-
-</nav>
+    </nav>

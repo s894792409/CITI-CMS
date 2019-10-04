@@ -6,6 +6,7 @@ using CMS.Models.ViewModels;
 using System.Data.SqlClient;
 using Microsoft.IdentityModel.Protocols;
 using System.Collections.Generic;
+using CMS.Models;
 
 namespace CMS.Models
 {
@@ -247,6 +248,9 @@ namespace CMS.Models
         public DbSet<CMS.Models.ViewModels.Awards> Awards { get; set; }
 
         public DbSet<CMS.Models.ViewModels.ShortCourses> ShortCourses { get; set; }
+
+        public DbSet<CMS.Models.User> User { get; set; }
+
  
     }
 }

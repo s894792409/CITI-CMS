@@ -170,7 +170,6 @@ namespace CMS
                 template: "{url}-id-{id}",
                 defaults: new { controller = "Home", action = "ViewBlog" });
                 /*End*/
-
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
@@ -181,7 +180,8 @@ namespace CMS
                 template: "{url}",
                 defaults: new { controller = "Home", action = "Page" });
                 /*End*/
-
+                
+               
             });
         }
     }

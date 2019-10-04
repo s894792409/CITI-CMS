@@ -16,11 +16,11 @@
         <a class="h1NewPage" asp-action="Create">Create New</a>
         <a class="h1NewPage" asp-action="Index">All Visit</a>
     </p>
-    <div style="align-content:center;">
+    <div style="max-width: 25rem;position:absolute;left:0px;right:0px;margin:auto;">
         <form asp-action="QueryVisit">
-            <p align="center">Please enter the company name of the query:</p>
+            <p align="center" style="font-size:20px">Please enter the company name of the query:</p>
             <p align="center"><input type="text" asp-for="companyName" /></p>
-            <p align="center"><input type="submit" value="submit" /></p>
+            <p align="center"><input type="submit"  class="btn btn-primary" value="submit" /></p>
         </form>
     </div>
 </body>

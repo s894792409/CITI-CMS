@@ -10,7 +10,6 @@
     <p align="center" style="font-size:50px;margin-top:50px;" class="title">All presets</p>
     <p align="center">
         <a class="h1NewPage" asp-action="Create">Create New</a>
-        <a class="h1NewPage" asp-action="QueryView">Query preset</a>
     </p>
     <table class="table table-striped">
         <thead class="thead-light">
@@ -69,6 +68,13 @@
                         <a asp-action="Edit" asp-route-id="@item.presetId" class="btn btn-primary">Edit</a>
                         @*<a asp-action="Details" asp-route-id="@item.presetId" class="btn btn-info">Details</a>*@
                         <a asp-action="Delete" asp-route-id="@item.presetId" class="btn btn-danger">Delete</a>
+                        @{
+                            var parms = new Dictionary<string, string>
+                                    {
+                                        { "themeId", item.themeId.ToString() }
+                                    };
+                        }
+                        <a asp-action="ViewTheme" asp-route-id="@item.themeId" class="btn btn-danger">View Theme</a>
                     </td>
 
                 </tr>

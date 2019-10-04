@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CMS.Models;
 using CMS.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CMS.Controllers
 {
+    [Authorize]
     public class PresetsController : Controller
     {
         private readonly CMSContext _context;
@@ -31,6 +33,15 @@ namespace CMS.Controllers
             return RedirectToAction("Themes", "QueryTheme");
         }
         
+            public async Task<IActionResult> ViewTheme(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            return Redirect("/Themes/ViewTheme?themeid="+id.ToString());
+        }
         // GET: Presets/Details/5
         public async Task<IActionResult> Details(int? id)
         {

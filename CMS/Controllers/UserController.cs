@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CMS.Controllers
 {
-    [Authorize(Roles = "User")]
+    [Authorize]
     public class UserController : Controller
     {
         private UserManager<AppUser> userManager;
@@ -20,6 +20,7 @@ namespace CMS.Controllers
         private IPasswordValidator<AppUser> passwordValidator;
         private IPasswordHasher<AppUser> passwordHasher;
         private SignInManager<AppUser> signInManager;
+        private IdentityDbContext identityDbContext;
 
         public UserController(UserManager<AppUser> userMgr, IUserValidator<AppUser> userValid, IPasswordValidator<AppUser> passValid, IPasswordHasher<AppUser> passwordHash, SignInManager<AppUser> signMgr)
         {
@@ -28,11 +29,17 @@ namespace CMS.Controllers
             passwordValidator = passValid;
             passwordHasher = passwordHash;
             signInManager = signMgr;
+            identityDbContext = new IdentityDbContext();
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+        public async Task<IActionResult> AllUser()
+        {
+             
+            return View(await identityDbContext.AspNetUsers.ToListAsync());
         }
 
         [AllowAnonymous]
@@ -147,6 +154,40 @@ namespace CMS.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Login");
+        }
+
+        public async Task<IActionResult> Delete(string username)
+        {
+            if (username == null)
+            {
+                throw new ArgumentNullException(nameof(username));
+            }
+
+            var user = await identityDbContext.AspNetUsers.ToListAsync();
+            UserInfo user1 = await identityDbContext.AspNetUsers.SingleOrDefaultAsync(s => s.UserName == username);
+            UserInfo user2 = new UserInfo();
+            user2.UserName = username;
+            return View(user1);
+        }
+
+        // POST: User/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string username)
+        {
+            AppUser appuser = await userManager.GetUserAsync(HttpContext.User);
+            if (username == appuser.UserName) {
+                ViewBag.error = "You cannot delete the account you are currently logged into!";
+                return View();
+            }
+            if (username == "admin") {
+                ViewBag.error = "You cannot delete the admin account!";
+                return View();
+            }
+            var user = await identityDbContext.AspNetUsers.SingleOrDefaultAsync(s => s.UserName == username);
+            identityDbContext.AspNetUsers.Remove(user);
+            await identityDbContext.SaveChangesAsync();
+            return RedirectToAction(nameof(AllUser));
         }
     }
 }
