@@ -69,6 +69,27 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (visits.visitDate < DateTime.Now)
+                {
+                    ViewBag.error = "The date entered is in the past. Please choose a date in the future";
+                    var VisitTypelist1 = _context.VisitType.ToList();
+                    var selectList1 = new SelectList(VisitTypelist1, "visitTypeId", "visitType");
+                    ViewBag.visitTypes = selectList1;
+                    var CompanyTypelist1 = _context.CompanyType.ToList();
+                    var companySelectList1 = new SelectList(CompanyTypelist1, "companyTypeId", "companyType");
+                    ViewBag.CompanyType = companySelectList1;
+                    return View(visits);
+                }
+                else if(visits.visitDate.Day==DateTime.Now.Day&&visits.visitDate.Month==DateTime.Now.Month) {
+                    ViewBag.error = "Visit date cannot be today";
+                    var VisitTypelist2 = _context.VisitType.ToList();
+                    var selectList2 = new SelectList(VisitTypelist2, "visitTypeId", "visitType");
+                    ViewBag.visitTypes = selectList2;
+                    var CompanyTypelist2 = _context.CompanyType.ToList();
+                    var companySelectList2 = new SelectList(CompanyTypelist2, "companyTypeId", "companyType");
+                    ViewBag.CompanyType = companySelectList2;
+                    return View(visits);
+                }
                 visits.dateCreated = DateTime.Now;
                 _context.Add(visits);
                 await _context.SaveChangesAsync();

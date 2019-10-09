@@ -107,7 +107,7 @@ using Microsoft.AspNetCore.Identity;
                                 ");
             EndContext();
             BeginContext(577, 164, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4c8661147c944298b8b213c44cd6268e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "41d3f0b2009f42b4b6ccdb8001dc8c75", async() => {
                 BeginContext(668, 27, true);
                 WriteLiteral("<img class=\"img-responsive\"");
                 EndContext();
@@ -180,7 +180,7 @@ WriteAttributeValue("", 726, p.Name, 726, 7, false);
             WriteLiteral("</span>\n                                    <h3>");
             EndContext();
             BeginContext(955, 102, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1d879bf8ea5f401d96017ee1b2731827", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "75b8f90d45464322900936b577a6038f", async() => {
                 BeginContext(1047, 6, false);
 #line 19 "C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\Views\Home\MyBlog.cshtml"
                                                                                                                               Write(p.Name);
@@ -270,7 +270,7 @@ WriteAttributeValue("", 726, p.Name, 726, 7, false);
             WriteLiteral("            ");
             EndContext();
             BeginContext(1772, 230, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8a8daba250d84dc6acf8c2015fe678e9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "30703905704f45bd99b19571405e4805", async() => {
             }
             );
             __CMS_Infrastructure_PageLinkTagHelper = CreateTagHelper<global::CMS.Infrastructure.PageLinkTagHelper>();
