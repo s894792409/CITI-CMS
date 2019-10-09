@@ -7,9 +7,6 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <title>Index</title>
-</head>
 <body>
     <p align="center" style="font-size:50px;margin-top:50px;" class="title">All company type Menu</p>
     <p align="center">
@@ -37,7 +34,7 @@
                                         @Html.DisplayFor(modelItem => item.companyType)
                                     </td>
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.companyTypeId" class="btn btn-primary">Edit</a>
+                                        <a asp-action="Edit" asp-route-id="@item.companyTypeId" class="btn btn-success">Edit</a>
                                         @* <a asp-action="Details" asp-route-id="@item.companyTypeId" class="btn btn-info">Details</a> *@
                                         <a asp-action="Delete" asp-route-id="@item.companyTypeId" class="btn btn-danger">Delete</a>
                                     </td>

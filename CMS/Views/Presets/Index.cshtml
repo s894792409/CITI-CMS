@@ -72,7 +72,7 @@
                                         @Html.DisplayFor(modelItem => datecreated)
                                     </td>
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.presetId" class="btn btn-primary">Edit</a>
+                                        <a asp-action="Edit" asp-route-id="@item.presetId" class="btn btn-success">Edit</a>
                                         @*<a asp-action="Details" asp-route-id="@item.presetId" class="btn btn-info">Details</a>*@
                                         <a asp-action="Delete" asp-route-id="@item.presetId" class="btn btn-danger">Delete</a>
                                         @{
@@ -81,7 +81,7 @@
                                                                                                 { "themeId", item.themeId.ToString() }
                                                                                             };
                                         }
-                                        <a asp-action="ViewTheme" asp-route-id="@item.themeId" class="btn btn-danger">View Theme</a>
+                                        <a asp-action="ViewTheme" asp-route-id="@item.themeId" class="btn btn-default">View Theme</a>
                                     </td>
 
                                 </tr>
