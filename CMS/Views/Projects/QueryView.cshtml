@@ -1,12 +1,12 @@
 ﻿@model CMS.Models.ViewModels.Projects
 @{
-   // ViewData["Title"] = "QueryView";
+    ViewData["Title"] = "Query project";
 }
 
 <p align="center" style="font-size:50px;margin-top:50px;" class="title">Query Project</p>
 <p align="center">
-    <a class="h1NewPage" asp-action="Create">Create New</a>
-    <a class="h1NewPage" asp-action="Index">All Project</a>
+    <a class="btn btn-info" asp-action="Create">Create New</a>
+    <a class="btn btn-info" asp-action="Index">All Project</a>
 </p>
 <div style="max-width: 25rem;position:absolute;left:0px;right:0px;margin:auto;">
     <form asp-action="QueryProject">

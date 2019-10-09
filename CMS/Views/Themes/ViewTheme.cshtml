@@ -1,53 +1,46 @@
-﻿@model IEnumerable<CMS.Models.ViewModels.Theme>
+﻿@model CMS.Models.ViewModels.Theme
 
 @{
-    ViewData["Title"] = "ViewTheme";
+    ViewData["Title"] = "View theme";
 }
 
-<h2>ViewTheme</h2>
+<div>
+    <p align="center" style="font-size:50px;margin-top:50px;" class="title">View theme</p>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.themeName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.themeName)
+        </dd>
 
-<p>
-    <a asp-controller="Presets" asp-action="Index">Back</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.themeName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.backgroundColor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fontStyle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dateCreated)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.themeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.backgroundColor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fontStyle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dateCreated)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.themeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.themeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.themeId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <dt>
+            @Html.DisplayNameFor(model => model.backgroundColor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.backgroundColor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.fontStyle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.fontStyle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+        <dd>
+            @using System.Globalization;
+            @{
+                string datecreated = Model.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+            }
+            @Html.DisplayFor(modelItem => datecreated)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.themeId"class="btn btn-outline-primary">Edit</a> 
+    <a asp-action="Index"class="btn btn-outline-info">Go to themes list</a>  
+    <a asp-controller="Presets" asp-action="Index"class="btn btn-outline-info">Back</a>
+</div>

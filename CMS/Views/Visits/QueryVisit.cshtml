@@ -2,111 +2,119 @@
 @using Microsoft.EntityFrameworkCore;
 @using System.Globalization;
 @{
-    // Layout = null;
+    ViewData["Title"] = "Query visit";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
     <title>QueryVisit</title>
 </head>
 <body>
     <p align="center" style="font-size:50px;margin-top:50px;" class="title">Search result</p>
     <p align="center">
-        <a class="h1NewPage" asp-action="Create">Create New</a>
-        <a class="h1NewPage" asp-action="Index">All Visits</a>
-        <a class="h1NewPage" asp-action="QueryView">Continue to query</a>
+        <a class="btn btn-info" asp-action="Create">Create New</a>
+        <a class="btn btn-info" asp-action="Index">All Visits</a>
+        <a class="btn btn-info" asp-action="QueryView">Continue to query</a>
     </p>
-    <table class="table table-striped">
-        <thead class="thead-light">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.companyName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.companyTypeId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.noOfPax)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.visitDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.visitTypeId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.dateCreated)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td style="line-height:40px;">
-                        @Html.DisplayFor(modelItem => item.companyName)
-                    </td>
-                    <td style="line-height:40px;">
-                        @{
-                            var _context = new CMSContext();
-                            string companytype = null;
-                            var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
-
-                            foreach (CompanyType companyType in CompanyTypelist)
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.companyName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.companyTypeId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.noOfPax)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.visitDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.visitTypeId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dateCreated)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
                             {
-                                if (companyType.companyTypeId == item.companyTypeId)
-                                {
-                                    companytype = companyType.companyType;
-                                    break;
-                                }
-                            }
-                        }
-                        @Html.DisplayFor(modelItem => companytype)
-                    </td>
-                    <td style="line-height:40px;">
-                        @Html.DisplayFor(modelItem => item.noOfPax)
-                    </td>
-                    <td style="line-height:40px;">
-                        @{
-                            string date = item.visitDate.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                        }
-                        @Html.DisplayFor(modelItem => date)
-                    </td>
-                    <td style="line-height:40px;">
-                        @{
-                            //var _context = new CMSContext();
-                            string visitType = null;
-                            var visitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
+                                <tr>
+                                    <td style="line-height:40px;">
+                                        @Html.DisplayFor(modelItem => item.companyName)
+                                    </td>
+                                    <td style="line-height:40px;">
+                                        @{
+                                            var _context = new CMSContext();
+                                            string companytype = null;
+                                            var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
 
-                            foreach (VisitType visitTypes in visitTypelist)
-                            {
-                                if (visitTypes.visitTypeId == item.visitTypeId)
-                                {
-                                    visitType = visitTypes.visitType;
-                                    break;
-                                }
+                                            foreach (CompanyType companyType in CompanyTypelist)
+                                            {
+                                                if (companyType.companyTypeId == item.companyTypeId)
+                                                {
+                                                    companytype = companyType.companyType;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        @Html.DisplayFor(modelItem => companytype)
+                                    </td>
+                                    <td style="line-height:40px;">
+                                        @Html.DisplayFor(modelItem => item.noOfPax)
+                                    </td>
+                                    <td style="line-height:40px;">
+                                        @{
+                                            string date = item.visitDate.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                                        }
+                                        @Html.DisplayFor(modelItem => date)
+                                    </td>
+                                    <td style="line-height:40px;">
+                                        @{
+                                            //var _context = new CMSContext();
+                                            string visitType = null;
+                                            var visitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
+
+                                            foreach (VisitType visitTypes in visitTypelist)
+                                            {
+                                                if (visitTypes.visitTypeId == item.visitTypeId)
+                                                {
+                                                    visitType = visitTypes.visitType;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        @Html.DisplayFor(modelItem => visitType)
+                                    </td>
+                                    <td style="line-height:40px;">
+                                        @{
+                                            string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                                        }
+                                        @Html.DisplayFor(modelItem => datecreated)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.visitId" class="btn btn-primary">Edit</a>
+                                        @*<a asp-action="Details" asp-route-id="@item.visitId" class="btn btn-info">Details</a> *@
+                                        <a asp-action="Delete" asp-route-id="@item.visitId" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
                             }
-                        }
-                        @Html.DisplayFor(modelItem => visitType)
-                    </td>
-                    <td style="line-height:40px;">
-                        @{
-                            string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                        }
-                        @Html.DisplayFor(modelItem => datecreated)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.visitId" class="btn btn-primary">Edit</a>
-                        @*<a asp-action="Details" asp-route-id="@item.visitId" class="btn btn-info">Details</a> *@
-                        <a asp-action="Delete" asp-route-id="@item.visitId" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 </html>

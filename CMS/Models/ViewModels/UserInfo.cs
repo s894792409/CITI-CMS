@@ -10,6 +10,7 @@ namespace CMS.Models.ViewModels
     {
         
         [Required]
+        [Display(Name ="User Name")]
         public string UserName { get; set; }
         [Key]
         public string Id { get; set; }
@@ -21,6 +22,7 @@ namespace CMS.Models.ViewModels
         [Required]
         public string PhoneNumber { get; set; }
         [Required]
+        [Display(Name ="Role")]
         public bool Admin { get; set; }
     }
 }

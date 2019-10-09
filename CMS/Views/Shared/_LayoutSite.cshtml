@@ -1,7 +1,8 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html style="background:url(/images/bg2.jpg) no-repeat;background-size:cover;z-index:10000000000;">
 <head>
+
     <meta name="viewport" content="width=device-width" />
     <title>@(((string[])ViewData["Meta"])[0])</title>
     <meta name="keywords" content="@(((string[])ViewData["Meta"])[1])" />
@@ -18,10 +19,11 @@
     <link rel="stylesheet" href="/site/css/style.css">
     <!-- Modernizr JS -->
     <script src="/site/js/modernizr-2.6.2.min.js"></script>
+
 </head>
-<body >
-        @RenderBody()
-    
+<body>
+    @RenderBody()
+
 
     <!-- jQuery -->
     <script src="/site/js/jquery.min.js"></script>
@@ -37,5 +39,6 @@
     <script src="/site/js/jquery.flexslider-min.js"></script>
     <!-- Main JS (Do not remove) -->
     <script src="/site/js/main.js"></script>
+    
 </body>
 </html>

@@ -1,21 +1,20 @@
 ﻿@model CMS.Models.ViewModels.Visits
 
 @{
-   // Layout = null;
+    ViewData["Title"] = "Edit visit";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
     <title>Edit</title>
 </head>
 <body>
 
-<h4>Visits</h4>
+    <p align="center" style="font-size:50px;">Edit visit</p>
 <hr />
-<div class="row">
+<div class="row" style="align-content:center; align-items:center;align-self:center;">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>

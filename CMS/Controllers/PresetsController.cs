@@ -33,7 +33,7 @@ namespace CMS.Controllers
             return RedirectToAction("Themes", "QueryTheme");
         }
         
-            public async Task<IActionResult> ViewTheme(int? id)
+            public IActionResult ViewTheme(int? id)
         {
             if (id == null)
             {

@@ -52,7 +52,6 @@ C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\Razor\Views\Presets\Details.g.cshtml.cs
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\Razor\Views\Presets\Edit.g.cshtml.cs
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\Razor\Views\Presets\Index.g.cshtml.cs
-C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\Razor\Views\Presets\ViewTheme.g.cshtml.cs
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\Razor\Views\Projects\Create.g.cshtml.cs
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\Razor\Views\Projects\Delete.g.cshtml.cs
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\Razor\Views\Projects\Details.g.cshtml.cs
@@ -114,3 +113,6 @@ C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\CMS.dll
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\CMS.pdb
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\CMS.csproj.CopyComplete
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\Razor\Views\Admin\CreateUser.g.cshtml.cs
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\Razor\Views\User\AllUser.g.cshtml.cs
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Release\netcoreapp2.1\Razor\Views\User\Delete.g.cshtml.cs

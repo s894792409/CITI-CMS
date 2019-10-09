@@ -1,293 +1,233 @@
 ﻿@model LoggedUser
+<style type="text/css">
 
-    <header id="adminBar" class="col-sm-12">
-        Welcome, @Model.UserName
+    #sidebarnav li ul{
+        display:none;
+        background-color:aliceblue;
+    }
+    #sidebarnav li:hover > ul {
+        display: block;
+    }
+
+        
+</style>
+
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <header class="topbar">
+        <nav class="navbar top-navbar navbar-toggleable-sm navbar-light" style="flex-direction:row;display: flex; flex-wrap:wrap;">
+            <!-- ============================================================== -->
+            <!-- Logo -->
+            <!-- ============================================================== -->
+            <div class="navbar-header" style="width:250px;">
+                @if (Model.Role == "admin")
+                {
+                    <a class="navbar-brand" asp-controller="admin" asp-action="index">
+                        <!-- Logo icon -->
+                        <b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="~/images/citilogo.png" alt="homepage" class="dark-logo" />
+
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span>
+                            <!-- dark Logo text -->
+                            @*<img src="/assets/images/logo-text.png" alt="homepage" class="dark-logo" />*@
+                            CITI2.0 CMS
+                        </span>
+
+                    </a>
+                }
+                else
+                {
+                    <a class="navbar-brand" asp-controller="User" asp-action="index">
+                        <!-- Logo icon -->
+        <b>
+            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+            <!-- Dark Logo icon -->
+            <img src="~/images/citilogo.png" alt="homepage" style="width: auto;height: auto;max-width: 120px;max-height: 120px;" />
+
+        </b>
+        <!--End Logo icon -->
+        <!-- Logo text -->
+        <span>
+            <!-- dark Logo text -->
+            <!--<img src="/assets/images/logo-text.png" alt="homepage" class="dark-logo" />-->
+            CITI2.0 CMS
+        </span>
+                        @*<img src="~/images/nyplogo.png" style="width: auto;height: auto;max-width: 100%;max-height: 80px;" />*@
+
+                    </a>
+                }
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Logo -->
+            <!-- ============================================================== -->
+            <div style="display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;justify-content:flex-end;">
+                @*<span style="background:#fff;font-size:30px;align-self:center;"><img src="~/images/citilogo.png" style="max-width:120px;max-height:120px;"/>CITI2.0-CMS</span>*@
+                <!-- ============================================================== -->
+                <!-- toggle and nav items -->
+                <!-- ============================================================== -->
+                @*<ul class="navbar-nav mr-auto mt-md-0 ">
+                    <!-- This is  -->
+                    <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                    <li class="nav-item hidden-sm-down">
+                        <form class="app-search p-l-20">
+                            <input type="text" class="form-control" placeholder="Search for..."> <a class="srh-btn"><i class="ti-search"></i></a>
+                        </form>
+                    </li>
+                </ul>
+                <!-- ============================================================== -->
+                <!-- User profile and search -->
+                <!-- ============================================================== -->*@
+                <ul class="navbar-nav my-lg-0"style="align-self:flex-end;">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wecome,@Model.UserName</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </header>
-    <style type="text/css">
-        #nav1 {
-            list-style: none outside none;
-            padding: 0;
-            width: 30%;
-            flex-direction:row;
-            display: flex;
-            flex-wrap:wrap; 
-            flex:auto;
-           
-        }
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <aside class="left-sidebar" style="width:250px;">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li class="visitIcon">
+                        <a class="waves-effect"><i class="fa fa-address-card m-r-10" aria-hidden="true"></i>Visits</a>
+                        <ul>
+                            <li>
+                                <a asp-controller="Visits" asp-action="Index">All Visit</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Visits" asp-action="Create">Add Visit</a>
+                            </li>
 
-            #nav1 > li {
-                padding-left: 35px;
-                padding-top: 7px;
-                padding-bottom: 20px;
-                position: relative;
-                width: 150px;
-                background-color:#000000;
-                height: auto;
-            }
-            #nav1 li {
-                background-color:#000000;
-            }
-
-
-            #nav1 a {
-                color: #fff;
-                cursor: pointer;
-                width: 10%;
-            }
-
-                #nav1 a:hover {
-                    color: #00b9eb
-                }
-
-            #nav1 li:hover > ul {
-                display: block;
-            }
-            
-            #nav1 ul {
-                display: none;
-                margin: auto;
-                padding: 0;
-                width: 185px;
-                position: absolute;
-                top: 5px;
-                left: 90px;
-                bottom:0px;
-                list-style: none outside none
-            }
-
-                #nav1 ul li {
-                    padding: 5px;
-                    background-color: #333;
-                    position: relative;
-                    z-index:99999;
-                }
-
-            #nav1 li.pageIcon {
-                background: url("/images/page-icon.png") no-repeat
-            }
-
-            #nav1 li.mediaIcon {
-                background: url("/images/media-icon.png") no-repeat
-            }
-
-            #nav1 li.blogIcon {
-                background: url("/images/blog-icon.svg") no-repeat
-            }
-
-            #nav1 li.courseIcon {
-                background: url("/images/course-icon.png") no-repeat
-            }
-
-            #nav1 li.siteIcon {
-                background: url("/images/site-icon.png") no-repeat
-            }
-
-            #nav1 li.accountIcon {
-                background: url("/images/account-icon.png") no-repeat
-            }
-
-            #nav1 li.awardIcon {
-                background: url("/images/award.png") no-repeat
-            }
-
-            #nav1 li.visitIcon {
-                background: url("/images/visitIcon.png") no-repeat
-            }
-            #nav1 li.studentIcon {
-                background: url("/images/studentIcon.png") no-repeat
-            }
-            #nav1 li.ProjectIcon {
-                background: url("/images/projectIcon.png") no-repeat
-            }
-            #nav1 li.shortCoursesIcon {
-                background: url("/images/shortCoursesIcon.png") no-repeat
-            }
-            #nav1 li.menuIcon {
-                background: url("/images/menuIcon.png") no-repeat
-            }
-            #nav1 li.ThemeIcon {
-                background: url("/images/ThemeIcon.png") no-repeat
-            }
-    </style>
-    <nav id="leftMenu" class="col-sm-3" style="height:100%;">
-        
-        <ul id="nav1">
-            @*<li class="pageIcon">
-            <a>Pages</a>
-            <ul>
-                <li>
-                    <a asp-controller="Page" asp-action="Index">All Page</a>
-                </li>
-                <li>
-                    <a asp-controller="Page" asp-action="Add" asp-route-id="">Add Page</a>
-                </li>
-            </ul>
-        </li>
-        <li class="mediaIcon">
-            <a>Media</a>
-            <ul>
-                <li>
-                    <a asp-controller="Media" asp-action="Index">All Media</a>
-                </li>
-                <li><a asp-controller="Media" asp-action="Add" asp-route-id="">Add Media</a></li>
-            </ul>
-        </li>
-        <li class="blogIcon">
-            <a>Blogs</a>
-            <ul>
-                <li>
-                    <a asp-controller="BlogCategory" asp-action="Index">All Blog Category</a>
-                </li>
-                <li>
-                    <a asp-controller="BlogCategory" asp-action="Add" asp-route-id="">Add Blog Category</a>
-                </li>
-                <li>
-                    <a asp-controller="Blog" asp-action="Index">All Blog</a>
-                </li>
-                <li>
-                    <a asp-controller="Blog" asp-action="Add" asp-route-id="">Add Blog</a>
-                </li>
-            </ul>
-        </li>
-        <li class="siteIcon">
-            <a>Site Info</a>
-            <ul>
-                <li>
-                    <a asp-controller="Info" asp-action="Index">Info</a>
-                </li>
-            </ul>
-        </li>
-        <li class="pageIcon">
-            <a>Menu</a>
-            <ul>
-                <li>
-                    <a asp-controller="Menu" asp-action="Index">All Menu</a>
-                </li>
-                <li>
-                    <a asp-controller="Menu" asp-action="Add" asp-route-id="">Add Menu</a>
-                </li>
-            </ul>
-        </li>*@
-
-            <li class="visitIcon">
-                <a>Visits</a>
-                <ul>
-                    <li>
-                        <a asp-controller="Visits" asp-action="Index">All Visit</a>
+                        </ul>
+                    </li>
+                    <li class="menuIcon">
+                        <a class="waves-effect"><i class="fa fa-th-list m-r-10" aria-hidden="true"></i>Edit Company Type menu</a>
+                        <ul>
+                            <li>
+                                <a asp-controller="CompanyType" asp-action="Index">All Menu</a>
+                            </li>
+                            <li>
+                                <a asp-controller="CompanyType" asp-action="Create">Add Menu</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a asp-controller="Visits" asp-action="Create">Add Visit</a>
+                        <a class="waves-effect"><i class="fa fa-th-list m-r-10" aria-hidden="true"></i>Edit Visit Type menu</a>
+                        <ul>
+                            <li>
+                                <a asp-controller="VisitTypes" asp-action="Index">All Menu</a>
+                            </li>
+                            <li>
+                                <a asp-controller="VisitTypes" asp-action="Create">Add Menu</a>
+                            </li>
+                        </ul>
                     </li>
+                    <li class="ThemeIcon">
+                        <a class="waves-effect"><i class="fa fa-puzzle-piece m-r-10" aria-hidden="true"></i>Preset and Theme</a>
+                        <ul>
+                            <li>
+                                <a asp-controller="Presets" asp-action="Index">All Preset</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Themes" asp-action="Index">All Themes</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="studentIcon">
+                        <a class="waves-effect"><i class="fa fa-mortar-board m-r-10" aria-hidden="true"></i>student information</a>
+                        <ul>
+                            <li>
+                                <a asp-controller="Students" asp-action="Index">All Student</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Students" asp-action="Create">Add Student</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="ProjectIcon">
+                        <a class="waves-effect"><i class="fa fa-tasks m-r-10" aria-hidden="true"></i>Projects information</a>
+                        <ul>
+                            <li>
+                                <a asp-controller="Projects" asp-action="Index">All Projects</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Projects" asp-action="create">Add Project</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="awardIcon">
+                        <a class="waves-effect"><i class="fa  fa-trophy m-r-10" aria-hidden="true"></i>Awards</a>
+                        <ul>
+                            <li>
+                                <a asp-controller="Awards" asp-action="Index">All Awards</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Awards" asp-action="create">Add Awards</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="shortCoursesIcon" style="padding-bottom:30px;">
+                        <a class="waves-effect"><i class="fa fa-book m-r-10" aria-hidden="true"></i>Short Courses</a>
+                        <ul>
+                            <li>
+                                <a asp-controller="ShortCourses" asp-action="Index">All Short Courses</a>
+                            </li>
+                            <li>
+                                <a asp-controller="ShortCourses" asp-action="create">Add Short Courses</a>
+                            </li>
+                        </ul>
+                    </li>
+                    @if (Model.Role == "Admin")
+                        {
+                            <li class="accountIcon">
+                                <a class="waves-effect"><i class="fa fa-users m-r-10" aria-hidden="true"></i>Account</a>
+                                <ul>
+                                    <li><a asp-controller="User" asp-action="AllUser">All User</a></li>
+                                    <li><a asp-controller="Admin" asp-action="CreateUser">Add User</a></li>
+                                    <li><a asp-controller="Admin" asp-action="Role">Role</a></li>
+                                    <li><a asp-controller="User" asp-action="Edit">Edit account info</a></li>
+                                    <li><a asp-controller="Admin" asp-action="Logout">Logout</a></li>
+                                </ul>
 
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="pageIcon">
+                                <a class="waves-effect"><i class="fa fa-user m-r-10" aria-hidden="true"></i>User</a>
+                                <ul>
+                                    <li>
+                                        <a asp-controller="User" asp-action="Edit">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="User" asp-action="Logout">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                 </ul>
-            </li>
-            <li class="menuIcon">
-                <a>Edit Company Type menu</a>
-                <ul>
-                    <li>
-                        <a asp-controller="CompanyType" asp-action="Index">All Menu</a>
-                    </li>
-                    <li>
-                        <a asp-controller="CompanyType" asp-action="Create">Add Menu</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="menuIcon">
-                <a>Edit Visit Type menu</a>
-                <ul>
-                    <li>
-                        <a asp-controller="VisitTypes" asp-action="Index">All Menu</a>
-                    </li>
-                    <li>
-                        <a asp-controller="VisitTypes" asp-action="Create">Add Menu</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="ThemeIcon">
-                <a>View Preset and Theme</a>
-                <ul>
-                    <li>
-                        <a asp-controller="Presets" asp-action="Index">All Preset</a>
-                    </li>
-                    <li>
-                        <a asp-controller="Themes" asp-action="Index">All Themes</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="studentIcon">
-                <a>student information</a>
-                <ul>
-                    <li>
-                        <a asp-controller="Students" asp-action="Index">All Student</a>
-                    </li>
-                    <li>
-                        <a asp-controller="Students" asp-action="Create">Add Student</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="ProjectIcon">
-                <a>Projects information</a>
-                <ul>
-                    <li>
-                        <a asp-controller="Projects" asp-action="Index">All Projects</a>
-                    </li>
-                    <li>
-                        <a asp-controller="Projects" asp-action="create">Add Project</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="awardIcon">
-                <a>Awards</a>
-                <ul>
-                    <li>
-                        <a asp-controller="Awards" asp-action="Index">All Awards</a>
-                    </li>
-                    <li>
-                        <a asp-controller="Awards" asp-action="create">Add Awards</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="shortCoursesIcon" style="padding-bottom:30px;">
-                <a>Short Courses</a>
-                <ul>
-                    <li>
-                        <a asp-controller="ShortCourses" asp-action="Index">All Short Courses</a>
-                    </li>
-                    <li>
-                        <a asp-controller="ShortCourses" asp-action="create">Add Short Courses</a>
-                    </li>
-                </ul>
-            </li>
-            @if (Model.Role == "Admin")
-            {
-                <li class="accountIcon">
-                    <a>Account</a>
-
-                    <ul>
-                        <li><a asp-controller="User" asp-action="AllUser">All User</a></li>
-                        <li><a asp-controller="Admin" asp-action="CreateUser">Add User</a></li>
-                        <li><a asp-controller="Admin" asp-action="Role">Role</a></li>
-                        <li><a asp-controller="User" asp-action="Edit">Edit account info</a></li>
-                        <li><a asp-controller="Admin" asp-action="Logout">Logout</a></li>
-                    </ul>
-
-                </li>
-            }
-            else
-            {
-                <li class="pageIcon">
-                    <a>User</a>
-                    <ul>
-                        <li>
-                            <a asp-controller="User" asp-action="Edit">Edit</a>
-                        </li>
-                        <li>
-                            <a asp-controller="User" asp-action="Logout">Logout</a>
-                        </li>
-                    </ul>
-                </li>
-            }
-            </ul>
-        
-
-    </nav>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->

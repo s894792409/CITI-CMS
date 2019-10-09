@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_LayoutSite.cshtml";
    // Layout = null;
 }
-
-<div class="card" style="width: 500px; text-align: center;
+<div>
+    <div class="card" style="width: 500px; text-align: center;
     border-radius: 20px;
     height: 200px;
     margin: auto;
@@ -16,10 +16,11 @@
     right: 0px;
     bottom: 0px;
 ">
-    <div class="card-body" >
-        <h1 class="card-title">Welcome to CITI 2.0 CMS</h1>
-        <p class="card-text">Please click the button below to login</p>
-        <a asp-controller="Login" asp-action="index" class="btn btn-primary">Go to login</a>
+        <div class="card-body">
+            <h1 class="card-title"><b>Welcome to CITI 2.0 CMS</b></h1>
+            <p class="card-text"><b>Please click the button below to login</b></p>
+            <a asp-controller="Login" asp-action="index" class="btn btn-primary">Go to login</a>
+        </div>
     </div>
 </div>
 

@@ -26,6 +26,76 @@ a {
     background: #23282d;
 }
 
+#nav1 {
+    list-style: none outside none;
+    padding: 0;
+    width: 30%
+}
+
+    #nav1 > li {
+        padding-left: 35px;
+        padding-top: 7px;
+        padding-bottom: 20px;
+        position: relative;
+        width: 100px;
+        height: auto;
+    }
+
+
+    #nav1 a {
+        color: #fff;
+        cursor: pointer;
+        width: 10%;
+    }
+
+        #nav1 a:hover {
+            color: #00b9eb
+        }
+
+    #nav1 li:hover > ul {
+        display: block
+    }
+
+    #nav1 ul {
+        display: none;
+        margin: 0;
+        padding: 0;
+        width: 185px;
+        position: absolute;
+        top: 5px;
+        left: 90px;
+        background: #333;
+        list-style: none outside none
+    }
+
+        #nav1 ul li {
+            padding: 5px
+        }
+
+    #nav1 li.pageIcon {
+        background: url("../images/page-icon.png") no-repeat
+    }
+
+    #nav1 li.mediaIcon {
+        background: url("../images/media-icon.png") no-repeat
+    }
+
+    #nav1 li.blogIcon {
+        background: url("../images/blog-icon.svg") no-repeat
+    }
+
+    #nav1 li.courseIcon {
+        background: url("../images/course-icon.png") no-repeat
+    }
+
+    #nav1 li.siteIcon {
+        background: url("../images/site-icon.png") no-repeat
+    }
+
+    #nav1 li.accountIcon {
+        background: url("../images/account-icon.png") no-repeat
+    }
+
 /*Menu*/
 #nav {
     list-style: none outside none;
@@ -323,38 +393,8 @@ h2 {
     padding-top: 5px;
 }
 
-table {
-    width: 100%;
-    background-color: #FFFFFF;
-    border-collapse: collapse;
-    align-content: center;
-}
 
-    table tr th {
-        color: #00b9eb;
-        font-weight: 400;
-        align-content:center;
-    }
-
-    table td {
-        padding-top: 5px;
-        align-content: center;
-    }
-
-    table thead {
-        /*border-bottom: 1px solid #CCCCCC;*/
-    }
-
-    table a {
-        border-right: 1px solid #333333;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-
-    table tbody tr {
-        height: 50px;
-        align-content: center;
-    }
+  
 
 /*Media*/
 #mediaItem {
@@ -583,4 +623,6 @@ a.close {
 /*End*/
 
 #mainFooter {
+    position:absolute;
+    bottom:0px;
 }

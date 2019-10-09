@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using CMS.Models;
 using CMS.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
 
 namespace CMS.Controllers
 {
+    [Display(Name = "Edit company Type menu")]
     [Authorize]
     public class CompanyTypeController : Controller
     {

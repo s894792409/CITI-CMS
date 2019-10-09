@@ -97,7 +97,7 @@ WriteAttributeValue("", 89, Model.Id, 89, 9, false);
             WriteLiteral("<div>");
             EndContext();
             BeginContext(149, 53, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3bafa07130ee499f9157b624f934b5ec", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1159e5d5e6e84f619bdbbecc6e283737", async() => {
                 BeginContext(194, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -132,7 +132,7 @@ WriteAttributeValue("", 89, Model.Id, 89, 9, false);
             WriteLiteral(" ");
             EndContext();
             BeginContext(203, 104, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dd588756bea04402969e8aa6efcad50f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c4927489acff4ee481ba071d0aeab964", async() => {
                 BeginContext(299, 4, true);
                 WriteLiteral("View");
                 EndContext();

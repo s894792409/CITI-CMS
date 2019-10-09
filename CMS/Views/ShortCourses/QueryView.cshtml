@@ -1,12 +1,12 @@
 ﻿@model ShortCourses
 @{
-    //ViewData["Title"] = "QueryView";
+    ViewData["Title"] = "Query short courses";
 }
 
 <p align="center" style="font-size:50px;margin-top:50px;" class="title">Query Short Courses</p>
 <p align="center">
-    <a class="h1NewPage" asp-action="Create">Create New</a>
-    <a class="h1NewPage" asp-action="Index">All Short Courses</a>
+    <a class="btn btn-info" asp-action="Create">Create New</a>
+    <a class="btn btn-info" asp-action="Index">All Short Courses</a>
 </p>
 <div style="max-width: 25rem;position:absolute;left:0px;right:0px;margin:auto;">
     <form asp-action="QueryShortCourses">

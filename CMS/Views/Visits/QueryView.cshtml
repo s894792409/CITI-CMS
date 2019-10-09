@@ -1,20 +1,19 @@
 ﻿@model CMS.Models.ViewModels.Visits
 @{
-    //Layout = null;
+    ViewData["Title"] = "Query visit";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
     <title>QueryView</title>
 </head>
 <body>
-    <p align="center" style="font-size:50px;margin-top:50px;" class="title">Query Visit</p>
+    <p align="center" style="font-size:50px;margin-top:50px;" class="title">Query visit</p>
     <p align="center">
-        <a class="h1NewPage" asp-action="Create">Create New</a>
-        <a class="h1NewPage" asp-action="Index">All Visit</a>
+        <a class="btn btn-info" asp-action="Create">Create New</a>
+        <a class="btn btn-info" asp-action="Index">All Visit</a>
     </p>
     <div style="max-width: 25rem;position:absolute;left:0px;right:0px;margin:auto;">
         <form asp-action="QueryVisit">
