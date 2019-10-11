@@ -11,6 +11,7 @@ namespace CMS.Models
         public Country Country { get; set; }
 
         public int Age { get; set; }
+        public string UserKey { get; set; }
     }
 
     public enum Country

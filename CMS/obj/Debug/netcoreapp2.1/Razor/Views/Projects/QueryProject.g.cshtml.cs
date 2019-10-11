@@ -95,7 +95,7 @@ using System.Globalization;
             WriteLiteral("\r\n<p align=\"center\" style=\"font-size:50px;margin-top:50px;\" class=\"title\">Search result</p>\r\n<p align=\"center\">\r\n    ");
             EndContext();
             BeginContext(221, 58, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7377de6cc384d1b8a141720f3a4dcaa", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e917aa93735a405892030cba261aa25b", async() => {
                 BeginContext(265, 10, true);
                 WriteLiteral("Create New");
                 EndContext();
@@ -118,7 +118,7 @@ using System.Globalization;
             WriteLiteral("\r\n    ");
             EndContext();
             BeginContext(285, 59, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "332b80969547433e95009f59ed14165c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1559888315d04d82b2144489bbb2bfa7", async() => {
                 BeginContext(328, 12, true);
                 WriteLiteral("All Projects");
                 EndContext();
@@ -141,7 +141,7 @@ using System.Globalization;
             WriteLiteral("\r\n    ");
             EndContext();
             BeginContext(350, 68, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "57aaf11f2f114baa974c98c091436517", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d2680866d3014ac7aa6df5b95af6ab4d", async() => {
                 BeginContext(397, 17, true);
                 WriteLiteral("Continue to query");
                 EndContext();
@@ -278,7 +278,7 @@ using System.Globalization;
             WriteLiteral("\r\n                                </td>\r\n                                <td>\r\n                                    ");
             EndContext();
             BeginContext(2629, 84, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "65bcb03a603c454489dcabf6d4459132", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af97f8691335456ba3c65bc09a6800ef", async() => {
                 BeginContext(2705, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -317,7 +317,7 @@ using System.Globalization;
             WriteLiteral("                                    ");
             EndContext();
             BeginContext(2881, 87, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bc0d84f4bfb249fa8fc19a42f2f29e0e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f5d8a45d99db4e2ba905d0889199fc99", async() => {
                 BeginContext(2958, 6, true);
                 WriteLiteral("Delete");
                 EndContext();

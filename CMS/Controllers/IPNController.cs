@@ -70,6 +70,7 @@ namespace CMS.Controllers
             }
             catch (Exception exception)
             {
+                exception.ToString();
                 //Capture exception for manual investigation
             }
 

@@ -44,7 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\json\" />
     <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 
@@ -136,8 +135,6 @@
     <None Include="wwwroot\assets\plugins\sticky-kit-master\dist\sticky-kit.js" />
     <None Include="wwwroot\assets\plugins\sticky-kit-master\dist\sticky-kit.min.js" />
     <None Include="wwwroot\assets\plugins\styleswitcher\jQuery.style.switcher.js" />
-    <None Include="wwwroot\dist\rvnm.js" />
-    <None Include="wwwroot\dist\rvnm.min.js" />
     <None Include="wwwroot\scss\app.scss" />
     <None Include="wwwroot\scss\colors\blue-dark.scss" />
     <None Include="wwwroot\scss\colors\blue.scss" />
@@ -561,7 +558,6 @@
     <None Include="wwwroot\site\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <None Include="wwwroot\site\fonts\icomoon\icomoon.svg" />
     <None Include="wwwroot\site\js\modernizr-2.6.2.min.js" />
-    <None Include="wwwroot\src\jquery-rvnm.js" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="http://json.schemastore.org/appveyor" /></VisualStudio></ProjectExtensions>

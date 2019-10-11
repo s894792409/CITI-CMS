@@ -28,29 +28,6 @@ namespace CMS.Controllers
             return View();
         }
 
-        public IActionResult Page(string url)
-        {
-            Page page = new Page();
-            using (var context = new CMSContext())
-            {
-                page = context.Page.Where(t => t.Url == url).FirstOrDefault();
-            }
-            return View("Index", page);
-        }
-
-        public IActionResult ViewBlog(int id)
-        {
-            Blog blog = new Blog();
-            using (var context = new CMSContext())
-            {
-                blog = context.Blog.Where(t => t.Id == id).FirstOrDefault();
-                blog.PrimaryImageUrl = blog.PrimaryImageId != null ? "/" + context.Media.Where(x => x.Id == blog.PrimaryImageId).Select(x => x.Url).FirstOrDefault() : "/images/addphoto.jpg";
-
-                ViewBag.BlogCategory = context.BlogCategory.Where(t => t.Status == true).ToList();
-            }
-            return View(blog);
-        }
-
 
     }
 }

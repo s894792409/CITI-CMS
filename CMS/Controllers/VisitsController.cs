@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CMS.Models;
 using CMS.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Cryptography;
 
 namespace CMS.Controllers
 {
@@ -27,6 +28,7 @@ namespace CMS.Controllers
             var content = await _context.Visits.ToListAsync();
             return View(content);
         }
+      
 
         // GET: Visits/Details/5
         public async Task<IActionResult> Details(int? id)

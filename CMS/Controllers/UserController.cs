@@ -94,6 +94,57 @@ namespace CMS.Controllers
             return View(user);
         }
 
+        //public async Task<IActionResult> Edit(string username)
+        //{
+        //    UserInfo info= await identityDbContext.AspNetUsers.SingleOrDefaultAsync(s => s.UserName == username);
+        //    AppUser user = new AppUser();
+        //    User
+        //    ViewBag.Title = "Update User";
+        //    return View(user);
+        //}
+        public async Task<IActionResult> RefreshKey()
+        {
+            AppUser user = await userManager.GetUserAsync(HttpContext.User);
+            user.UserKey = MakeKey(15);
+            IdentityResult result = await userManager.UpdateAsync(user);
+            if (result.Succeeded)
+                ViewBag.Result = "Update Successful";
+            else
+                AddErrorsFromResult(result);
+            return RedirectToAction("Edit");
+        }
+        private static string MakeKey(int pwdLength)
+
+        {     //声明要返回的字符串    
+
+            string tmpstr = "";
+
+            //密码中包含的字符数组    
+
+            string pwdchars = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_?/-=";
+
+            //数组索引随机数    
+
+            int iRandNum;
+
+            //随机数生成器    
+
+            Random rnd = new Random();
+
+            for (int i = 0; i < pwdLength; i++)
+
+            {      //Random类的Next方法生成一个指定范围的随机数     
+
+                iRandNum = rnd.Next(pwdchars.Length);
+
+                //tmpstr随机添加一个字符     
+
+                tmpstr += pwdchars[iRandNum];
+
+            }
+
+            return tmpstr;
+        }
         [HttpPost]
         public async Task<IActionResult> Edit(AppUser appUser, string Password)
         {

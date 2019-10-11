@@ -59,14 +59,14 @@ namespace CMS.Controllers
 
         public async Task<IActionResult> Create()
         {
-            IdentityResult result = await roleManager.CreateAsync(new IdentityRole("Admin"));
+            IdentityResult result = new IdentityResult();
 
             AppUser user = new AppUser
             {
                 UserName = "admin",
                 Email = "admin@gmail.com"
             };
-            result = await userManager.CreateAsync(user, "Secret123$");
+            result = await userManager.CreateAsync(user, "Sun123!");
 
             if (result.Succeeded)
             {

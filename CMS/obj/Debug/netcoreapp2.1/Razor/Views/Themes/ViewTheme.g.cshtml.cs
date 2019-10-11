@@ -185,7 +185,7 @@ using System.Globalization;
             WriteLiteral("\r\n        </dd>\r\n    </dl>\r\n</div>\r\n<div>\r\n    ");
             EndContext();
             BeginContext(1165, 90, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "613c3ec640764fbd8c0e0c96c34e7088", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5a56d7b7065e4550af9341c2ae99a85a", async() => {
                 BeginContext(1247, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -221,7 +221,7 @@ using System.Globalization;
             WriteLiteral(" \r\n    ");
             EndContext();
             BeginContext(1262, 71, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5eec684a82384452b72de2698477442e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dcdbeca23b994135a1d3215ce42971d1", async() => {
                 BeginContext(1312, 17, true);
                 WriteLiteral("Go to themes list");
                 EndContext();
@@ -244,7 +244,7 @@ using System.Globalization;
             WriteLiteral("  \r\n    ");
             EndContext();
             BeginContext(1341, 83, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f2ad1f6db9449b99e533f83925b7fa8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b41d59e544364f629a4ae1b9e1e8ee1a", async() => {
                 BeginContext(1416, 4, true);
                 WriteLiteral("Back");
                 EndContext();
