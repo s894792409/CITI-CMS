@@ -65,10 +65,9 @@ namespace CMS.Controllers.API
             //list.Where(s => s.visitId == id);
             foreach (Visits v in list)
             {
-                if (v.visitId == id)
+                if (v.VisitId == id)
                 {
-                    visits.dateCreated = v.dateCreated;
-                    visits.visitDate = v.visitDate;
+                    visits.VisitId = v.VisitId;
                     break;
                 }
 
@@ -76,8 +75,7 @@ namespace CMS.Controllers.API
             try
             {
 
-                visits.visitId = id;
-                //return Ok("开始更新" + visits.dateCreated + "   " + visits.GetType()+"  "+visits.visitId);
+                visits.VisitId = id;
                 _context.Update(visits);
                 await _context.SaveChangesAsync();
 
@@ -107,9 +105,15 @@ namespace CMS.Controllers.API
             {
                 return BadRequest(ModelState);
             }
-           
-            visits.dateCreated = DateTime.Now;
-            _context.Visits.Add(visits);
+            Visits visits1 = new Visits();
+            visits1.EndDate = visits.EndDate;
+            visits1.StartDate = visits.StartDate;
+            visits1.Pax = visits.Pax;
+            visits1.ForeignVisit = visits.ForeignVisit;
+            visits1.Host = visits.Host;
+            visits1.Name = visits.Name;
+            visits1.SIC = visits.SIC;
+            _context.Visits.Add(visits1);
             await _context.SaveChangesAsync();
             APIReturn re = new APIReturn();
             re.Status = "success";
@@ -141,7 +145,7 @@ namespace CMS.Controllers.API
 
         private bool VisitsExists(int id)
         {
-            return _context.Visits.Any(e => e.visitId == id);
+            return _context.Visits.Any(e => e.VisitId == id);
         }
     }
 }

@@ -9,6 +9,12 @@ using CMS.Models;
 using CMS.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Text;
+using OfficeOpenXml;
+using Microsoft.AspNetCore.Hosting;
+using System.Globalization;
 
 namespace CMS.Controllers
 {
@@ -16,10 +22,12 @@ namespace CMS.Controllers
     public class VisitsController : Controller
     {
         private readonly CMSContext _context;
+        private IHostingEnvironment _hostingEnvironment;
 
-        public VisitsController()
+        public VisitsController(IHostingEnvironment hostingEnvironment)
         {
             _context = new CMSContext();
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // GET: Visits
@@ -39,7 +47,7 @@ namespace CMS.Controllers
             }
 
             var visits = await _context.Visits
-                .SingleOrDefaultAsync(m => m.visitId == id);
+                .SingleOrDefaultAsync(m => m.VisitId == id);
             if (visits == null)
             {
                 return NotFound();
@@ -51,13 +59,14 @@ namespace CMS.Controllers
         // GET: Visits/Create
         public IActionResult Create()
         {
-            var VisitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
-            var selectList = new SelectList(VisitTypelist, "visitTypeId", "visitType");
-            ViewBag.visitTypes = selectList;
-            //var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
-            var CompanyTypelist = _context.CompanyType.ToList();
-            var companySelectList = new SelectList(CompanyTypelist, "companyTypeId", "companyType");
-            ViewBag.CompanyType = companySelectList;
+            //var VisitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
+            //var selectList = new SelectList(VisitTypelist, "visitTypeId", "visitType");
+            //ViewBag.visitTypes = selectList;
+            ////var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
+            //var CompanyTypelist = _context.CompanyType.ToList();
+            //var companySelectList = new SelectList(CompanyTypelist, "companyTypeId", "companyType");
+            //ViewBag.CompanyType = companySelectList;
+            
             return View();
         }
         
@@ -67,44 +76,30 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("visitId,companyName,companyTypeId,noOfPax,visitDate,visitTypeId,dateCreated")] Visits visits)
+        public async Task<IActionResult> Create([Bind("Name,StartDate,EndDate,Pax,SIC,Host,ForeignVisit")] Visits visits)
         {
             if (ModelState.IsValid)
             {
-                if (visits.visitDate < DateTime.Now)
+                if (visits.StartDate < DateTime.Now)
                 {
-                    ViewBag.error = "The date entered is in the past. Please choose a date in the future";
-                    var VisitTypelist1 = _context.VisitType.ToList();
-                    var selectList1 = new SelectList(VisitTypelist1, "visitTypeId", "visitType");
-                    ViewBag.visitTypes = selectList1;
-                    var CompanyTypelist1 = _context.CompanyType.ToList();
-                    var companySelectList1 = new SelectList(CompanyTypelist1, "companyTypeId", "companyType");
-                    ViewBag.CompanyType = companySelectList1;
+                    ViewBag.error = "The start DateTime entered is in the past. Please choose a date in the future";
                     return View(visits);
                 }
-                else if(visits.visitDate.Day==DateTime.Now.Day&&visits.visitDate.Month==DateTime.Now.Month) {
+                if (visits.StartDate.Day == DateTime.Now.Day && visits.StartDate.Month == DateTime.Now.Month)
+                {
                     ViewBag.error = "Visit date cannot be today";
-                    var VisitTypelist2 = _context.VisitType.ToList();
-                    var selectList2 = new SelectList(VisitTypelist2, "visitTypeId", "visitType");
-                    ViewBag.visitTypes = selectList2;
-                    var CompanyTypelist2 = _context.CompanyType.ToList();
-                    var companySelectList2 = new SelectList(CompanyTypelist2, "companyTypeId", "companyType");
-                    ViewBag.CompanyType = companySelectList2;
                     return View(visits);
                 }
-                visits.dateCreated = DateTime.Now;
+                if (visits.EndDate <visits.StartDate)
+                {
+                    ViewBag.error = "The end time entered is before at the start time. Please select a future date";
+                    return View(visits);
+                }
+
                 _context.Add(visits);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //var VisitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
-            var VisitTypelist = _context.VisitType.ToList();
-            var selectList = new SelectList(VisitTypelist, "visitTypeId", "visitType");
-            ViewBag.visitTypes = selectList;
-            // var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
-            var CompanyTypelist= _context.CompanyType.ToList();
-            var companySelectList = new SelectList(CompanyTypelist, "companyTypeId", "companyType");
-            ViewBag.CompanyType = companySelectList;
             return View(visits);
         }
 
@@ -116,17 +111,17 @@ namespace CMS.Controllers
                 return NotFound();
             }
 
-            var visits = await _context.Visits.SingleOrDefaultAsync(m => m.visitId == id);
+            var visits = await _context.Visits.SingleOrDefaultAsync(m => m.VisitId == id);
             if (visits == null)
             {
                 return NotFound();
             }
-            var VisitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
-            var selectList = new SelectList(VisitTypelist, "visitTypeId", "visitType");
-            ViewBag.visitTypes = selectList;
-            var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
-            var companySelectList = new SelectList(CompanyTypelist, "companyTypeId", "companyType");
-            ViewBag.CompanyType = companySelectList;
+            //var VisitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
+            //var selectList = new SelectList(VisitTypelist, "visitTypeId", "visitType");
+            //ViewBag.visitTypes = selectList;
+            //var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
+            //var companySelectList = new SelectList(CompanyTypelist, "companyTypeId", "companyType");
+            //ViewBag.CompanyType = companySelectList;
             return View(visits);
         }
 
@@ -135,9 +130,9 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("visitId,companyName,companyTypeId,noOfPax,visitDate,visitTypeId,dateCreated")] Visits visits)
+        public async Task<IActionResult> Edit(int id, Visits visits)
         {
-            if (id != visits.visitId)
+            if (id != visits.VisitId)
             {
                 return NotFound();
             }
@@ -153,7 +148,7 @@ namespace CMS.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VisitsExists(visits.visitId))
+                    if (!VisitsExists(visits.VisitId))
                     {
                         return NotFound();
                     }
@@ -176,7 +171,7 @@ namespace CMS.Controllers
             }
 
             var visits = await _context.Visits
-                .SingleOrDefaultAsync(m => m.visitId == id);
+                .SingleOrDefaultAsync(m => m.VisitId == id);
             if (visits == null)
             {
                 return NotFound();
@@ -190,7 +185,7 @@ namespace CMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var visits = await _context.Visits.SingleOrDefaultAsync(m => m.visitId == id);
+            var visits = await _context.Visits.SingleOrDefaultAsync(m => m.VisitId == id);
             _context.Visits.Remove(visits);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -198,7 +193,7 @@ namespace CMS.Controllers
 
         private bool VisitsExists(int id)
         {
-            return _context.Visits.Any(e => e.visitId == id);
+            return _context.Visits.Any(e => e.VisitId == id);
         }
         public IActionResult QueryView()
         {
@@ -207,15 +202,184 @@ namespace CMS.Controllers
 
         public async Task<IActionResult> QueryVisit(Visits visits)
         {
-            var visit = from m in _context.Visits
-                          select m;
+            //var visit = from m in _context.Visits
+            //              select m;
 
-            if (!String.IsNullOrEmpty(visits.companyName))
-            {
-                visit = visit.Where(s => s.companyName.Contains(visits.companyName));
-            }
+            //if (!String.IsNullOrEmpty(visits.companyName))
+            //{
+            //    visit = visit.Where(s => s.companyName.Contains(visits.companyName));
+            //}
 
-            return View(await visit.ToListAsync());
+            return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Import(IFormFile excelfile)
+        {
+            string webrootpath = _hostingEnvironment.WebRootPath;
+            string filename = $"{ Guid.NewGuid()}.xlsx";
+            FileInfo file = new FileInfo(Path.Combine(webrootpath, filename));
+            try
+            {
+                using (FileStream fs = new FileStream(file.ToString(), FileMode.Create))
+                {
+                    excelfile.CopyTo(fs);
+                    fs.Flush();
+                }
+                using (ExcelPackage package = new ExcelPackage(file))
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    foreach (ExcelWorksheet worksheet in package.Workbook.Worksheets)
+                    {
+                        int sumrow = worksheet.Dimension.Rows;
+                        int sumclm = worksheet.Dimension.Columns;
+                        ImportInfoCursor infoCursor = new ImportInfoCursor();
+                        for (int row = 1; row <= sumrow; row++)
+                        {
+                            for (int clm = 1; clm <= sumclm; clm++)
+                            {
+                                //sb.Append(worksheet.Cells[row, clm].Value.ToString()+"\t");
+                                if (row == 1)
+                                {
+                                    switch (worksheet.Cells[row, clm].Value.ToString())
+                                    {
+                                        case "Start DateTime":
+                                            infoCursor.StartDate = clm;
+                                            break;
+                                        case "End DateTime":
+                                            infoCursor.EndDate = clm;
+                                            break;
+                                        case "Name":
+                                            infoCursor.Name = clm;
+                                            break;
+                                        case "Pax":
+                                            infoCursor.Pax = clm;
+                                            break;
+                                        case "SIC":
+                                            infoCursor.SIC = clm;
+                                            break;
+                                        case "Host":
+                                            infoCursor.Host = clm;
+                                            break;
+                                        case "Foreign Visit":
+                                            infoCursor.ForeignVisit = clm;
+                                            break;
+                                    }
+                                }
+
+                            }
+                            // if (Check(infoCursor, sumclm))
+                            // {
+
+                            if (row != 1)
+                            {
+                                DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
+
+                                dtFormat.ShortDatePattern = "yyyy/MM/dd HH:mm:ss";
+                                try
+                                {
+                                    Visits importInfo = new Visits();
+
+                                    importInfo.StartDate = Convert.ToDateTime(worksheet.Cells[row, infoCursor.StartDate].Value.ToString(), dtFormat);
+                                    try
+                                    {
+                                        importInfo.EndDate = Convert.ToDateTime(worksheet.Cells[row, infoCursor.EndDate].Value.ToString(), dtFormat);
+                                    }
+                                    catch
+                                    {
+                                        importInfo.EndDate = null;
+                                    }
+                                    string companyname = worksheet.Cells[row, infoCursor.Name].Value.ToString();
+                                    string[] name = companyname.Split(new string[] { "Visit by " }, StringSplitOptions.RemoveEmptyEntries);
+                                    companyname = "";
+                                    foreach (string s in name)
+                                    {
+                                        companyname += s;
+                                    }
+                                    importInfo.Name = companyname;
+                                    importInfo.Pax = int.Parse(worksheet.Cells[row, infoCursor.Pax].Value.ToString());
+                                    importInfo.Host = worksheet.Cells[row, infoCursor.Host].Value.ToString();
+                                    importInfo.SIC = worksheet.Cells[row, infoCursor.SIC].Value.ToString();
+
+                                    if (worksheet.Cells[row, infoCursor.ForeignVisit].Value.ToString() == "Yes" || worksheet.Cells[row, infoCursor.ForeignVisit].Value.ToString() == "True")
+                                    {
+                                        importInfo.ForeignVisit = true;
+                                    }
+                                    else
+                                    {
+                                        importInfo.ForeignVisit = false;
+                                    }
+
+                                    _context.Add(importInfo);
+                                    await _context.SaveChangesAsync();
+                                }
+                                catch (Exception e)
+                                {
+                                    return Content(e.Message.ToString() + e.StackTrace.ToString() + infoCursor.ForeignVisit.ToString());
+                                }
+                            }
+                            // }
+                            // else {
+                            //     return Content("表头有问题");
+                            // }
+                            //sb.Append(Environment.NewLine);
+                        }
+                    }
+                    //return Content(sb.ToString());
+                    file.Delete();
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            return RedirectToAction("index");
+        }
+
+        private bool Check(ImportInfoCursor infoCursor, int sumclm)
+        {
+            if (infoCursor.StartDate > sumclm || infoCursor.StartDate < 1)
+            {
+                return false;
+            }
+            else if (infoCursor.EndDate > sumclm || infoCursor.EndDate < 1)
+            {
+                return false;
+            }
+            else if (infoCursor.Name > sumclm || infoCursor.Name < 1)
+            {
+                return false;
+            }
+            else if (infoCursor.Pax > sumclm || infoCursor.Pax < 1)
+            {
+                return false;
+            }
+            else if (infoCursor.SIC > sumclm || infoCursor.SIC < 1)
+            {
+                return false;
+            }
+            else if (infoCursor.Host > sumclm || infoCursor.Host < 1)
+            {
+                return false;
+            }
+            else if (infoCursor.ForeignVisit > sumclm || infoCursor.ForeignVisit < 1)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public class ImportInfoCursor
+        {
+            public int StartDate { get; set; }
+            public int EndDate { get; set; }
+            public int Name { get; set; }
+            public int Pax { get; set; }
+            public int SIC { get; set; }
+            public int Host { get; set; }
+            public int ForeignVisit { get; set; }
+        }
+
     }
 }

@@ -11,8 +11,6 @@ namespace CMS.Models.ViewModels
     {
         [Key]
         public int themeId { get; set;}
-        [Display(Name ="Created Date")]
-        public DateTime dateCreated { get; set; }
         [Required]
         [Display(Name ="Background Color")]
         public string backgroundColor { get; set; }

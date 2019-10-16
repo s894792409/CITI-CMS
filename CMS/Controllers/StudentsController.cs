@@ -85,7 +85,6 @@ namespace CMS.Controllers
                 var check = await _context.Student.SingleOrDefaultAsync(s => s.studentAdmin == student.studentAdmin);
                 if (check == null)
                 {
-                    student.dateCreated = DateTime.Now;
                     _context.Add(student);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));

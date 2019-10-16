@@ -28,9 +28,6 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.noOfStudents)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.dateCreated)
-                            </th>
                             <th></th>
                         </tr>
                     </thead>
@@ -46,13 +43,6 @@
                                 </td>
                                 <td style="line-height:40px;">
                                     @Html.DisplayFor(modelItem => item.noOfStudents)
-                                </td>
-                                <td style="line-height:40px;">
-                                    @using System.Globalization;
-                                    @{
-                                        string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                                    }
-                                    @Html.DisplayFor(modelItem => datecreated)
                                 </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.projectId" class="btn btn-success">Edit</a>

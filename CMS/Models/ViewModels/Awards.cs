@@ -23,9 +23,6 @@ namespace CMS.Models.ViewModels
         [Display(Name = "Award Type")]
         [Required]
         public string awardType { get; set; }
-        [Display(Name = "Created Date ")]
-        [Required]
-        public DateTime dateCreated { get; set; }
 
     }
 }

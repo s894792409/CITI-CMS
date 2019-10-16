@@ -22,9 +22,6 @@ namespace CMS.Models.ViewModels
         [Required]
         [Display(Name = "student's Age")]
         public int studentYear { get; set; }
-        [Required]
-        [Display(Name = "Created Date")]
-        public DateTime dateCreated { get; set; }
 
     }
 }

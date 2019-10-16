@@ -63,7 +63,6 @@ namespace CMS.Controllers.API
 
             // _context.Entry(shortCourses).State = EntityState.Modified;
             var list = await _context.ShortCourses.AsNoTracking().SingleAsync(s => s.courseId == id);
-            shortCourses.dateCreated = list.dateCreated;
             shortCourses.courseId = id;
 
             try
@@ -96,7 +95,6 @@ namespace CMS.Controllers.API
             {
                 return BadRequest(ModelState);
             }
-            shortCourses.dateCreated = DateTime.Now;
             _context.ShortCourses.Add(shortCourses);
             await _context.SaveChangesAsync();
 

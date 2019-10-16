@@ -64,7 +64,7 @@ namespace CMS.Controllers
         public IActionResult Create()
         {
             var list = _context.Visits.ToList();
-            var selectlist = new SelectList(list, "visitId", "companyName");
+            var selectlist = new SelectList(list, "VisitId", "Name");
             ViewBag.selectlist = selectlist;
             var themelist = _context.Theme.ToList();
             var namelist = new SelectList(themelist, "themeId", "themeName");
@@ -81,13 +81,12 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                preset.dateCreated = DateTime.Now;
                 _context.Add(preset);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             var list = _context.Visits.ToList();
-            var selectlist = new SelectList(list, "visitId", "companyName");
+            var selectlist = new SelectList(list, "VisitId", "Name");
             ViewBag.selectlist = selectlist;
             var themelist = _context.Theme.ToList();
             var namelist = new SelectList(themelist, "themeId", "themeName");
@@ -109,7 +108,7 @@ namespace CMS.Controllers
                 return NotFound();
             }
             var list = _context.Visits.ToList();
-            var selectlist = new SelectList(list, "visitId", "companyName");
+            var selectlist = new SelectList(list, "VisitId", "Name");
             ViewBag.selectlist = selectlist;
             var themelist = _context.Theme.ToList();
             var namelist = new SelectList(themelist, "themeId", "themeName");
@@ -150,7 +149,7 @@ namespace CMS.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var list = _context.Visits.ToList();
-            var selectlist = new SelectList(list, "visitId", "companyName");
+            var selectlist = new SelectList(list, "VisitId", "Name");
             ViewBag.selectlist = selectlist;
             var themelist = _context.Theme.ToList();
             var namelist = new SelectList(themelist, "themeId", "themeName");

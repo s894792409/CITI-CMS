@@ -79,7 +79,6 @@ namespace CMS.Controllers
 
             if (ModelState.IsValid)
             {
-                shortCourses.dateCreated = DateTime.Now;
                 _context.Add(shortCourses);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

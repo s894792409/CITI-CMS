@@ -63,7 +63,6 @@ namespace CMS.Controllers.API
 
             // _context.Entry(preset).State = EntityState.Modified;
             var list = await _context.Preset.AsNoTracking().SingleAsync(s => s.presetId == id);
-            preset.dateCreated = list.dateCreated;
             preset.presetId = id;
 
             try
@@ -96,7 +95,6 @@ namespace CMS.Controllers.API
             {
                 return BadRequest(ModelState);
             }
-            preset.dateCreated = DateTime.Now;
             _context.Preset.Add(preset);
             await _context.SaveChangesAsync();
 

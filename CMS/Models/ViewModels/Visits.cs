@@ -10,25 +10,24 @@ namespace CMS.Models.ViewModels
     public class Visits
     {
         [Key]
-        public int visitId { get; set; }
-        [Display(Name ="Company Name")]
         [Required]
-        public String companyName { get; set; }
-        [Display(Name = "Company Type")]
+        public int VisitId { get; set; }
         [Required]
-        public int companyTypeId { get; set; }
-        [Display(Name = "Number of Visitor")]
+        [Display(Name = "Start DateTime")]
+        public DateTime StartDate { get; set; }
+        [Display(Name = "End DateTime")]
+        public DateTime? EndDate { get; set; }
         [Required]
-        public int noOfPax { get; set; }
-        [Display(Name = "Visit Date")]
+        [Display(Name = "CompanyName")]
+        public string Name { get; set; }
         [Required]
-        public DateTime visitDate { get; set; }
-        [Display(Name = "Visit Type")]
+        public int Pax { get; set; }
         [Required]
-        public int visitTypeId { get; set; }
-        [Display(Name = "Created Date ")]
+        public string SIC { get; set; }
         [Required]
-        public DateTime dateCreated { get; set; }
-
+        public string Host { get; set; }
+        [Required]
+        [Display(Name = "Foreign Visit")]
+        public bool ForeignVisit { get; set; }
     }
 }

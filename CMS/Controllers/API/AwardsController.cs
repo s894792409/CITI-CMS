@@ -69,7 +69,6 @@ namespace CMS.Controllers.API
 
             //_context.Entry(awards).State = EntityState.Modified;
             var list = await _context.Awards.AsNoTracking().SingleAsync(s=>s.awardId==id);
-            awards.dateCreated = list.dateCreated;
             awards.awardId = id;
             try
             {
@@ -104,7 +103,7 @@ namespace CMS.Controllers.API
             {
                 return BadRequest(ModelState);
             }
-            awards.dateCreated = DateTime.Now;
+
             _context.Awards.Add(awards);
             await _context.SaveChangesAsync();
 

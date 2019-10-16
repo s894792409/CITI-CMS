@@ -80,7 +80,6 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                theme.dateCreated = DateTime.Now;
                 _context.Add(theme);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

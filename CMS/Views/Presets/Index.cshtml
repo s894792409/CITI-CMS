@@ -28,9 +28,6 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.visitId)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.dateCreated)
-                                </th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -42,19 +39,26 @@
                                     <td style="line-height:40px;">
                                         @{
                                             CMSContext context = new CMSContext();
-                                            var them = context.Theme.SingleOrDefault(n => n.themeId == item.themeId);
-                                            var themename = them.themeName;
+                                            string themename;
+                                            try
+                                            {
+                                                var them = context.Theme.SingleOrDefault(n => n.themeId == item.themeId);
+                                                themename = them.themeName;
+                                            }
+                                            catch {
+                                                themename = "Not Found";
+                                            }
                                         }
                                         @Html.DisplayFor(modelItem => themename)
                                     </td>
                                     <td style="line-height:40px;">
                                         @{
 
-                                            Visits visit = context.Visits.SingleOrDefault(s => s.visitId == item.visitId);
+                                            Visits visit = context.Visits.SingleOrDefault(s => s.VisitId == item.visitId);
                                             string name = "";
                                             if (visit != null)
                                             {
-                                                name = visit.companyName;
+                                                name = visit.Name;
                                             }
                                             else
                                             {
@@ -62,15 +66,9 @@
                                             }
 
                                         }
-                                        @Html.DisplayFor(modelItem => name)
+                                        @Html.DisplayFor(modelItem =>name)
                                     </td>
-                                    <td style="line-height:40px;">
-                                        @using System.Globalization;
-                                        @{
-                                            string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                                        }
-                                        @Html.DisplayFor(modelItem => datecreated)
-                                    </td>
+                                    
                                     <td>
                                         <a asp-action="Edit" asp-route-id="@item.presetId" class="btn btn-success">Edit</a>
                                         @*<a asp-action="Details" asp-route-id="@item.presetId" class="btn btn-info">Details</a>*@

@@ -77,7 +77,6 @@ namespace CMS.Controllers
             if (ModelState.IsValid)
             {
                 projects.noOfStudents = 0;
-                projects.dateCreated = DateTime.Now;
                 _context.Add(projects);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

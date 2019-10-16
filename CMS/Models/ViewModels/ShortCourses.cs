@@ -23,9 +23,6 @@ namespace CMS.Models.ViewModels
         [Display(Name = "Course Venue")]
         [Required]
         public string courseVenue { get; set; }
-        [Display(Name = "Created Date ")]
-        
-        public DateTime dateCreated { get; set; }
 
     }
 }

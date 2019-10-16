@@ -60,7 +60,6 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                awards.dateCreated = DateTime.Now;
                 _context.Add(awards);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
