@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit project";
 }
 
-<p align="center" style="font-size:50px;margin-top:50px;" class="title">Edit projects</p>
+<p align="center" style="font-size:50px;" >Edit projects</p>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -25,7 +25,7 @@
                 </select>
                 <span asp-validation-for="projectState" class="text-danger"></span>
             </div>
-            
+            <input asp-for="dateCreated" hidden="hidden" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

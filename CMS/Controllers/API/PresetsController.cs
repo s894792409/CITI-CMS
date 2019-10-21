@@ -95,6 +95,7 @@ namespace CMS.Controllers.API
             {
                 return BadRequest(ModelState);
             }
+            preset.dateCreated = DateTime.Now;
             _context.Preset.Add(preset);
             await _context.SaveChangesAsync();
 

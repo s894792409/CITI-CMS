@@ -76,6 +76,7 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
+                projects.dateCreated = DateTime.Now;
                 projects.noOfStudents = 0;
                 _context.Add(projects);
                 await _context.SaveChangesAsync();

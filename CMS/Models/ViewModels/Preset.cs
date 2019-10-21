@@ -19,5 +19,7 @@ namespace CMS.Models.ViewModels
         [Display(Name = "Visit Company")]
         public int visitId { get; set; }
         public string presetName { get; set; }
+        [Display(Name = "Create date")]
+        public DateTime dateCreated { get; set; }
     }
 }

@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<CMS.Models.ViewModels.Student>
-
+@using System.IO;
 @{
     ViewData["Title"] = "All students";
 }
 
-<p align="center" style="font-size:50px;margin-top:50px;" class="title">All students info</p>
+<p align="center" style="font-size:50px;" >All students info</p>
 <p align="center">
     <a class="btn btn-info" asp-action="Create">Create New</a>
     <a class="btn btn-info" asp-action="QueryView">Query Student</a>
@@ -17,6 +17,9 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Photo)
+                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.studentName)
                             </th>
@@ -32,35 +35,39 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td style="line-height:40px;">
-                                    @Html.DisplayFor(modelItem => item.studentName)
-                                </td>
-                                <td style="line-height:40px;">
-                                    @{
-                                        CMSContext context = new CMSContext();
-                                        string name = "";
-                                        if (item.projectId == 0)
-                                        {
-                                            name = "null";
-                                        }
-                                        else
-                                        {
-                                            var project = context.Projects.SingleOrDefault(p => p.projectId == item.projectId);
-                                            name = project.projectName;
-                                        }
+                        <tr>
+                            <td style="line-height:40px;">
+                                <img src="/Students/ViewPhoto?studentadmin=@item.studentAdmin" style="width: auto;height: auto;max-width: 150px;max-height: 150px;" />
+                                
+                            </td>
+                            <td style="line-height:40px;">
+                                @Html.DisplayFor(modelItem => item.studentName)
+                            </td>
+                            <td style="line-height:40px;">
+                                @{
+                                    CMSContext context = new CMSContext();
+                                    string name = "";
+                                    if (item.projectId == 0)
+                                    {
+                                        name = "null";
                                     }
-                                    @Html.DisplayFor(modelItem => name)
-                                </td>
-                                <td style="line-height:40px;">
-                                    @Html.DisplayFor(modelItem => item.studentYear)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.studentAdmin" class="btn btn-success">Edit</a>
-                                    @* <a asp-action="Details" asp-route-id="@item.studentAdmin" class="btn btn-info">Details</a>*@
-                                    <a asp-action="Delete" asp-route-id="@item.studentAdmin" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
+                                    else
+                                    {
+                                        var project = context.Projects.SingleOrDefault(p => p.projectId == item.projectId);
+                                        name = project.projectName;
+                                    }
+                                }
+                                @Html.DisplayFor(modelItem => name)
+                            </td>
+                            <td style="line-height:40px;">
+                                @Html.DisplayFor(modelItem => item.studentYear)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.studentAdmin" class="btn btn-success">Edit</a>
+                                @* <a asp-action="Details" asp-route-id="@item.studentAdmin" class="btn btn-info">Details</a>*@
+                                <a asp-action="Delete" asp-route-id="@item.studentAdmin" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

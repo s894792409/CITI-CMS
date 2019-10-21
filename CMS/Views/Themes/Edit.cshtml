@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit theme";
 }
 
-<p align="center" style="font-size:50px;margin-top:50px;" class="title">Edit themes</p>
+<p align="center" style="font-size:50px;">Edit themes</p>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -26,6 +26,7 @@
                 <input asp-for="fontStyle" class="form-control" />
                 <span asp-validation-for="fontStyle" class="text-danger"></span>
             </div>
+            <input asp-for="dateCreated" hidden="hidden" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

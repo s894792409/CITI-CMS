@@ -20,5 +20,7 @@ namespace CMS.Models.ViewModels
         [Required]
         [Display(Name = "Theme Name")]
         public string themeName { get; set; }
+        [Display(Name = "Create date")]
+        public DateTime dateCreated { get; set; }
     }
 }

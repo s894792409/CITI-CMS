@@ -81,6 +81,7 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
+                preset.dateCreated = DateTime.Now;
                 _context.Add(preset);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

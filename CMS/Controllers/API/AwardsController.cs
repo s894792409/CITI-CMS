@@ -103,7 +103,7 @@ namespace CMS.Controllers.API
             {
                 return BadRequest(ModelState);
             }
-
+            awards.dateCreated = DateTime.Now;
             _context.Awards.Add(awards);
             await _context.SaveChangesAsync();
 

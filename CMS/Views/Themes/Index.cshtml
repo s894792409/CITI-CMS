@@ -4,54 +4,61 @@
     ViewData["Title"] = "Index theme";
 }
 
+<!DOCTYPE html>
 
-<p align="center" style="font-size:50px;margin-top:50px;" class="title">All themes</p>
-<p align="center">
-    <a class="btn btn-info" asp-action="Create">Create New</a>
-</p>
-<div class="row">
-    <!-- column -->
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.themeName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.backgroundColor)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.fontStyle)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+<html>
+<head>
+</head>
+<body>
+    <p align="center" style="font-size:50px;" >All themes</p>
+    <p align="center">
+        <a class="btn btn-info" asp-action="Create">Create New</a>
+    </p>
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td style="line-height:40px;">
-                                    @Html.DisplayFor(modelItem => item.themeName)
-                                </td>
-                                <td style="line-height:40px;">
-                                    @Html.DisplayFor(modelItem => item.backgroundColor)
-                                </td>
-                                <td style="line-height:40px;">
-                                    @Html.DisplayFor(modelItem => item.fontStyle)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.themeId" class="btn btn-success">Edit</a>
-                                    @* <a asp-action="Details" asp-route-id="@item.themeId" class="btn btn-info">Details</a>*@
-                                    <a asp-action="Delete" asp-route-id="@item.themeId" class="btn btn-danger">Delete</a>
-                                </td>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.themeName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.backgroundColor)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.fontStyle)
+                                </th>
+                                <th></th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="line-height:40px;">
+                                        @Html.DisplayFor(modelItem => item.themeName)
+                                    </td>
+                                    <td style="line-height:40px;">
+                                        @Html.DisplayFor(modelItem => item.backgroundColor)
+                                    </td>
+                                    <td style="line-height:40px;">
+                                        @Html.DisplayFor(modelItem => item.fontStyle)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.themeId" class="btn btn-success">Edit</a>
+                                        @* <a asp-action="Details" asp-route-id="@item.themeId" class="btn btn-info">Details</a>*@
+                                        <a asp-action="Delete" asp-route-id="@item.themeId" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
-         </div>
-</div>
+        </div>
+    </div>
+    </body>
+</html>

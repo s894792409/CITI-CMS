@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Create</title>
+    
 </head>
 <body>
 
@@ -17,10 +18,32 @@
     <h2>Mode 1</h2>
     <h3>Import excel file</h3>
     @*<a asp-action="Export">Export</a>*@
+
     <form enctype="multipart/form-data" method="post" asp-action="Import">
         <input type="file" name="excelfile" />
-        <input type="submit" value="Upload" />
+        <input type="submit" value="Upload" data-toggle="modal" data-target="#exampleModalCenter" />
     </form>
+    @*<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <span >  Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <hr />
     <h2>Mode 2</h2>
     <h3>Enter access information</h3>

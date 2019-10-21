@@ -113,6 +113,7 @@ namespace CMS.Controllers.API
             visits1.Host = visits.Host;
             visits1.Name = visits.Name;
             visits1.SIC = visits.SIC;
+            visits1.dateCreated = DateTime.Now;
             _context.Visits.Add(visits1);
             await _context.SaveChangesAsync();
             APIReturn re = new APIReturn();

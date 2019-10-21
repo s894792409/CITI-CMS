@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<CMS.Models.ViewModels.Preset>
 @{
     ViewData["Meta"] = new string[3] { "All Preset", "MetaKeyword", "MetaDescription" };
+    ViewData["Title"] = "All Preset";
 }
 <!DOCTYPE html>
 
@@ -9,7 +10,7 @@
     <title>Index</title>
 </head>
 <body>
-    <p align="center" style="font-size:50px;margin-top:50px;" class="title">All presets</p>
+    <p align="center" style="font-size:50px;" >All presets</p>
     <p align="center">
         <a class="btn btn-info" asp-action="Create">Create New</a>
     </p>

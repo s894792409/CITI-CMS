@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit student";
 }
 
-<p align="center" style="font-size:50px;margin-top:50px;" class="title">Edit students info</p>
+<p align="center" style="font-size:50px;" >Edit students info</p>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label asp-for="projectId" class="control-label"></label>
                 <select asp-for="projectId" class="form-control" asp-items="ViewBag.projectSelect">
-                    <option id="0" value="0">If have project please select project</option>             
+                    <option id="0" value="0">If have project please select project</option>
                 </select>
                 <span asp-validation-for="projectId" class="text-danger"></span>
             </div>
@@ -28,6 +28,7 @@
                 <input asp-for="studentYear" class="form-control" />
                 <span asp-validation-for="studentYear" class="text-danger"></span>
             </div>
+            <input asp-for="dateCreated" hidden="hidden" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

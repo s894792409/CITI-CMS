@@ -1,6 +1,7 @@
 ﻿@model CMS.Models.ViewModels.Preset
 @{
     ViewData["Meta"] = new string[3] { "Edit Preset", "MetaKeyword", "MetaDescription" };
+    ViewData["Title"] = "Edit Preset";
 }
 <!DOCTYPE html>
 
@@ -9,7 +10,7 @@
     <title>Edit</title>
 </head>
 <body>
-    <p align="center" style="font-size:50px;margin-top:50px;" class="title">Edit presets</p>
+    <p align="center" style="font-size:50px;" >Edit presets</p>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -26,6 +27,7 @@
                     <select asp-for="visitId" class="form-control" asp-items="@ViewBag.selectlist "></select>
                     <span asp-validation-for="visitId" class="text-danger"></span>
                 </div>
+                <input asp-for="dateCreated" hidden="hidden" />
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-default" />
                 </div>

@@ -29,5 +29,7 @@ namespace CMS.Models.ViewModels
         [Required]
         [Display(Name = "Foreign Visit")]
         public bool ForeignVisit { get; set; }
+        [Display(Name = "Create date")]
+        public DateTime dateCreated { get; set; }
     }
 }

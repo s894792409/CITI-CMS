@@ -92,7 +92,7 @@ namespace CMS.Controllers.API
             {
                 return BadRequest(ModelState);
             }
-
+            theme.dateCreated = DateTime.Now;
             _context.Theme.Add(theme);
             await _context.SaveChangesAsync();
 

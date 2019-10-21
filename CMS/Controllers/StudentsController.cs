@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using CMS.Models;
 using CMS.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace CMS.Controllers
 {
@@ -74,7 +76,7 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("studentAdmin,studentName,projectId,studentYear")] Student student)
+        public async Task<IActionResult> Create([Bind("studentAdmin,studentName,projectId,studentYear")] Student student,IFormFile imagefile)
         {
             if (ModelState.IsValid)
             {
@@ -82,9 +84,20 @@ namespace CMS.Controllers
                 //        project.noOfStudents += 1;
                 //        _context.Update(project);
                 //        await _context.SaveChangesAsync();
+                
                 var check = await _context.Student.SingleOrDefaultAsync(s => s.studentAdmin == student.studentAdmin);
                 if (check == null)
                 {
+                    IFormFile uploadfile = imagefile;
+                    if (uploadfile == null || uploadfile.ContentType.ToLower().StartsWith("image/")) {
+                        MemoryStream ms = new MemoryStream();
+                        uploadfile.OpenReadStream().CopyTo(ms);
+
+                        System.Drawing.Image image = System.Drawing.Image.FromStream(ms);
+                        student.Photo = ms.ToArray();
+                        student.PhotoType = uploadfile.ContentType;
+                    }
+                    student.dateCreated = DateTime.Now;
                     _context.Add(student);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
@@ -100,7 +113,13 @@ namespace CMS.Controllers
             }
             return View(student);
         }
-
+        [HttpGet]
+        public IActionResult ViewPhoto(string studentadmin) {
+           // return Content("studentAdmin:"+studentadmin +" end");
+            Student student= _context.Student.SingleOrDefault(s => s.studentAdmin == studentadmin);
+            MemoryStream ms = new MemoryStream(student.Photo);
+            return new FileStreamResult(ms, student.PhotoType);
+        }
         // GET: Students/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
@@ -136,6 +155,9 @@ namespace CMS.Controllers
             {
                 try
                 {
+                    var stu = _context.Student.AsNoTracking().SingleOrDefault(s => s.studentAdmin == student.studentAdmin);
+                    student.Photo = stu.Photo;
+                    student.PhotoType = stu.PhotoType;
                     _context.Update(student);
                     await _context.SaveChangesAsync();
                     

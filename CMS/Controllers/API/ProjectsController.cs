@@ -90,7 +90,7 @@ namespace CMS.Controllers.API
             {
                 return BadRequest(ModelState);
             }
-
+            projects.dateCreated = DateTime.Now;
             _context.Projects.Add(projects);
             await _context.SaveChangesAsync();
 

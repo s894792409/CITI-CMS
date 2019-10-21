@@ -33,10 +33,52 @@ namespace CMS.Controllers
         // GET: Visits
         public async Task<IActionResult> Index()
         {
+            // ViewBag.fromdate = new DateTime();
+            // ViewBag.enddate = new DateTime();
+            ViewBag.rows = 5;
             var content = await _context.Visits.ToListAsync();
             return View(content);
         }
-      
+        [HttpPost]
+        public async Task<IActionResult> Index(DateTime fromdate,DateTime enddate,int rows) {
+            if (rows <= 0)
+            {
+                ViewBag.error = "The entered rows number is invalid and has been reset to 5";
+                ViewBag.rows = 5;
+                var content = await _context.Visits.ToListAsync();
+                return View(content);
+            }
+            else if (fromdate > enddate&&enddate!=new DateTime()) {
+                ViewBag.error = "Invalid date";
+                ViewBag.rows = rows;
+                var content = await _context.Visits.ToListAsync();
+                return View(content);
+            }
+            else if (fromdate != new DateTime() && enddate != new DateTime())
+            {
+                var content = await _context.Visits.Where(s => s.StartDate >= fromdate && s.StartDate <= enddate).ToListAsync();
+                ViewBag.fromdate = fromdate;
+                ViewBag.enddate = enddate;
+                ViewBag.rows = rows;
+                return View(content);
+            }
+            else if (fromdate != new DateTime())
+            {
+                var content = await _context.Visits.Where(s => s.StartDate >= fromdate).ToListAsync();
+                ViewBag.fromdate = fromdate;
+                ViewBag.rows = rows;
+                return View(content);
+            }
+            else
+            {
+                var content = await _context.Visits.ToListAsync();
+                ViewBag.rows = rows;
+                return View(content);
+            }
+
+            //return Content(fromdate.ToString() + "  " + enddate.ToString());
+        }
+
 
         // GET: Visits/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -95,7 +137,7 @@ namespace CMS.Controllers
                     ViewBag.error = "The end time entered is before at the start time. Please select a future date";
                     return View(visits);
                 }
-
+                visits.dateCreated = DateTime.Now;
                 _context.Add(visits);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -202,6 +244,7 @@ namespace CMS.Controllers
 
         public async Task<IActionResult> QueryVisit(Visits visits)
         {
+            
             //var visit = from m in _context.Visits
             //              select m;
 
@@ -228,7 +271,7 @@ namespace CMS.Controllers
                 }
                 using (ExcelPackage package = new ExcelPackage(file))
                 {
-                    StringBuilder sb = new StringBuilder();
+                    //StringBuilder sb = new StringBuilder();
 
                     foreach (ExcelWorksheet worksheet in package.Workbook.Worksheets)
                     {
@@ -244,6 +287,8 @@ namespace CMS.Controllers
                                 {
                                     switch (worksheet.Cells[row, clm].Value.ToString())
                                     {
+                                        case "No":
+                                            
                                         case "Start DateTime":
                                             infoCursor.StartDate = clm;
                                             break;
@@ -310,7 +355,7 @@ namespace CMS.Controllers
                                     {
                                         importInfo.ForeignVisit = false;
                                     }
-
+                                    importInfo.dateCreated = DateTime.Now;
                                     _context.Add(importInfo);
                                     await _context.SaveChangesAsync();
                                 }
@@ -372,6 +417,7 @@ namespace CMS.Controllers
 
         public class ImportInfoCursor
         {
+            public int No { get; set; }
             public int StartDate { get; set; }
             public int EndDate { get; set; }
             public int Name { get; set; }

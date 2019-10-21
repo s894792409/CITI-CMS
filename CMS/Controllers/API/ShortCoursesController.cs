@@ -95,6 +95,7 @@ namespace CMS.Controllers.API
             {
                 return BadRequest(ModelState);
             }
+            shortCourses.dateCreated = DateTime.Now;
             _context.ShortCourses.Add(shortCourses);
             await _context.SaveChangesAsync();
 
