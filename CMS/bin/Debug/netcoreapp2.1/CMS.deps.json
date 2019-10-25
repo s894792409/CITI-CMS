@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "e01a024cc3524fb2e76b84b2d16d2b3f689721d8"
+    "signature": "c9b9ee565aad05fe2f330050d1960e17c4f85831"
   },
   "compilationOptions": {
     "defines": [
@@ -35,6 +35,7 @@
           "SixLabors.ImageSharp.Drawing": "1.0.0-beta0004",
           "System.Drawing.Common": "4.5.0-rc1",
           "System.Net.Http": "4.3.2",
+          "UEditor.Core": "1.0.6",
           "bootstrap": "4.3.1",
           "bootstrap.sass": "4.3.1"
         },
@@ -619,6 +620,21 @@
         },
         "compile": {
           "ref/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
+        }
+      },
+      "UEditor.Core/1.0.6": {
+        "dependencies": {
+          "Microsoft.AspNetCore": "2.1.7",
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/UEditor.Core.dll": {
+            "assemblyVersion": "1.0.6.0",
+            "fileVersion": "1.0.6.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/UEditor.Core.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3980,6 +3996,13 @@
       "sha512": "sha512-A/uxsWi/Ifzkmd4ArTLISMbfFs6XpRPsXZonrIqyTY70xi8t+mDtvSM5Os0RqyRDobjMBwIDHDL4NOIbkDwf7A==",
       "path": "system.xml.xpath.xmldocument/4.3.0",
       "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "UEditor.Core/1.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pZfMSVeAGDAOFmN3yq6vsZTSv/ygmFa0ZqRvQrmIt2+wPQrHSyDW5KHjnJqNPWGCpuCdjzqpa8gHB8YJXcTOFQ==",
+      "path": "ueditor.core/1.0.6",
+      "hashPath": "ueditor.core.1.0.6.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "type": "package",

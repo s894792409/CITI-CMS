@@ -12,6 +12,7 @@ namespace CMS.Models.ViewModels
         [Key]
         [Required]
         public int VisitId { get; set; }
+        public int? No { get; set; }
         [Required]
         [Display(Name = "Start DateTime")]
         public DateTime StartDate { get; set; }

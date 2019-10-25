@@ -127,6 +127,9 @@
                             <li class="page-item"><a class="page-link" href="#" onclick="Previous()">Previous</a></li>
                             @{ 
                                 int tabsum=(rowsum % ViewBag.rows == 0) ? rowsum / ViewBag.rows : rowsum / ViewBag.rows + 1;
+                                if (tabsum == 0) {
+                                    tabsum = 1;
+                                }
                             }
                             @for (var s = 1; s <= tabsum; s++)
                             {
@@ -188,10 +191,16 @@
             }
         }
         function Previous() {
-            PageSwitch(--page);
+            if (page > 1 && page <= pageSum) {
+                PageSwitch(--page);
+            }
+
         }
         function Next() {
-            PageSwitch(++page);
+            if (page > 0 && page < pageSum) {
+                PageSwitch(++page);
+            }
+
         }
     </script>
 </body>

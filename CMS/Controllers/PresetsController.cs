@@ -24,8 +24,11 @@ namespace CMS.Controllers
         // GET: Presets
         public async Task<IActionResult> Index()
         {
+            ViewBag.rows = 5;
             return View(await _context.Preset.ToListAsync());
         }
+
+       
         public ActionResult QueryTheme(int? id) {
             Preset preset = new Preset();
             preset.themeId = (int)id;

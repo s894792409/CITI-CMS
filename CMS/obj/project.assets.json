@@ -4840,6 +4840,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
+      },
+      "UEditor.Core/1.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore": "2.0.0",
+          "Newtonsoft.Json": "11.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/UEditor.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/UEditor.Core.dll": {}
+        }
       }
     }
   },
@@ -13425,6 +13438,19 @@
         "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xmldocument.nuspec"
       ]
+    },
+    "UEditor.Core/1.0.6": {
+      "sha512": "pZfMSVeAGDAOFmN3yq6vsZTSv/ygmFa0ZqRvQrmIt2+wPQrHSyDW5KHjnJqNPWGCpuCdjzqpa8gHB8YJXcTOFQ==",
+      "type": "package",
+      "path": "ueditor.core/1.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/UEditor.Core.dll",
+        "lib/netstandard2.0/UEditor.Core.dll",
+        "ueditor.core.1.0.6.nupkg.sha512",
+        "ueditor.core.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -13440,6 +13466,7 @@
       "SixLabors.ImageSharp.Drawing >= 1.0.0-beta0004",
       "System.Drawing.Common >= 4.5.0-rc1",
       "System.Net.Http >= 4.3.2",
+      "UEditor.Core >= 1.0.6",
       "bootstrap >= 4.3.1",
       "bootstrap.sass >= 4.3.1"
     ]
@@ -13533,6 +13560,10 @@
           "System.Net.Http": {
             "target": "Package",
             "version": "[4.3.2, )"
+          },
+          "UEditor.Core": {
+            "target": "Package",
+            "version": "[1.0.6, )"
           },
           "bootstrap": {
             "target": "Package",

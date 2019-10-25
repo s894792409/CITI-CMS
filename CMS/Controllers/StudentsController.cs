@@ -26,8 +26,11 @@ namespace CMS.Controllers
         // GET: Students
         public async Task<IActionResult> Index()
         {
+            ViewBag.rows = 5;
             return View(await _context.Student.ToListAsync());
         }
+
+        
         public IActionResult QueryView()
         {
             return View();

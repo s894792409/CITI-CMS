@@ -1,0 +1,180 @@
+﻿@model IEnumerable<CMS.Models.ViewModels.Visits>
+@using System.Globalization;
+
+@{
+    ViewData["Title"] = "Import";
+}
+@if (ViewBag.error == null)
+{
+    <p align="center" style="font-size:50px;">Import Success</p>
+    @*<div style="width:100%;" class="d-flex justify-content-between">
+            <div class="card text-white bg-success mb-3" style="width: 30%;">
+                <div class="card-header">Added</div>
+                <div class="card-body">
+                    <h5 class="card-title">@ViewBag.create data</h5>
+
+                </div>
+            </div>
+
+            <div class="card text-white bg-success mb-3" style="width: 30%;">
+                <div class="card-header">Updated</div>
+                <div class="card-body">
+                    <h5 class="card-title">@ViewBag.update data</h5>
+
+                </div>
+            </div>
+
+            <div class="card text-white bg-success mb-3" style="width: 30%;">
+                <div class="card-header">Repeat</div>
+                <div class="card-body">
+                    <h5 class="card-title">@ViewBag.repeat data already exists</h5>
+
+                </div>
+            </div>
+        </div>*@
+    <div class="row d-flex justify-content-center" >
+        <div class="alert alert-success" style="width:40%;padding-right:15px;margin-left:15px;">
+            <h1 class="alert-heading"style="margin:5px;">Success!</h1>
+            <div class="card-body text-secondary d-flex flex-column">
+                <span class="card-text" style="font-size:20px;">You have added @ViewBag.create data</span>
+                <hr />
+                <span class="card-text" style="font-size:20px;">updated @ViewBag.update data</span>
+                <hr />
+                <span class="card-text" style="font-size:20px;">@ViewBag.repeat data already exists</span>
+            </div>
+        </div>
+
+
+            @*@if (ViewBag.delete != null)
+        {
+            <span style="margin:10px;font-size:20px;" class="mb-0">excel does not contain the following @ViewBag.delete data can be considered to delete</span>
+        }*@
+            @if (ViewBag.nullrow != null)
+            {
+                <div class="alert alert-warning" style="width:40%;margin-left:5%;">
+                    <p style="margin:10px;font-size:20px;" class="mb-0">
+                        Have @ViewBag.nullrow rows that have not been added
+                        , they are:
+                    </p>
+                    <p style="margin:10px;font-size:15px;color:#ff0000">@ViewBag.position</p>
+                </div>
+            }
+
+        </div>
+    @if (ViewBag.delete != 0)
+    {
+        <div class="row">
+            <!-- column -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <h3 class="card-header">Excel does not contain the following @ViewBag.delete data can be considered to delete</h3>
+                   
+                    <div class="table-responsive">
+                        <table class="table" id="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.No)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.StartDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EndDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Pax)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SIC)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Host)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ForeignVisit)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.dateCreated)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.No)
+                                        </td>
+                                        <td>
+                                            @{
+                                                string startdate = item.StartDate.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                                            }
+                                            @Html.DisplayFor(modelItem => startdate)
+                                        </td>
+                                        <td>
+                                            @{
+                                                string enddate = item.EndDate?.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                                                enddate = (enddate == null) ? "NIL" : enddate;
+                                            }
+                                            @Html.DisplayFor(modelItem => enddate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Pax)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SIC)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Host)
+                                        </td>
+                                        <td>
+                                            @{
+                                                string foreignVisit = item.ForeignVisit ? "Yes" : "No";
+                                            }
+                                            @Html.DisplayFor(modelItem => foreignVisit)
+                                        </td>
+                                        <td>
+                                            @{
+                                                string dateCreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                                            }
+                                            @Html.DisplayFor(modelItem => dateCreated)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.VisitId" class="btn btn-success">Edit</a>
+                                            <a asp-action="Delete" asp-route-id="@item.VisitId" class="btn btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+}
+else
+{
+    <p align="center" style="font-size:50px;">Import Failure</p>
+    @if (ViewBag.name != null)
+    {
+        <span class="d-flex justify-content-center text-danger" style="font-size:25px;">worksheet:@ViewBag.name</span>
+        <span class="d-flex justify-content-center text-danger" style="font-size:25px;">@ViewBag.error</span>
+        <span class="d-flex justify-content-center text-warning" style="font-size:25px;">Note: The data before this worksheet has been added.</span>
+    }
+    else
+    {
+        <span class="d-flex justify-content-center text-danger" style="font-size:25px;">@ViewBag.error</span>
+    }
+}
+<p class="d-flex justify-content-center"><a asp-controller="Visits" asp-action="index" class="btn btn-outline-info">Back to list</a></p>

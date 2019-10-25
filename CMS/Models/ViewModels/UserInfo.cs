@@ -21,6 +21,7 @@ namespace CMS.Models.ViewModels
 
         [Required]
         public string PhoneNumber { get; set; }
+        public string UserKey { get; set; }
         [Required]
         [Display(Name ="Role")]
         public bool Admin { get; set; }

@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<CMS.Models.ViewModels.Theme>
-
+@using System.Globalization;
 @{
     ViewData["Title"] = "Index theme";
 }
@@ -10,16 +10,41 @@
 <head>
 </head>
 <body>
-    <p align="center" style="font-size:50px;" >All themes</p>
+    <p align="center" style="font-size:50px;">All themes</p>
     <p align="center">
         <a class="btn btn-info" asp-action="Create">Create New</a>
     </p>
+    @*<div class="card text-white bg-secondary mb-3">
+        <div class="card-body">
+            <h3 class="card-title"><i class="fa fa-filter" aria-hidden="true"></i>Search Criteria</h3>
+            <form asp-action="Index" method="post" class="d-flex justify-content-center">
+                @{
+                    string fromdate = "";
+                    string Enddate = "";
+                    try
+                    {
+                        fromdate = ViewBag.fromdate.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+                        Enddate = ViewBag.enddate.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                <span>Date From <input type="date" name="fromdate" value="@fromdate" /></span>
+                <span style="padding-left:50px;">To<input type="date" name="enddate" value="@Enddate" /></span>
+                <span style="padding-left:50px;">Number of rows displayed<input type="number" name="rows" value="@ViewBag.rows" /></span>
+                <span style="padding-left:50px;"><input type="submit" value="Filter" /></span>
+            </form>
+            <h3 class="text-danger">@ViewBag.error</h3>
+        </div>
+    </div>*@
     <div class="row">
         <!-- column -->
         <div class="col-sm-12">
             <div class="card">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" id="table">
                         <thead>
                             <tr>
                                 <th>
@@ -35,8 +60,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @{
+                                var rowsum = 0;
+                            }
                             @foreach (var item in Model)
                             {
+                                rowsum++;
                                 <tr>
                                     <td style="line-height:40px;">
                                         @Html.DisplayFor(modelItem => item.themeName)
@@ -56,9 +85,86 @@
                             }
                         </tbody>
                     </table>
+                    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                        <ul class="pagination" id="pagebutton">
+                            <li class="page-item"><a class="page-link" href="#" onclick="Previous()">Previous</a></li>
+                            @{
+                                int tabsum = (rowsum % ViewBag.rows == 0) ? rowsum / ViewBag.rows : rowsum / ViewBag.rows + 1;
+                                if (tabsum == 0)
+                                {
+                                    tabsum = 1;
+                                }
+                            }
+                            @for (var s = 1; s <= tabsum; s++)
+                            {
+                                <li class="page-item"><a class="page-link" href="#" onclick="PageSwitch(@s)" name="ym">@s</a></li>
+
+                            }
+                            <li class="page-item"><a class="page-link" href="#" onclick="Next()">Next</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
-    </body>
+    <script type="text/javascript">
+        var table;
+        var rowSum;
+        var pageSum;
+        var page;
+
+        window.onload = function () {
+            table = document.getElementById("table");
+            rowSum = table.rows.length;
+            showrows = @ViewBag.rows;    //显示的行数
+            pageSum = Math.ceil(rowSum / showrows);
+            page = 1;
+
+            PageSwitch(page);
+        }
+        function PageSwitch(newpage) {
+
+            if (newpage > 0 && newpage <= pageSum) {
+                page = newpage;
+                for (var e = 1; e <= pageSum; e++) {
+                    if (e == newpage) {
+                        //var li = document.getElementById("pagebutton");
+                        //li.classList.add("active");
+                        document.getElementsByClassName("page-item")[e].classList.add("active");
+                    } else {
+                        //var li = document.getElementById("1");
+                        // li.classList.remove("active");
+                        document.getElementsByClassName("page-item")[e].classList.remove("active");
+                    }
+
+                }
+
+                for (var i = 1; i < rowSum; i++) {
+                    table.rows[i].style.display = "none";
+                }
+                if (newpage == 1) {
+                    for (n = newpage * showrows - showrows; n <= newpage * showrows; n++) {
+                        table.rows[n].style.display = "";
+                    }
+                } else {
+                    for (var n = newpage * showrows - showrows + 1; n <= newpage * showrows; n++) {
+                        table.rows[n].style.display = "";
+                    }
+                }
+            }
+        }
+        function Previous() {
+            if (page > 1 && page <= pageSum) {
+                PageSwitch(--page);
+            }
+
+        }
+        function Next() {
+            if (page > 0 && page < pageSum) {
+                PageSwitch(++page);
+            }
+
+        }
+    </script>
+</body>
 </html>

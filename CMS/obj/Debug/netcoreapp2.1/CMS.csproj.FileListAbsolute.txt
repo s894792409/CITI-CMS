@@ -214,3 +214,5 @@ C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Debug\netcoreapp2.1\Razor\Views\ImportInfoes\Details.g.cshtml.cs
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Debug\netcoreapp2.1\Razor\Views\ImportInfoes\Edit.g.cshtml.cs
 C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Debug\netcoreapp2.1\Razor\Views\ImportInfoes\Index.g.cshtml.cs
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Debug\netcoreapp2.1\Razor\Views\Visits\Import.g.cshtml.cs
+C:\Users\L33540.NYPSIT\Desktop\CMSTest2\ASP.NET-Core-CMS-master\CMS\CITI-CMS\CMS\obj\Debug\netcoreapp2.1\Razor\Views\Visits\ImportError.g.cshtml.cs

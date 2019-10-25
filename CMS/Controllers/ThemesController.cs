@@ -23,9 +23,13 @@ namespace CMS.Controllers
 
         // GET: Themes
         public async Task<IActionResult> Index()
-        {var list = await _context.Theme.ToListAsync();
+        {
+            ViewBag.rows = 5;
+            var list = await _context.Theme.ToListAsync();
             return View(await _context.Theme.ToListAsync());
         }
+
+       
 
         // GET: Themes/Details/5
         public async Task<IActionResult> Details(int? id)
