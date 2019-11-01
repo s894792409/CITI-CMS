@@ -39,6 +39,7 @@ namespace CMS
             services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
             /*End*/
 
+            services.AddNodeServices();
             /*Identity Login Url */
             services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Login");
 

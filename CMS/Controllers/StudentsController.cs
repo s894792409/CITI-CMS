@@ -10,6 +10,14 @@ using CMS.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Newtonsoft.Json;
+using ImageTest.Models;
+using SixLabors.ImageSharp.Formats;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.Primitives;
+using SixLabors.ImageSharp.Processing;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CMS.Controllers
 {
@@ -17,10 +25,11 @@ namespace CMS.Controllers
     public class StudentsController : Controller
     {
         private readonly CMSContext _context;
-
-        public StudentsController()
+        private IHostingEnvironment _hostingEnvironment;
+        public StudentsController(IHostingEnvironment hostingEnvironment)
         {
             _context = new CMSContext();
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // GET: Students
@@ -77,44 +86,174 @@ namespace CMS.Controllers
         // POST: Students/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("studentAdmin,studentName,projectId,studentYear")] Student student,IFormFile imagefile, string  tailor)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        //try
+        //        //{var file = HttpContext.Request.Form.Files["txt_file"];
+        //        //    IFormFile uploadfile = imagefile;
+        //        //    return Content(uploadfile.FileName + uploadfile.Name);
+        //        //}
+        //        //catch (Exception e) {
+
+        //        //    return Content(e.Message+"/n" + e.StackTrace);
+        //        //}
+
+        //        var tailorInfoEntity = JsonConvert.DeserializeObject<TailorInfo>(tailor);
+        //        var check = await _context.Student.SingleOrDefaultAsync(s => s.studentAdmin == student.studentAdmin);
+        //        if (check == null)
+        //        {
+        //            string webrootpath = _hostingEnvironment.WebRootPath;
+        //            string filename = $"{ Guid.NewGuid()}.png";
+        //            string path = Path.Combine(webrootpath, filename).ToString();
+        //            using (Image<Rgba64> image = Image.Load<Rgba64>(imagefile.OpenReadStream()))
+        //            {
+        //                Rectangle rectangle = new Rectangle(tailorInfoEntity.CoordinateX, tailorInfoEntity.CoordinateY, tailorInfoEntity.CoordinateWidth, tailorInfoEntity.CoordinateHeight);
+        //                image.Mutate(x => x
+        //                     .Crop(rectangle)
+        //                     .Resize(tailorInfoEntity.CoordinateWidth, tailorInfoEntity.CoordinateHeight)
+        //                     );
+        //                image.Save(path);
+        //                FileStream fs = new FileStream(path, FileMode.Open);
+        //                //Stream stream = fs as Stream;
+        //                MemoryStream memory = new MemoryStream();
+        //                fs.CopyTo(memory);
+        //                student.Photo = memory.ToArray();
+        //                student.PhotoType = imagefile.ContentType;
+        //            };
+        //            //FileInfo file = new FileInfo(path);
+
+        //            //if (uploadfile == null || uploadfile.ContentType.ToLower().StartsWith("image/")) {
+        //            //    MemoryStream ms = new MemoryStream();
+        //            //    uploadfile.OpenReadStream().CopyTo(ms);
+        //            //    System.Drawing.Image image = System.Drawing.Image.FromStream(ms);
+        //            //    student.Photo = ms.ToArray();
+        //            //    student.PhotoType = uploadfile.ContentType;
+        //            //}
+        //            student.dateCreated = DateTime.Now;
+        //            _context.Add(student);
+        //            await _context.SaveChangesAsync();
+        //            return RedirectToAction(nameof(Index));
+        //        }
+        //        else {
+        //            ViewBag.error = "The student Admin already exists!";
+        //            var projectlist = _context.Projects.ToList();
+        //            var projectSelect = new SelectList(projectlist, "projectId", "projectName");
+        //            ViewBag.projectselect = projectSelect;
+        //            return View();
+        //        }
+
+        //    }
+        //    return View(student);
+        //}
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("studentAdmin,studentName,projectId,studentYear")] Student student,IFormFile imagefile)
+        public async Task<IActionResult> CreateData()
         {
+            bool success = false;
+            var files = Request.Form.Files;
+            var file = files.FirstOrDefault();
+            string msg = Request.Form["tailorInfo"];
+            var tailorInfoEntity = JsonConvert.DeserializeObject<TailorInfo>(msg);
+            string stuinfo = Request.Form["stuinfo"];
+            var student = JsonConvert.DeserializeObject<Student>(stuinfo);
             if (ModelState.IsValid)
             {
-                //var project = await _context.Projects.SingleOrDefaultAsync(m => m.projectId == student.projectId);
-                //        project.noOfStudents += 1;
-                //        _context.Update(project);
-                //        await _context.SaveChangesAsync();
-                
                 var check = await _context.Student.SingleOrDefaultAsync(s => s.studentAdmin == student.studentAdmin);
                 if (check == null)
                 {
-                    IFormFile uploadfile = imagefile;
-                    if (uploadfile == null || uploadfile.ContentType.ToLower().StartsWith("image/")) {
-                        MemoryStream ms = new MemoryStream();
-                        uploadfile.OpenReadStream().CopyTo(ms);
+                    string webrootpath = _hostingEnvironment.WebRootPath;
+                    string filename = $"{ Guid.NewGuid()}.png";
+                    string path = Path.Combine(webrootpath, filename).ToString();
+                    using (Image<Rgba64> image = Image.Load<Rgba64>(file.OpenReadStream()))
+                    {
+                        Rectangle rectangle = new Rectangle(tailorInfoEntity.CoordinateX, tailorInfoEntity.CoordinateY, tailorInfoEntity.CoordinateWidth, tailorInfoEntity.CoordinateHeight);
+                        image.Mutate(x => x
+                             .Crop(rectangle)
+                             .Resize(tailorInfoEntity.CoordinateWidth, tailorInfoEntity.CoordinateHeight)
+                             );
+                        image.Save(path);
+                        FileStream fs = new FileStream(path, FileMode.Open);
+                        //Stream stream = fs as Stream;
+                        MemoryStream memory = new MemoryStream();
+                        fs.CopyTo(memory);
+                        student.Photo = memory.ToArray();
+                        student.PhotoType = file.ContentType;
+                    };
+                    //FileInfo file = new FileInfo(path);
 
-                        System.Drawing.Image image = System.Drawing.Image.FromStream(ms);
-                        student.Photo = ms.ToArray();
-                        student.PhotoType = uploadfile.ContentType;
-                    }
+                    //if (uploadfile == null || uploadfile.ContentType.ToLower().StartsWith("image/")) {
+                    //    MemoryStream ms = new MemoryStream();
+                    //    uploadfile.OpenReadStream().CopyTo(ms);
+                    //    System.Drawing.Image image = System.Drawing.Image.FromStream(ms);
+                    //    student.Photo = ms.ToArray();
+                    //    student.PhotoType = uploadfile.ContentType;
+                    //}
                     student.dateCreated = DateTime.Now;
                     _context.Add(student);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    success = true;
+                   // return RedirectToAction(nameof(Index));
                 }
-                else {
+                else
+                {
                     ViewBag.error = "The student Admin already exists!";
                     var projectlist = _context.Projects.ToList();
                     var projectSelect = new SelectList(projectlist, "projectId", "projectName");
                     ViewBag.projectselect = projectSelect;
-                    return View();
+                    //return View();
                 }
-                
+
             }
-            return View(student);
+            return Json(new { success = success.ToString() });
+        }
+        [HttpPost]
+        public ActionResult UpLoadFile(string tailorInfo)
+        {
+            var success = false;
+            var message = string.Empty;
+            var newImage = string.Empty;
+            var pictureUrl = string.Empty;
+            try
+            {
+                var tailorInfoEntity = JsonConvert.DeserializeObject<TailorInfo>(tailorInfo);
+                tailorInfoEntity.PictureWidth = tailorInfoEntity.PictureWidth.Replace("px", "");
+                tailorInfoEntity.PictureHeight = tailorInfoEntity.PictureHeight.Replace("px", "");
+                var file = HttpContext.Request.Form.Files["txt_file"];
+                
+                if (file != null && file.Length != 0)
+                {
+                    newImage = ImageCompress(file.OpenReadStream(), tailorInfoEntity);
+                    success = true;
+                    message = "保存成功";
+                }
+            }
+            catch (Exception ex)
+            {
+                message = "保存失败 " + ex.Message + "   " + ex.StackTrace.ToString();
+            }
+            return Json(new { success = success, message = message, newImage = newImage });
+
+        }
+        public static string ImageCompress(Stream content,TailorInfo tailorInfo)
+        {
+            IImageFormat format;
+            var imageString = string.Empty;
+            using (Image<Rgba64> image = Image.Load<Rgba64>(content, out format))
+            {
+                Rectangle rectangle = new Rectangle(tailorInfo.CoordinateX, tailorInfo.CoordinateY, tailorInfo.CoordinateWidth, tailorInfo.CoordinateHeight);
+                image.Mutate(x => x
+                     .Crop(rectangle)
+                     .Resize(tailorInfo.CoordinateWidth, tailorInfo.CoordinateHeight)
+                     );
+                
+
+                imageString = image.ToBase64String<Rgba64>(format);
+            }
+            return imageString;
         }
         [HttpGet]
         public IActionResult ViewPhoto(string studentadmin) {
@@ -213,6 +352,18 @@ namespace CMS.Controllers
         private bool StudentExists(string id)
         {
             return _context.Student.Any(e => e.studentAdmin == id);
+        }
+        [HttpPost]
+        public IActionResult test()
+        {
+            var data = Request.Form.Files;
+            var list=data.ToList();
+            string msg = Request.Form["tailorInfo"];
+            var tailorInfoEntity = JsonConvert.DeserializeObject<TailorInfo>(msg);
+            string stuinfo = Request.Form["stuinfo"];
+            var student = JsonConvert.DeserializeObject<Student>(stuinfo);
+            msg = student.studentAdmin+ " " +student.studentName+" "+student.studentYear+" "+student.projectId+"\n "+data.Count()+"\n "+tailorInfoEntity.CoordinateWidth+" "+tailorInfoEntity.CoordinateX ;
+            return Json(new { msg=msg, });
         }
     }
 }

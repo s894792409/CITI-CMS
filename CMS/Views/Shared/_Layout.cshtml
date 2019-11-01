@@ -10,28 +10,31 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Favicon icon -->
-    @*<link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicon.png">*@
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="~/css/style.css" rel="stylesheet">
-    <!-- You can change the theme colors from here -->
-    <link href="~/css/colors/blue.css" id="theme" rel="stylesheet">
-    <!--awesome font include-->
-    <link type="text/css" rel="stylesheet" href="~/assets/css/font-awesome.min.css" />
-    <!--include plugin css-->
-    <link type="text/css" rel="stylesheet" href="~/src/jquery-rvnm.css" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    @*<link rel="stylesheet" href="~/css/bundlecss.min.css" />*@
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link href="@Url.Content("~/tapmodo-Jcrop-1902fbc/css/jquery.Jcrop.css")" rel="stylesheet" />
+        <link href="@Url.Content("~/bootstrap-fileinput/css/fileinput.css")" rel="stylesheet" />
+        <!-- Custom CSS -->
+        <link href="~/css/style.css" rel="stylesheet">
+        <!-- You can change the theme colors from here -->
+        <link href="~/css/colors/blue.css" id="theme" rel="stylesheet">
+        <!--awesome font include-->
+        <link type="text/css" rel="stylesheet" href="~/assets/css/font-awesome.min.css" />
+        <!-- Bootstrap Core CSS -->
+        <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Icomoon Icon Fonts-->
+        <link rel="stylesheet" href="/site/css/icomoon.css">
+
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
 </head>
-<body class="fix-header fix-sidebar card-no-border">
+<body class="fix-header fix-sidebar card-no-border" style="padding:0px;margin:0px;">
     @*<div id="wrapper" class="container-fluid" style="flex-direction:row;display: flex; flex-wrap:wrap;">
             <div class="row">
                 @await Component.InvokeAsync(nameof(UserDetail))
@@ -43,11 +46,11 @@
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
-    <div class="preloader">
+   @* <div class="preloader" style="padding-top:0px;margin-top:0px;">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
         </svg>
-    </div>
+    </div>*@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -65,18 +68,18 @@
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
                 @*<div class="row page-titles">
-            <div class="col-md-6 col-8 align-self-center">
-                <h3 class="text-themecolor m-b-0 m-t-0">@ViewContext.RouteData.Values["controller"].ToString()</h3>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-                    <li class="breadcrumb-item active">@ViewContext.RouteData.Values["controller"].ToString()</li>
-                    <li class="breadcrumb-item active">@ViewContext.RouteData.Values["action"].ToString()</li>
-                </ol>
-            </div>
-        </div>*@
+                        <div class="col-md-6 col-8 align-self-center">
+                            <h3 class="text-themecolor m-b-0 m-t-0">@ViewContext.RouteData.Values["controller"].ToString()</h3>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                                <li class="breadcrumb-item active">@ViewContext.RouteData.Values["controller"].ToString()</li>
+                                <li class="breadcrumb-item active">@ViewContext.RouteData.Values["action"].ToString()</li>
+                            </ol>
+                        </div>
+                    </div>*@
                 <div class="col-md-6 col-8 d-flex justify-content-start " style="width:auto; height:auto; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; background:none;z-index:1000;">
                     @*<h3 class="text-themecolor m-b-0 m-t-0" style=" align-items:center;">@ViewContext.RouteData.Values["controller"].ToString()</h3>*@
-                    <ol class="breadcrumb"style="width:auto; height:auto; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; background:none;">
+                    <ol class="breadcrumb" style="width:auto; height:auto; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; background:none;">
                         <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
                         <li class="breadcrumb-item active"><a asp-controller="@ViewContext.RouteData.Values["controller"].ToString()" asp-action="index">@ViewContext.RouteData.Values["controller"].ToString()</a> </li>
                         <li class="breadcrumb-item active">@ViewContext.RouteData.Values["action"].ToString()</li>
@@ -118,15 +121,30 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="~/assets/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="~/assets/plugins/bootstrap/js/tether.min.js"></script>
-    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="~/js/jquery.slimscroll.js"></script>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="@Url.Content("~/tapmodo-Jcrop-1902fbc/js/jquery.Jcrop.js")"></script>
+        <script src="@Url.Content("~/bootstrap-fileinput/js/fileinput.js")"></script>
+        <script src="@Url.Content("~/bootstrap-fileinput/js/locales/zh.js")"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
     <!--Wave Effects -->
     <script src="~/js/waves.js"></script>
     <!--Menu sidebar -->
@@ -135,17 +153,6 @@
     <script src="~/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="~/js/custom.min.js"></script>
-    <!-- ============================================================== -->
-    <!-- This page plugins -->
-    <!-- ============================================================== -->
-    <!-- Flot Charts JavaScript -->
-    <script src="~/assets/plugins/flot/jquery.flot.js"></script>
-    <script src="~/assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="~/js/flot-data.js"></script>
-    <!-- ============================================================== -->
-
-    <script src="~/js/bundlejs.min.js"></script>
-    @RenderSection("Script", false)
-
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

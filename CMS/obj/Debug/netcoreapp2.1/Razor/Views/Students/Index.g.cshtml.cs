@@ -96,7 +96,7 @@ using System.Globalization;
             WriteLiteral("\r\n<p align=\"center\" style=\"font-size:50px;\">All students info</p>\r\n<p align=\"center\">\r\n    ");
             EndContext();
             BeginContext(239, 58, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9a220f7ebba043cc836fbb761461606c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "95771da3f7554f528eb859295cc839ac", async() => {
                 BeginContext(283, 10, true);
                 WriteLiteral("Create New");
                 EndContext();
@@ -119,7 +119,7 @@ using System.Globalization;
             WriteLiteral("\r\n    ");
             EndContext();
             BeginContext(303, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1e0914a3dda14d2abd4dae3d5575d430", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4b7f16c085ec4592bc81a4649bc91e4b", async() => {
                 BeginContext(350, 13, true);
                 WriteLiteral("Query Student");
                 EndContext();
@@ -275,7 +275,7 @@ WriteAttributeValue("", 2976, item.studentAdmin, 2976, 18, false);
             WriteLiteral("\r\n                                </td>\r\n                                <td>\r\n                                    ");
             EndContext();
             BeginContext(4500, 87, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "21d485548b114f14b04d5c2bd72ee4a6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "83b7034be1184e4294d32246435de404", async() => {
                 BeginContext(4579, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -314,7 +314,7 @@ WriteAttributeValue("", 2976, item.studentAdmin, 2976, 18, false);
             WriteLiteral("                                    ");
             EndContext();
             BeginContext(4758, 90, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e860bf4493c747fa865d579bf38e8821", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d5a65c07962c45b3932ddb3b093d9972", async() => {
                 BeginContext(4838, 6, true);
                 WriteLiteral("Delete");
                 EndContext();

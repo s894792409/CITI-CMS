@@ -2,13 +2,12 @@
 <style type="text/css">
 
     #sidebarnav li ul{
-        display:none;
         background-color:aliceblue;
     }
-    #sidebarnav li:hover > ul {
+    /*#sidebarnav li:hover > ul {
         display: block;
-    }
-    .element {
+    }*/
+    /*.element {
         -ms-overflow-style: none;
     }
     .element {
@@ -16,19 +15,19 @@
     }
     ::-webkit-scrollbar {
         width: 0px
-    }
+    }*/
         
 </style>
 
     <!-- ============================================================== -->
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <header class="topbar">
-        <nav class="navbar top-navbar navbar-toggleable-sm navbar-light d-flex justify-content-center"  >
+    <header class="topbar row" style="padding-top:0px;margin-top:0px;">
+        <nav class="navbar top-navbar navbar-toggleable-sm navbar-light d-flex flex-lg-row row"  >
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
-            <div class="navbar-header" style="width:250px;">
+            <div class="navbar-header" style="width:280px;padding-left:15px;">
                 @if (Model.Role == "admin")
                 {
                     <a class="navbar-brand" asp-controller="admin" asp-action="index">
@@ -74,7 +73,9 @@
             <!-- ============================================================== -->
             <!-- End Logo -->
             <!-- ============================================================== -->
-            <div class="d-flex justify-content-center" style="width:100%; padding-left:10px;">
+            <div class="d-flex justify-content-center" style=" width: -moz-calc(100% - 280px);
+ width: -webkit-calc(100% - 280px);
+ width: calc(100% - 280px); padding-left:10px;">
                 @*<span style="background:#fff;font-size:30px;align-self:center;"><img src="~/images/citilogo.png" style="max-width:120px;max-height:120px;"/>CITI2.0-CMS</span>*@
                 <!-- ============================================================== -->
                 <!-- toggle and nav items -->
@@ -105,9 +106,6 @@
                         <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wecome,@Model.UserName</a>
                     </li>
                 </ul>
-                <div>
-
-                </div>
             </div>
         </nav>
     </header>
@@ -118,8 +116,8 @@
     <!-- Left Sidebar - style you can find in sidebar.scss  -->
     <!-- ============================================================== -->
     <aside class="left-sidebar" style="width:250px; overflow:scroll;">
-        <!-- Sidebar scroll-->
-        <div class="scroll-sidebar">
+       @* <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">*@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav">
@@ -127,10 +125,10 @@
                         <a class="waves-effect"><i class="fa fa-address-card m-r-10" aria-hidden="true"></i>Visits</a>
                         <ul>
                             <li>
-                                <a asp-controller="Visits" asp-action="Index">All Visit</a>
+                                <a class="waves-effect" asp-controller="Visits" asp-action="Index">All Visit</a>
                             </li>
                             <li>
-                                <a asp-controller="Visits" asp-action="Create">Add Visit</a>
+                                <a class="waves-effect" asp-controller="Visits" asp-action="Create">Add Visit</a>
                             </li>
 
                         </ul>
@@ -173,10 +171,10 @@
                         <a class="waves-effect"><i class="fa fa-puzzle-piece m-r-10" aria-hidden="true"></i>Preset and Theme</a>
                         <ul>
                             <li>
-                                <a asp-controller="Presets" asp-action="Index">All Preset</a>
+                                <a class="waves-effect" asp-controller="Presets" asp-action="Index">All Preset</a>
                             </li>
                             <li>
-                                <a asp-controller="Themes" asp-action="Index">All Themes</a>
+                                <a class="waves-effect" asp-controller="Themes" asp-action="Index">All Themes</a>
                             </li>
                         </ul>
                     </li>
@@ -184,10 +182,10 @@
                         <a class="waves-effect"><i class="fa fa-mortar-board m-r-10" aria-hidden="true"></i>student information</a>
                         <ul>
                             <li>
-                                <a asp-controller="Students" asp-action="Index">All Student</a>
+                                <a class="waves-effect" asp-controller="Students" asp-action="Index">All Student</a>
                             </li>
                             <li>
-                                <a asp-controller="Students" asp-action="Create">Add Student</a>
+                                <a class="waves-effect" asp-controller="Students" asp-action="Create">Add Student</a>
                             </li>
                         </ul>
                     </li>
@@ -195,10 +193,10 @@
                         <a class="waves-effect"><i class="fa fa-tasks m-r-10" aria-hidden="true"></i>Projects information</a>
                         <ul>
                             <li>
-                                <a asp-controller="Projects" asp-action="Index">All Projects</a>
+                                <a class="waves-effect" asp-controller="Projects" asp-action="Index">All Projects</a>
                             </li>
                             <li>
-                                <a asp-controller="Projects" asp-action="create">Add Project</a>
+                                <a class="waves-effect" asp-controller="Projects" asp-action="create">Add Project</a>
                             </li>
                         </ul>
                     </li>
@@ -206,10 +204,10 @@
                         <a class="waves-effect"><i class="fa  fa-trophy m-r-10" aria-hidden="true"></i>Awards</a>
                         <ul>
                             <li>
-                                <a asp-controller="Awards" asp-action="Index">All Awards</a>
+                                <a class="waves-effect" asp-controller="Awards" asp-action="Index">All Awards</a>
                             </li>
                             <li>
-                                <a asp-controller="Awards" asp-action="create">Add Awards</a>
+                                <a class="waves-effect" asp-controller="Awards" asp-action="create">Add Awards</a>
                             </li>
                         </ul>
                     </li>
@@ -217,10 +215,10 @@
                         <a class="waves-effect"><i class="fa fa-book m-r-10" aria-hidden="true"></i>Short Courses</a>
                         <ul>
                             <li>
-                                <a asp-controller="ShortCourses" asp-action="Index">All Short Courses</a>
+                                <a class="waves-effect" asp-controller="ShortCourses" asp-action="Index">All Short Courses</a>
                             </li>
                             <li>
-                                <a asp-controller="ShortCourses" asp-action="create">Add Short Courses</a>
+                                <a class="waves-effect" asp-controller="ShortCourses" asp-action="create">Add Short Courses</a>
                             </li>
                         </ul>
                     </li>
@@ -229,11 +227,11 @@
                         <li class="accountIcon">
                             <a class="waves-effect"><i class="fa fa-users m-r-10" aria-hidden="true"></i>Account</a>
                             <ul>
-                                <li><a asp-controller="User" asp-action="AllUser">All User</a></li>
-                                <li><a asp-controller="Admin" asp-action="CreateUser">Add User</a></li>
+                                <li><a class="waves-effect" asp-controller="User" asp-action="AllUser">All User</a></li>
+                                <li><a class="waves-effect" asp-controller="Admin" asp-action="CreateUser">Add User</a></li>
                                 @*<li><a asp-controller="Admin" asp-action="Role">Role</a></li>*@
-                                <li><a asp-controller="User" asp-action="Edit">Edit account info</a></li>
-                                <li><a asp-controller="Admin" asp-action="Logout">Logout</a></li>
+                                <li><a class="waves-effect" asp-controller="User" asp-action="Edit">Edit account info</a></li>
+                                <li><a class="waves-effect" asp-controller="Admin" asp-action="Logout">Logout</a></li>
                             </ul>
 
                         </li>
@@ -255,7 +253,7 @@
                 </ul>
             </nav>
             <!-- End Sidebar navigation -->
-        </div>
+        @*</div>*@
         <!-- End Sidebar scroll-->
     </aside>
     <!-- ============================================================== -->
