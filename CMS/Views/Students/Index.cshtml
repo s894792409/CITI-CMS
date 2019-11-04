@@ -52,9 +52,6 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.projectId)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.studentYear)
-                            </th>
                             <th></th>
                         </tr>
                     </thead>
@@ -88,9 +85,6 @@
                                         }
                                     }
                                     @Html.DisplayFor(modelItem => name)
-                                </td>
-                                <td style="line-height:40px;">
-                                    @Html.DisplayFor(modelItem => item.studentYear)
                                 </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.studentAdmin" class="btn btn-success">Edit</a>
@@ -160,7 +154,10 @@
                 }
                 if (newpage == 1) {
                     for (n = newpage * showrows - showrows; n <= newpage * showrows; n++) {
-                        table.rows[n].style.display = "";
+                        console.log(n);
+                        if (table.rows[n] != null) {
+                            table.rows[n].style.display = "";
+                        }
                     }
                 } else {
                     for (var n = newpage * showrows - showrows + 1; n <= newpage * showrows; n++) {

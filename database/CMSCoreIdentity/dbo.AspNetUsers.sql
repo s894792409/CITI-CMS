@@ -1,7 +1,7 @@
 USE [CMSCoreIdentity]
 GO
 
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 2019/10/16 15:34:38 ******/
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 2019/11/4 15:50:39 ******/
 SET ANSI_NULLS ON
 GO
 

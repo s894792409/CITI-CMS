@@ -28,7 +28,7 @@ namespace CMS.Controllers.API
 
         // GET: api/Presets
         [HttpGet]
-        public async Task<IEnumerable<Preset>> GetPresetAsync()
+        public async Task<IActionResult> GetPresetAsync()
         {
             
             try
@@ -40,7 +40,35 @@ namespace CMS.Controllers.API
                     if (userInfo != null)
                     {
                         await RefreshAsync(userInfo);
-                        return _context.Preset;
+                        var presetlist =await _context.Preset.AsNoTracking().ToListAsync();
+                        var boxlist = await _context.Box.AsNoTracking().ToListAsync();
+                        var cardlist = await _context.Card.AsNoTracking().ToListAsync();
+                        List<IOformat> ioformatlist = new List<IOformat>();
+                        foreach (Preset p in presetlist) {
+                            IOformat ioformat = new IOformat();
+                            ioformat.presetId = p.presetId;
+                            ioformat.presetName = p.presetName;
+                            ioformat.themeId = p.themeId;
+                            ioformat.visitId = p.visitId;
+                            ioformat.dateCreated = p.dateCreated;
+                            try
+                            {
+                                List<Boxformat> boxformatlist = new List<Boxformat>();
+                                foreach (Box box in boxlist.Where(b => b.presetId == p.presetId))
+                                {
+                                    Boxformat boxformat = new Boxformat();
+                                    boxformat.boxId = box.boxId;
+                                    boxformat.cardList = cardlist.Where(c => c.boxId == box.boxId).ToList();
+                                    boxformatlist.Add(boxformat);
+                                }
+                                ioformat.presetBoxList = boxformatlist;
+                                
+                            }
+                            catch {
+                            }
+                            ioformatlist.Add(ioformat);
+                        }
+                        return Ok(ioformatlist);
                     }
                 }
             }
@@ -151,7 +179,7 @@ namespace CMS.Controllers.API
 
         // POST: api/Presets
         [HttpPost]
-        public async Task<IActionResult> PostPreset([FromBody] Preset preset)
+        public async Task<IActionResult> PostPreset([FromBody] IOformat ioformat)
         {
             
             try
@@ -162,26 +190,59 @@ namespace CMS.Controllers.API
                     UserInfo userInfo = identityDbContext.AspNetUsers.Single(s => s.UserKey == key);
                     if (userInfo != null)
                     {
+                       
                         await RefreshAsync(userInfo);
                         if (!ModelState.IsValid)
                         {
                             return BadRequest(ModelState);
                         }
-                        preset.dateCreated = DateTime.Now;
-                        _context.Preset.Add(preset);
-                        await _context.SaveChangesAsync();
+                        try
+                        {
+                            var preset = new Preset();
+                            preset.dateCreated = DateTime.Now;
+                            preset.themeId = ioformat.themeId;
+                            preset.visitId = ioformat.visitId;
+                            preset.presetName = ioformat.presetName;
+                            _context.Preset.Add(preset);
+                            await _context.SaveChangesAsync();
 
-                        APIReturn re = new APIReturn();
-                        re.Status = "success";
-                        return Ok(re);
+                            foreach (Boxformat boxformat in ioformat.presetBoxList)
+                            {
+                                var box = new Box();
+                                box.presetId = preset.presetId;
+                                box.GUID = Guid.NewGuid().ToString();
+                                _context.Box.Add(box);
+                                await _context.SaveChangesAsync();
+                                foreach (Card c in boxformat.cardList)
+                                {
+                                    var box1 = await _context.Box.AsNoTracking().SingleOrDefaultAsync(b=>b.presetId==box.presetId&&b.GUID==box.GUID);
+                                    Card card = new Card();
+                                    card.color = c.color;
+                                    card.icon = c.icon;
+                                    card.title = c.title;
+                                    card.value = c.value;
+                                    card.boxId = box1.boxId;
+                                    card.dateCreated = DateTime.Now;
+                                    _context.Card.Add(card);
+                                    await _context.SaveChangesAsync();
+                                }
+                            }
+                            APIReturn re = new APIReturn();
+                            re.Status = "success";
+                            return Ok(re);
+                        }
+                        catch(Exception e) {
+                            return BadRequest(e.Message+"\n"+e.StackTrace);
+                        }
+                        
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
-                return null;
+                return BadRequest("2."+e.Message);
             }
-            return null;
+            return BadRequest();
             
         }
 
@@ -271,5 +332,18 @@ namespace CMS.Controllers.API
             user.UserKey = MakeKey(15);
             IdentityResult result2 = await userManager.UpdateAsync(user);
         }
+    }
+
+    public class IOformat {
+        public int presetId { get; set; }
+        public int themeId { get; set; }
+        public int visitId { get; set; }
+        public string presetName { get; set; }
+        public DateTime dateCreated { get; set; }
+        public List<Boxformat> presetBoxList { get; set; }
+    }
+    public class Boxformat {
+        public int boxId { get; set; }
+        public List<Card> cardList { get; set; }
     }
 }

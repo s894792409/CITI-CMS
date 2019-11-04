@@ -4,33 +4,76 @@
     ViewData["Title"] = "Edit student";
 }
 
-<p align="center" style="font-size:50px;" >Edit students info</p>
+<!-- JCrop -->
+<link href="@Url.Content("~/tapmodo-Jcrop-1902fbc/css/jquery.Jcrop.css")" rel="stylesheet" />
+<!-- bootstrap-fileinput -->
+<link href="@Url.Content("~/bootstrap-fileinput/css/fileinput.css")" rel="stylesheet" />
+
+<p align="center" style="font-size:50px;">Edit students info</p>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="studentAdmin" />
+            <div class="form-group">
+                <label class="control-label">Student Photo</label><br />
+                <img id="show-img" class="thumbnail" src="/Students/ViewPhoto?studentadmin=@Model.studentAdmin" style="width:150px;height:150px;border:2px solid #808080;">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" type="button">Change Photo</button>
+                <br /><span class="text-danger" id="photoerr"></span>
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="max-width:95%">
+                <div class="modal-dialog" style="max-width:95%">
+                    <div class="modal-content" style="">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body ">
+                            <h4 class="modal-title d-flex justify-content-center" id="myModalLabel">Upload Photo</h4>
+                            <div class="row d-flex justify-content-center card-header">
+                                <div class="col-md-5">
+                                    <br /><br /><br />
+                                    <input type="file" name="txt_file" id="txt_file" multiple class="file-loading" style="align-content:flex-end;" />
+                                </div>
+                                <div>
+                                    <h4>Description：</h4>
+                                    <p>1、The image format requires jpg, gif, and png as suffixes.</p>
+                                    <p>2、Images can be cropped online to crop the final result.</p>
+                                    <p>3、After selecting the cropping position, click the Upload button upload image</p>
+                                    <p>4、The window can be closed after the image has been uploaded.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="width:100%;">
+                                <br />
+                                <img id="cut-img" class="thumbnail " src="/Students/ViewPhoto?studentadmin=@Model.studentAdmin" style="margin-left:0px;margin-right:0px;margin:auto;position:center;">
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" asp-for="studentAdmin" id="studentAdmin" />
             <div class="form-group">
                 <label asp-for="studentName" class="control-label"></label>
-                <input asp-for="studentName" class="form-control" />
+                <input asp-for="studentName" id="studentNameval" class="form-control" />
                 <span asp-validation-for="studentName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="projectId" class="control-label"></label>
-                <select asp-for="projectId" class="form-control" asp-items="ViewBag.projectSelect">
+                <label asp-for="projectId" class="control-label" ></label>
+                <select asp-for="projectId" class="form-control" id="projectIdval" asp-items="ViewBag.projectSelect">
                     <option id="0" value="0">If have project please select project</option>
                 </select>
-                <span asp-validation-for="projectId" class="text-danger"></span>
+                <span asp-validation-for="projectId" id="projectIderr" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="studentYear" class="control-label"></label>
-                <input asp-for="studentYear" class="form-control" />
-                <span asp-validation-for="studentYear" class="text-danger"></span>
+                <label asp-for="studentBirthday" class="control-label"></label>
+                <input type="date" asp-for="studentBirthday" id="studentBirthdayval" class="form-control" />
+                <span asp-validation-for="studentBirthday" id="studentBirthdayerr" class="text-danger"></span>
             </div>
-            <input asp-for="dateCreated" hidden="hidden" />
+            <input asp-for="dateCreated" hidden="hidden" id="dateCreated" />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-info" />
+                <input type="button" onclick="check()" value="Save" class="btn btn-info" />
             </div>
         </form>
     </div>
@@ -39,4 +82,215 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+@section scripts{
+    <script src="@Url.Content("~/tapmodo-Jcrop-1902fbc/js/jquery.Jcrop.js")"></script>
+    <script src="@Url.Content("~/bootstrap-fileinput/js/fileinput.js")"></script>
+    <script src="@Url.Content("~/bootstrap-fileinput/js/locales/zh.js")"></script>
+    <script type="text/javascript">
+
+        //http://code.ciaoca.com/jquery/jcrop/
+        //http://code.ciaoca.com/jquery/jcrop/demo/animation
+        //http://plugins.krajee.com/file-input
+        //http://plugins.krajee.com/file-advanced-usage-demo#advanced-example-5
+        var file;
+        var tailorInfo = "";
+        var photoflag = false;
+        var chengephoto = false;
+        var formData = new FormData();
+        //初始化fileinput
+        function FileInput(ctrlName, uploadUrl) {
+            var oFile = new Object();
+
+            oFile.Init = function (ctrlName, uploadUrl) {
+                var control = $('#' + ctrlName);
+                //初始化上传控件的样式
+                control.fileinput({
+                    //language: 'zh', //设置语言
+                    browseLabel: '选择',
+                    browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+                    browseClass: "btn btn-primary", //按钮样式
+                    uploadUrl: uploadUrl, //上传的地址
+                    allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+                    showUpload: true, //是否显示上传按钮
+                    showCaption: true,//是否显示标题
+                    showPreview: false,//隐藏预览
+                    dropZoneEnabled: false,//是否显示拖拽区域
+                    uploadAsync: true,//采用异步
+                    autoReplace: true,
+                    //minImageWidth: 50,
+                    //minImageHeight: 50,
+                    //maxImageWidth: 1000,
+                    //maxImageHeight: 1000,
+                    //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+                    //minFileCount: 0,
+                    maxFileCount: 1, //表示允许同时上传的最大文件个数
+                    enctype: 'multipart/form-data',
+                    validateInitialCount: true,
+                    previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                    msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+                    uploadExtraData: function () {
+                        return { "tailorInfo": tailorInfo };
+                    }
+                });
+            }
+
+            return oFile;
+        };
+
+        function PageInit() {
+            var jcorp = null;
+            var _this = this;
+            var fileInput = new FileInput();
+            fileInput.Init("txt_file", "@Url.Action("UpLoadFile")");
+            var input = $('#txt_file');
+
+            //图片上传完成后
+            input.on("fileuploaded", function (event, data, previewId, index) {
+                if (data.response.success) {
+                    jcorp.destroy();
+                    var str = data.response.message;
+                    $('#cut-img').removeAttr('style');
+                    $('#cut-img').attr('src', data.response.newImage);//Data URI Scheme形式
+                    //$('#cut-img').width(data.response.width).height(data.response.height);
+                    $('#show-img').attr('src', data.response.newImage);//Data URI Scheme形式
+                    photoflag = true;
+                    alert(str);
+                    //$('#cut-img').attr('src', data.response.newImage + "?t=" + Math.random());//加尾巴解决缓存问题
+                }
+            });
+            //选择图片后触发
+            input.on('change', function (event, data, previewId, index) {
+                chengephoto = true;
+                var img = $('#cut-img');
+                if (input[0].files && input[0].files[0]) {
+                    file = input[0].files[0];
+                    formData.append("files", input[0].files[0]);
+                    var reader = new FileReader();
+                    reader.readAsDataURL(input[0].files[0]);
+                    reader.onload = function (e) {
+                        img.removeAttr('style');
+                        img.removeAttr('src');
+                        img.attr('src', e.target.result);
+                        img.Jcrop({
+                            setSelect: [0, 0, 150, 150],
+                            //handleSize: 10,
+
+                            aspectRatio: 1,//选框宽高比
+                            bgFade: false,
+                            bgColor: 'black',
+                            bgOpacity: 0.3,
+                            onSelect: updateCords
+                        }, function () {
+                            jcorp = this;
+                        });
+                    };
+                    if (jcorp != undefined) {
+                        jcorp.destroy();
+                    }
+                }
+                function updateCords(obj) {
+                    tailorInfo = JSON.stringify({ "PictureWidth": $('.jcrop-holder').css('width'), "PictureHeight": $('.jcrop-holder').css('height'), "CoordinateX": obj.x, "CoordinateY": obj.y, "CoordinateWidth": obj.w, "CoordinateHeight": obj.h });
+                    console.log(tailorInfo);
+                }
+            });
+
+            //上传出现错误
+            input.on('fileuploaderror', function (event, data, msg) {
+                alert(event + msg);
+                photoflag = false;
+                //jcorp.destroy();
+                //$('#cut-img').attr('src', '/Content/defaultAvatar.jpg');
+                return false;
+            });
+
+            //移除图片
+            input.on('fileclear', function (event) {
+                console.log("fileclear");
+
+                jcorp.destroy();
+                $('#cut-img').attr('src', '/Content/defaultAvatar.jpg');
+            });
+        };
+
+        $(function () {
+            PageInit();
+
+        });
+
+        function check() {
+            var studentNameerr = $("#studentNameerr");
+            var studentNameval = $("#studentNameval");
+            var projectIdval = $("#projectIdval");
+            var projectIderr = $("#projectIderr");
+            var studentBirthdayval = $("#studentBirthdayval");
+            var studentBirthdayerr = $("#studentBirthdayerr");
+            var photoerr = $("#photoerr");
+            var dateCreated = $("#dateCreated");
+            var studentAdmin = $("#studentAdmin");
+            var checkformat = true;
+            if (studentBirthdayval.val() == "") {
+               studentBirthdayerr.html("Student year can not be empty!");
+                studentBirthdayval.focus();
+                checkformat = false;
+            } else {
+                studentBirthdayerr.html("");
+            }
+            if (studentNameval.val() == "") {
+                studentNameerr.html("Student name can not be empty!");
+                studentNameval.focus();
+                checkformat = false;
+            } else {
+                studentNameerr.html("");
+            }
+            if (chengephoto == true) {
+                if (photoflag == false || tailorInfo == "") {
+                    photoerr.html("Please check the photo upload status!");
+                    checkformat = false;
+                } else {
+                    photoerr.html("");
+                }
+            }
+
+            if (checkformat == true ) {
+                formData.append("tailorInfo", tailorInfo);
+                var sel = document.getElementById("projectIdval");
+                var index = sel.selectedIndex; // 选中索引
+
+                albumid = sel.options[index].value;//要的值
+                console.log(albumid);
+                console.log(projectIdval.val());
+                var stuinfo = JSON.stringify({
+                    "studentAdmin": studentAdmin.val(), "studentName": studentNameval.val(), "studentBirthday": studentBirthdayval.val(), "projectId": projectIdval.val(), "dateCreated": dateCreated.val()
+                });
+                console.log(stuinfo);
+                formData.append("stuinfo", stuinfo);
+                $.ajax({
+                    url: '@Url.Action("UpdateData")',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (returndata) {
+                        if (returndata.success) {
+                            alert("Success!");
+                            window.location = "/Students/index";// 可以将其连接到指定的位置
+                            
+                        } else {
+                            alert(returndata.msg);
+                        }
+
+
+                    },
+                    error: function (returndata) {
+                        alert(returndata.msg);
+
+                    }
+                });
+            }
+        }
+    </script>
+}
 

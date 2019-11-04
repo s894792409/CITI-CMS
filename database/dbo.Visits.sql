@@ -1,7 +1,7 @@
 USE [CMSCore]
 GO
 
-/****** Object:  Table [dbo].[Visits]    Script Date: 2019/10/16 15:31:53 ******/
+/****** Object:  Table [dbo].[Visits]    Script Date: 2019/11/4 15:51:18 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -17,6 +17,8 @@ CREATE TABLE [dbo].[Visits](
 	[SIC] [varchar](max) NULL,
 	[Host] [varchar](max) NULL,
 	[ForeignVisit] [bit] NULL,
+	[dateCreated] [datetime] NULL,
+	[No] [int] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[VisitId] ASC

@@ -11,13 +11,19 @@
 <p align="center" style="font-size:50px;">Create students info</p>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data" id="form1" method="post">
+    <div class="col-md-4 " >
+        <form asp-action="Create" enctype="multipart/form-data" id="form1" method="post" style="width:100%;align-content:center;">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label class="control-label">Student Photo</label><br />
+                <img id="show-img" class="thumbnail" src="~/tapmodo-Jcrop-1902fbc/demos/demo_files/sago.jpg" style="width:150px;height:150px;border:2px solid #808080;">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" type="button">Upload Photo</button>
+                <br /><span class="text-danger" id="photoerr"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="studentAdmin" id="studentAdmin" class="control-label"></label>
-                <input asp-for="studentAdmin"  id="studentAdminval" class="form-control" />
-                <span type="text" asp-validation-for="studentAdmin" id="studentAdminerr"  class="text-danger" >@ViewBag.error</span>
+                <input asp-for="studentAdmin" id="studentAdminval" class="form-control" />
+                <span type="text" asp-validation-for="studentAdmin" id="studentAdminerr" class="text-danger">@ViewBag.error</span>
             </div>
             <div class="form-group">
                 <label asp-for="studentName" id="studentName" class="control-label"></label>
@@ -32,45 +38,42 @@
                 <span asp-validation-for="projectId" id="projectIderr" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="studentYear" id="studentYear" class="control-label"></label>
-                <input asp-for="studentYear" id="studentYearval" class="form-control" />
-                <span asp-validation-for="studentYear" id="studentYearerr" class="text-danger"></span>
+                <label asp-for="studentBirthday" id="studentBirthday" class="control-label"></label>
+                <input type="date" asp-for="studentBirthday" id="studentBirthdayval" class="form-control" />
+                <span asp-validation-for="studentBirthday" id="studentBirthdayerr" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label class="control-label">Student Photo</label>
-                <img id="show-img" class="thumbnail" src="~/tapmodo-Jcrop-1902fbc/demos/demo_files/sago.jpg" style="width:150px;height:150px;">
 
-                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" type="button">上传头像</button>
-                <input type="file" name="imagefile" id="imagefile" class="form-control"  />
-                <span class="text-danger"></span>
-            </div>
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="min-width:1500px">
-                <div class="modal-dialog" style="min-width:1500px">
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="max-width:95%">
+                <div class="modal-dialog" style="max-width:95%">
                     <div class="modal-content" style="">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
                         </div>
                         <div class="modal-body ">
-                            <h4 class="modal-title" id="myModalLabel">图片上传</h4>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img id="cut-img" class="thumbnail" src="~/tapmodo-Jcrop-1902fbc/demos/demo_files/sago.jpg"><br />
-                                </div>
+                            <h4 class="modal-title d-flex justify-content-center" id="myModalLabel">Upload Photo</h4>
+                            <div class="row d-flex justify-content-center card-header">
                                 <div class="col-md-5">
-
-                                    <input type="file" name="txt_file" id="txt_file" multiple class="file-loading" /><br />
-                                    <h4>图片说明：</h4>
-                                    <p>1、图片格式需要jpg、gif、png为后缀名.</p>
-                                    <p>2、图片可以在线裁剪大小,以裁剪后为最终结果.</p>
-                                    <p>3、图片上传完毕即可关闭窗口.</p>
+                                    <br /><br /><br />
+                                    <input type="file" name="txt_file" id="txt_file" multiple class="file-loading" style="align-content:flex-end;" />
+                                </div>
+                                <div>
+                                    <h4>Description：</h4>
+                                    <p>1、The image format requires jpg, gif, and png as suffixes.</p>
+                                    <p>2、Images can be cropped online to crop the final result.</p>
+                                    <p>3、After selecting the cropping position, click the Upload button upload image</p>
+                                    <p>4、The window can be closed after the image has been uploaded.</p>
                                 </div>
                             </div>
+                            <div class="col-md-6" style="width:100%;">
+                                <br />
+                                <img id="cut-img" class="thumbnail " src="~/tapmodo-Jcrop-1902fbc/demos/demo_files/sago.jpg" style="margin-left:0px;margin-right:0px;margin:auto;position:center;">
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
-            <input type="text" id="tailor" name="tailor" />
             <div class="form-group">
                 <input type="button" onclick="check()" value="Create" class="btn btn-info" id="create" />
             </div>
@@ -93,8 +96,6 @@
         //http://code.ciaoca.com/jquery/jcrop/demo/animation
         //http://plugins.krajee.com/file-input
         //http://plugins.krajee.com/file-advanced-usage-demo#advanced-example-5
-
-        var dir = "";
         var file;
         var tailorInfo = "";
         var photoflag = false;
@@ -107,7 +108,7 @@
                 var control = $('#' + ctrlName);
                 //初始化上传控件的样式
                 control.fileinput({
-                    language: 'zh', //设置语言
+                    //language: 'zh', //设置语言
                     browseLabel: '选择',
                     browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
                     browseClass: "btn btn-primary", //按钮样式
@@ -140,13 +141,6 @@
         };
 
         function PageInit() {
-            if (dir == null) {
-                @{
-                var test=DateTime.Now.ToString();
-                 }
-                    dir ="@test";
-            }
-            console.log(dir);
             var jcorp = null;
             var _this = this;
             var fileInput = new FileInput();
@@ -163,7 +157,6 @@
                     //$('#cut-img').width(data.response.width).height(data.response.height);
                     $('#show-img').attr('src', data.response.newImage);//Data URI Scheme形式
                     photoflag = true;
-                    $('#tailor').val(tailorInfo);
                     alert(str);
                     //$('#cut-img').attr('src', data.response.newImage + "?t=" + Math.random());//加尾巴解决缓存问题
                 }
@@ -177,12 +170,13 @@
                     var reader = new FileReader();
                     reader.readAsDataURL(input[0].files[0]);
                     reader.onload = function (e) {
+                        img.removeAttr('style');
                         img.removeAttr('src');
-                        
                         img.attr('src', e.target.result);
                         img.Jcrop({
                             setSelect: [0, 0, 150, 150],
                             //handleSize: 10,
+                            
                             aspectRatio: 1,//选框宽高比
                             bgFade: false,
                             bgColor: 'black',
@@ -216,7 +210,7 @@
                 console.log("fileclear");
 
                 jcorp.destroy();
-                $('#cut-img').attr('src', '/Content/defaultAvatar.jpg');
+                $('#cut-img').attr('src', '~/tapmodo-Jcrop-1902fbc/demos/demo_files/sago.jpg');
             });
         };
 
@@ -226,47 +220,22 @@
         });
 
         function check() {
-            @*$.ajax({
-                type: "POST",
-                url: "@Url.Action("test")",
-                contentType: "application/json",
-                dataType: "json",
-                async: true,
-                data: JSON.stringify({ "ID": 112, "Name": "李四", "Birthday": "2017-01-23 12:12:12" }),
-                success: function (result) {
-                    alert(result.msg);
-                }
-            });*@
             var studentAdminerr = $("#studentAdminerr");
             var studentAdminval = $("#studentAdminval");
             var studentNameerr = $("#studentNameerr");
             var studentNameval = $("#studentNameval");
             var projectIdval = $("#projectIdval");
             var projectIderr = $("#projectIderr");
-            var studentYearval = $("#studentYearval");
-            var studentYearerr = $("#studentYearerr");
+            var studentBirthdayval = $("#studentBirthdayval");
+            var studentBirthdayerr = $("#studentBirthdayerr");
+            var photoerr = $("#photoerr");
             var checkformat = true;
-            if (studentAdminval.val() == "") {
-                studentAdminerr.html("Student admin can not be empty!");
-                studentAdminval.focus();
-                checkformat = false;
-                console.log("1" + checkformat);
-            } else {
-                studentAdminerr.html("");
-            }
-            if (studentNameval.val() == "") {
-                studentNameerr.html("Student name can not be empty!");
-                studentNameval.focus();
+            if (studentBirthdayval.val() == "") {
+               studentBirthdayerr.html("Student year can not be empty!");
+                studentBirthdayval.focus();
                 checkformat = false;
             } else {
-                studentNameerr.html("");
-            }
-            if (studentYearval.val() == "") {
-                studentYearerr.html("Student year can not be empty!");
-                studentYearval.focus();
-                checkformat = false;
-            } else {
-                studentYearerr.html("");
+                studentBirthdayerr.html("");
             }
             if (projectIdval.val() == "") {
                 projectIderr.html("Project id can not be empty!");
@@ -275,9 +244,32 @@
             } else {
                 projectIderr.html("");
             }
-            if (checkformat == true) {
+            if (studentNameval.val() == "") {
+                studentNameerr.html("Student name can not be empty!");
+                studentNameval.focus();
+                checkformat = false;
+            } else {
+                studentNameerr.html("");
+            }
+            if (studentAdminval.val() == "") {
+                studentAdminerr.html("Student admin can not be empty!");
+                studentAdminval.focus();
+                checkformat = false;
+                console.log("1" + checkformat);
+            } else {
+                studentAdminerr.html("");
+            }
+            if (photoflag == false || tailorInfo == "") {
+                photoerr.html("Please check the photo upload status!");
+                checkformat = false;
+            } else {
+                photoerr.html("");
+            }
+            
+            
+            if (checkformat == true ) {
                 formData.append("tailorInfo", tailorInfo);
-                var stuinfo = JSON.stringify({ "studentAdmin": studentAdminval.val(), "studentName": studentNameval.val(), "studentYear": studentYearval.val(), "projectId": projectIdval.val() });
+                var stuinfo = JSON.stringify({ "studentAdmin": studentAdminval.val(), "studentName": studentNameval.val(), "studentBirthday": studentBirthdayval.val(), "projectId": projectIdval.val() });
                 formData.append("stuinfo", stuinfo);
                 $.ajax({
                     url: '@Url.Action("CreateData")',
@@ -288,42 +280,21 @@
                     contentType: false,
                     processData: false,
                     success: function (returndata) {
-                        alert(returndata.success);
+                        if (returndata.success) {
+                            alert("Success! \n" + returndata.msg);
+                            window.location.href = "index";// 可以将其连接到指定的位置
+                        } else {
+                            alert(returndata.msg);
+                        }
                         
+
                     },
                     error: function (returndata) {
-                        alert("error");
-                        
+                        alert(returndata.msg);
+
                     }
                 });
             }
-            //if (photoflag = true && document.getElementById('tailor').value != null) {
-            //    document.getElementById('form1').submit(); //验证成功进行表单提交
-            //} else {
-            //    alert("false");
-            //}
-            //if (password == pwd) {
-            //    alert("验证正确");
-            //    document.getElementById('form1').submit(); //验证成功进行表单提交
-            //} else {
-            //    alert("验证错误，请重新输入");
-            //    //window.location.href="index.jsp"; 可以将其连接到指定的位置
-            //}
-        }
-        function Uploadfun() {
-            var _file = document.getElementById("FileUpLoad"); //此处是前台页面的 input 标签的ID
-            var _form = document.createElenent("form"); //创建一个form
-            document.body.appendChild(_form);//添加一个form
-            _form.encoding = "multipart/form-data"; //使用该编码规程可以不限制 post表单2M大小的限制
-            _form.method = "post";//使用POST方式
-            _form.action = "../Service/FileSrv.aspx?Type=Client&CallFun=UploadFile"; //此处使用Get方式，传到前台页面的后台Server代码层；
-            // 这个是本人工作中的项目位置
-            _form.target = "hidden_frame";
-            var pos = _file.nextSibling;
-            _form.appendChild(_file);
-            _form.submit();
-            pos.parentNode.insertBefore(_file, pos);
-            document.body.renoveChild(_form);
         }
     </script>
 }

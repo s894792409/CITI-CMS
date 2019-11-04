@@ -22,8 +22,8 @@ namespace CMS.Models.ViewModels
         [Display(Name = "Project")]
         public int projectId { get; set; }
         [Required]
-        [Display(Name = "student's Age")]
-        public int studentYear { get; set; }
+        [Display(Name = "student's Birthday")]
+        public DateTime studentBirthday { get; set; }
 
         [Display(Name = "Create date")]
         public DateTime dateCreated { get; set; }
