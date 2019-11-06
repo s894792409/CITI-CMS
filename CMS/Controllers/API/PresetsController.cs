@@ -72,9 +72,9 @@ namespace CMS.Controllers.API
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
-                return null;
+                return BadRequest(e.Message+"\n"+e.StackTrace);
             }
             return null;
             
@@ -99,14 +99,38 @@ namespace CMS.Controllers.API
                             return BadRequest(ModelState);
                         }
 
-                        var preset = await _context.Preset.FindAsync(id);
+                        var preset = await _context.Preset.AsNoTracking().SingleOrDefaultAsync(s=>s.presetId==id);
 
                         if (preset == null)
                         {
                             return NotFound();
                         }
+                        var presetlist = await _context.Preset.AsNoTracking().ToListAsync();
+                        var boxlist = await _context.Box.AsNoTracking().ToListAsync();
+                        var cardlist = await _context.Card.AsNoTracking().ToListAsync();
+                        IOformat ioformat = new IOformat();
+                        ioformat.presetId = preset.presetId;
+                        ioformat.presetName = preset.presetName;
+                        ioformat.themeId = preset.themeId;
+                        ioformat.visitId = preset.visitId;
+                        ioformat.dateCreated = preset.dateCreated;
+                        try
+                        {
+                            List<Boxformat> boxformatlist = new List<Boxformat>();
+                            foreach (Box box in boxlist.Where(b => b.presetId == preset.presetId))
+                            {
+                                Boxformat boxformat = new Boxformat();
+                                boxformat.boxId = box.boxId;
+                                boxformat.cardList = cardlist.Where(c => c.boxId == box.boxId).ToList();
+                                boxformatlist.Add(boxformat);
+                            }
+                            ioformat.presetBoxList = boxformatlist;
 
-                        return Ok(preset);
+                        }
+                        catch
+                        {
+                        }
+                        return Ok(ioformat);
                     }
                 }
             }
@@ -120,7 +144,7 @@ namespace CMS.Controllers.API
 
         // PUT: api/Presets/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPreset([FromRoute] int id, [FromBody] Preset preset)
+        public async Task<IActionResult> PutPreset([FromRoute] int id, [FromBody] IOformat ioformat)
         {
             
             try
@@ -137,41 +161,146 @@ namespace CMS.Controllers.API
                             return BadRequest(ModelState);
                         }
 
-                        if (id != preset.presetId)
+                        if (id != ioformat.presetId)
                         {
                             return BadRequest();
                         }
-
-                        // _context.Entry(preset).State = EntityState.Modified;
-                        var list = await _context.Preset.AsNoTracking().SingleAsync(s => s.presetId == id);
-                        preset.presetId = id;
-
-                        try
+                        Preset preset = await _context.Preset.AsNoTracking().SingleAsync(s => s.presetId == ioformat.presetId);
+                        if (preset == null)
                         {
-                            _context.Update(preset);
-                            await _context.SaveChangesAsync();
+                            return BadRequest();
                         }
-                        catch (DbUpdateConcurrencyException)
-                        {
-                            if (!PresetExists(id))
-                            {
-                                return NotFound();
-                            }
-                            else
-                            {
-                                throw;
-                            }
-                        }
+                        preset.themeId = ioformat.themeId;
+                        preset.visitId = ioformat.visitId;
+                        preset.presetName = ioformat.presetName;
+                        _context.Update(preset);
+                        await _context.SaveChangesAsync();
 
+                        foreach (Boxformat boxformat in ioformat.presetBoxList)
+                        {
+                            var box = await _context.Box.AsNoTracking().SingleOrDefaultAsync(b => b.boxId == boxformat.boxId);
+                            if (box != null&& box.presetId == preset.presetId)
+                            {
+                                if (box.presetId == preset.presetId)
+                                {
+                                    foreach (Card c in boxformat.cardList)
+                                    {
+                                        try
+                                        {
+                                            var chackcard = await _context.Card.AsNoTracking().SingleAsync(s => s.cardId == c.cardId);
+
+                                            if (chackcard != null && chackcard.boxId == c.boxId)
+                                            {
+                                                chackcard.color = c.color;
+                                                chackcard.icon = c.icon;
+                                                chackcard.title = c.title;
+                                                chackcard.value = c.value;
+                                                _context.Card.Update(chackcard);
+                                                await _context.SaveChangesAsync();
+                                            }
+                                            
+                                            
+                                        }
+                                        catch {
+                                            var box1 = await _context.Box.AsNoTracking().SingleOrDefaultAsync(b => b.presetId == box.presetId && b.GUID == box.GUID);
+                                            Card card = new Card();
+                                            card.color = c.color;
+                                            card.icon = c.icon;
+                                            card.title = c.title;
+                                            card.value = c.value;
+                                            card.boxId = box1.boxId;
+                                            card.dateCreated = DateTime.Now;
+                                            _context.Card.Add(card);
+                                            await _context.SaveChangesAsync();
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            else {
+                                    var box2 = new Box();
+                                    box2.presetId = preset.presetId;
+                                    box2.GUID = Guid.NewGuid().ToString();
+                                    _context.Box.Add(box2);
+                                    await _context.SaveChangesAsync();
+                                    foreach (Card c in boxformat.cardList)
+                                    {
+                                    var chackcard = await _context.Card.AsNoTracking().SingleAsync(s => s.cardId == c.cardId);
+                                    if (chackcard != null && chackcard.boxId == c.boxId)
+                                    {
+                                        chackcard.color = c.color;
+                                        chackcard.icon = c.icon;
+                                        chackcard.title = c.title;
+                                        chackcard.value = c.value;
+                                        _context.Card.Update(chackcard);
+                                        await _context.SaveChangesAsync();
+                                    }
+                                    else
+                                    {
+                                        var box1 = await _context.Box.AsNoTracking().SingleOrDefaultAsync(b => b.presetId == box.presetId && b.GUID == box.GUID);
+                                        Card card = new Card();
+                                        card.color = c.color;
+                                        card.icon = c.icon;
+                                        card.title = c.title;
+                                        card.value = c.value;
+                                        card.boxId = box1.boxId;
+                                        card.dateCreated = DateTime.Now;
+                                        _context.Card.Add(card);
+                                        await _context.SaveChangesAsync();
+                                    }
+                                }
+                                
+                                
+                            }
+                            var oldcardlist = _context.Card.AsNoTracking().Where(c => c.boxId == box.boxId);
+                            if (oldcardlist.Count() != boxformat.cardList.Count())
+                            {
+                                List<Card> removecardlist = new List<Card>();
+                                foreach (Card oldcard in oldcardlist)
+                                {
+                                    bool flag = false;
+                                    foreach (Card card in boxformat.cardList)
+                                    {
+                                        if (oldcard.cardId == card.cardId)
+                                        {
+                                            flag = true;
+                                            break;
+                                        }
+                                    }
+                                    if (flag == false)
+                                    {
+                                        removecardlist.Add(oldcard);
+
+                                    }
+                                }
+                                //foreach(Card card in removecardlist)
+                                //{
+                                //    _context.Card.AsNoTracking();
+                                //    _context.Card.Remove(card);
+                                //    await _context.SaveChangesAsync();
+                                //}
+                                try
+                                {
+                                    for (int i = 0; i < removecardlist.Count(); i++)
+                                    {
+                                        _context.Card.Remove(removecardlist[i]);
+                                        await _context.SaveChangesAsync();
+                                    }
+                                }
+                                catch
+                                {
+                                }
+                            }
+                        }//为了提高程序的容错率删除box只能用api操作
                         APIReturn re = new APIReturn();
                         re.Status = "success";
                         return Ok(re);
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
-                return null;
+                return BadRequest(e.Message+"\n"+e.StackTrace);
             }
             return null;
             
@@ -265,24 +394,58 @@ namespace CMS.Controllers.API
                             return BadRequest(ModelState);
                         }
 
-                        var preset = await _context.Preset.FindAsync(id);
+                        var preset = await _context.Preset.AsNoTracking().SingleAsync(s=>s.presetId==id);
                         if (preset == null)
                         {
                             return NotFound();
                         }
+                        var boxlist =await _context.Box.AsNoTracking().Where(s => s.presetId == preset.presetId).ToListAsync();
+                        foreach(Box box in boxlist)
+                        {
+                            try
+                            {
+                                var cardlist =await _context.Card.AsNoTracking().Where(c => c.boxId == box.boxId).ToListAsync();
+                                List<Card> cardRemovelist = new List<Card>();
+                                foreach (Card card in cardlist)
+                                {
+                                    cardRemovelist.Add(card);
+                                }
+                           
+                            try
+                            {
+                                for(int i = 0; i < cardRemovelist.Count(); i++)
+                                {
+                                    _context.Card.Remove(cardRemovelist[i]);
+                                    await _context.SaveChangesAsync();
+                                }
 
+                            }
+                            catch {
+                            }
+                            }
+                            catch (Exception e)
+                            {
+                                return BadRequest();
+                            }
+
+                        }
+                        for (int i = 0; i < boxlist.Count(); i++)
+                        {
+                            _context.Box.Remove(boxlist[i]);
+                            await _context.SaveChangesAsync();
+                        }
                         _context.Preset.Remove(preset);
                         await _context.SaveChangesAsync();
-
+                        
                         APIReturn re = new APIReturn();
                         re.Status = "success";
                         return Ok(re);
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
-                return null;
+                return BadRequest(e.Message+"\n\n"+e.StackTrace);
             }
             return null;
             

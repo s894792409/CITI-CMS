@@ -101,6 +101,7 @@ namespace CMS.Controllers.API
                     UserInfo userInfo = identityDbContext.AspNetUsers.Single(s => s.UserKey == key);
                     if (userInfo != null)
                     {
+                        await RefreshAsync(userInfo);
                         if (!ModelState.IsValid)
                         {
                             return BadRequest(ModelState);
@@ -115,7 +116,7 @@ namespace CMS.Controllers.API
 
                         try
                         {
-                            await RefreshAsync(userInfo);
+                            
                             await _context.SaveChangesAsync();
                         }
                         catch (DbUpdateConcurrencyException)
