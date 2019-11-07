@@ -13473,23 +13473,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nightmare\\.nuget\\packages\\": {},
+    "C:\\Users\\L33540.NYPSIT\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\GitHub\\CITI-CMS\\CMS\\CMS.csproj",
+      "projectUniqueName": "C:\\Users\\L33540.NYPSIT\\Desktop\\CMSTest2\\ASP.NET-Core-CMS-master\\CMS\\CITI-CMS\\CMS\\CMS.csproj",
       "projectName": "CMS",
-      "projectPath": "E:\\GitHub\\CITI-CMS\\CMS\\CMS.csproj",
-      "packagesPath": "C:\\Users\\nightmare\\.nuget\\packages\\",
-      "outputPath": "E:\\GitHub\\CITI-CMS\\CMS\\obj\\",
+      "projectPath": "C:\\Users\\L33540.NYPSIT\\Desktop\\CMSTest2\\ASP.NET-Core-CMS-master\\CMS\\CITI-CMS\\CMS\\CMS.csproj",
+      "packagesPath": "C:\\Users\\L33540.NYPSIT\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\L33540.NYPSIT\\Desktop\\CMSTest2\\ASP.NET-Core-CMS-master\\CMS\\CITI-CMS\\CMS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\nightmare\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\L33540.NYPSIT\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13497,7 +13497,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://www.myget.org/F/orchardcore-preview/api/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.1": {
@@ -13540,6 +13541,7 @@
             "version": "[2.1.11, )"
           },
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
