@@ -42,6 +42,14 @@
                 <input type="date" asp-for="studentBirthday" id="studentBirthdayval" class="form-control" />
                 <span asp-validation-for="studentBirthday" id="studentBirthdayerr" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="studentPortfolio" id="studentBirthday form-control" class="control-label"></label>
+                @*<input type="tel" asp-for="studentPortfolio" id="studentBirthdayval" class="form-control" />*@
+                <textarea cols="20" rows="5" style="margin-left:2px;" class="row form-control" asp-for="studentPortfolio" id="studentPortfolioval">
+                 Say something
+                </textarea>
+                <span asp-validation-for="studentPortfolio" id="studentPortfolioerr" class="text-danger"></span>
+            </div>
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="max-width:95%">
                 <div class="modal-dialog" style="max-width:95%">
@@ -228,6 +236,8 @@
             var projectIderr = $("#projectIderr");
             var studentBirthdayval = $("#studentBirthdayval");
             var studentBirthdayerr = $("#studentBirthdayerr");
+            var studentPortfolioval = $("#studentPortfolioval");
+            var studentPortfolioerr = $("#studentPortfolioerr");
             var photoerr = $("#photoerr");
             var checkformat = true;
             if (studentBirthdayval.val() == "") {
@@ -269,7 +279,10 @@
             
             if (checkformat == true ) {
                 formData.append("tailorInfo", tailorInfo);
-                var stuinfo = JSON.stringify({ "studentAdmin": studentAdminval.val(), "studentName": studentNameval.val(), "studentBirthday": studentBirthdayval.val(), "projectId": projectIdval.val() });
+                var stuinfo = JSON.stringify({
+                    "studentAdmin": studentAdminval.val(), "studentName": studentNameval.val(), "studentBirthday": studentBirthdayval.val(), "projectId": projectIdval.val(), "studentPortfolio": studentPortfolioval.val()
+                });
+                console.log(stuinfo);
                 formData.append("stuinfo", stuinfo);
                 $.ajax({
                     url: '@Url.Action("CreateData")',

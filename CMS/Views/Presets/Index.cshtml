@@ -48,7 +48,9 @@
                     <table class="table" id="table">
                         <thead>
                             <tr>
-
+                                <th>
+                                    Preset Name
+                                </th>
                                 <th>
                                     Theme Name
                                 </th>
@@ -65,56 +67,59 @@
                             @foreach (var item in Model)
                             {
                                 rowsum++;
-                                <tr>
-
-                                    <td style="line-height:40px;">
-                                        @{
-                                            CMSContext context = new CMSContext();
-                                            string themename;
-                                            try
-                                            {
-                                                var them = context.Theme.SingleOrDefault(n => n.themeId == item.themeId);
-                                                themename = them.themeName;
-                                            }
-                                            catch
-                                            {
-                                                themename = "Not Found";
-                                            }
+                            <tr>
+                                <td style="line-height:40px;">
+                                    
+                                    @Html.DisplayFor(modelItem => item.presetName)
+                                </td>
+                                <td style="line-height:40px;">
+                                    @{
+                                        CMSContext context = new CMSContext();
+                                        string themename;
+                                        try
+                                        {
+                                            var them = context.Theme.SingleOrDefault(n => n.themeId == item.themeId);
+                                            themename = them.themeName;
                                         }
-                                        @Html.DisplayFor(modelItem => themename)
-                                    </td>
-                                    <td style="line-height:40px;">
-                                        @{
-
-                                            Visits visit = context.Visits.SingleOrDefault(s => s.VisitId == item.visitId);
-                                            string name = "";
-                                            if (visit != null)
-                                            {
-                                                name = visit.Name;
-                                            }
-                                            else
-                                            {
-                                                name = "Not find this visit!";
-                                            }
-
+                                        catch
+                                        {
+                                            themename = "Not Found!";
                                         }
-                                        @Html.DisplayFor(modelItem => name)
-                                    </td>
+                                    }
+                                    @Html.DisplayFor(modelItem => themename)
+                                </td>
+                                <td style="line-height:40px;">
+                                    @{
 
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@item.presetId" class="btn btn-success">Edit</a>
-                                        @*<a asp-action="Details" asp-route-id="@item.presetId" class="btn btn-info">Details</a>*@
-                                        <a asp-action="Delete" asp-route-id="@item.presetId" class="btn btn-danger">Delete</a>
-                                        @{
-                                            var parms = new Dictionary<string, string>
-                                                                                                                                                                                                                                        {
-                                                                                                                                                                                                                                            { "themeId", item.themeId.ToString() }
-                                                                                                                                                                                                                                        };
+                                        Visits visit = context.Visits.SingleOrDefault(s => s.VisitId == item.visitId);
+                                        string name = "";
+                                        if (visit != null)
+                                        {
+                                            name = visit.Name;
                                         }
-                                        <a asp-action="ViewTheme" asp-route-id="@item.themeId" class="btn btn-default">View Theme</a>
-                                    </td>
+                                        else
+                                        {
+                                            name = "Not find this visit!";
+                                        }
 
-                                </tr>
+                                    }
+                                    @Html.DisplayFor(modelItem => name)
+                                </td>
+
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.presetId" class="btn btn-success">Edit</a>
+                                    @*<a asp-action="Details" asp-route-id="@item.presetId" class="btn btn-info">Details</a>*@
+                                    <a asp-action="Delete" asp-route-id="@item.presetId" class="btn btn-danger">Delete</a>
+                                    @{
+                                        var parms = new Dictionary<string, string>
+                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                    { "themeId", item.themeId.ToString() }
+                                                                                                                                                                                                                                                                };
+                                    }
+                                    @*<a asp-action="ViewTheme" asp-route-id="@item.themeId" class="btn btn-default">View Theme</a>*@
+                                </td>
+
+                            </tr>
                             }
                         </tbody>
                     </table>

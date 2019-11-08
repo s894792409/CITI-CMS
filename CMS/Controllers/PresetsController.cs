@@ -185,8 +185,45 @@ namespace CMS.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var preset = await _context.Preset.SingleOrDefaultAsync(m => m.presetId == id);
+            var boxlist = await _context.Box.AsNoTracking().Where(s => s.presetId == preset.presetId).ToListAsync();
+            foreach (Box box in boxlist)
+            {
+                try
+                {
+                    var cardlist = await _context.Card.AsNoTracking().Where(c => c.boxId == box.boxId).ToListAsync();
+                    List<Card> cardRemovelist = new List<Card>();
+                    foreach (Card card in cardlist)
+                    {
+                        cardRemovelist.Add(card);
+                    }
+
+                    try
+                    {
+                        for (int i = 0; i < cardRemovelist.Count(); i++)
+                        {
+                            _context.Card.Remove(cardRemovelist[i]);
+                            await _context.SaveChangesAsync();
+                        }
+
+                    }
+                    catch
+                    {
+                    }
+                }
+                catch (Exception e)
+                {
+                    return BadRequest();
+                }
+
+            }
+            for (int i = 0; i < boxlist.Count(); i++)
+            {
+                _context.Box.Remove(boxlist[i]);
+                await _context.SaveChangesAsync();
+            }
             _context.Preset.Remove(preset);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

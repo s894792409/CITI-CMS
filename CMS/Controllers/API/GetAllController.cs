@@ -72,10 +72,41 @@ namespace CMS.Controllers.API
                         sum.ProjectsSum = NoOfProjects;
                         sum.VisitsSum = NoOfVisit;
 
+                        var presetlist = await _context.Preset.AsNoTracking().ToListAsync();
+                        var boxlist = await _context.Box.AsNoTracking().ToListAsync();
+                        var cardlist = await _context.Card.AsNoTracking().ToListAsync();
+                        List<IOformat> ioformatlist = new List<IOformat>();
+                        foreach (Preset p in presetlist)
+                        {
+                            IOformat ioformat = new IOformat();
+                            ioformat.presetId = p.presetId;
+                            ioformat.presetName = p.presetName;
+                            ioformat.themeId = p.themeId;
+                            ioformat.visitId = p.visitId;
+                            ioformat.dateCreated = p.dateCreated;
+                            try
+                            {
+                                List<Boxformat> boxformatlist = new List<Boxformat>();
+                                foreach (Box box in boxlist.Where(b => b.presetId == p.presetId))
+                                {
+                                    Boxformat boxformat = new Boxformat();
+                                    boxformat.boxId = box.boxId;
+                                    boxformat.cardList = cardlist.Where(c => c.boxId == box.boxId).ToList();
+                                    boxformatlist.Add(boxformat);
+                                }
+                                ioformat.presetBoxList = boxformatlist;
+
+                            }
+                            catch
+                            {
+                            }
+                            ioformatlist.Add(ioformat);
+                        }
+                       
                         All all = new All();
                         all.Visits = _context.Visits;
                         all.Awards = _context.Awards;
-                        all.Presets = _context.Preset;
+                        all.Presets = ioformatlist;
                         all.Projects = _context.Projects;
                         all.ShortCourses = _context.ShortCourses;
                         all.Sum = sum;
@@ -96,9 +127,23 @@ namespace CMS.Controllers.API
             public DbSet<Visits> Visits { get; set; }
             public DbSet<Awards> Awards { get; set; }
             public DbSet<Projects> Projects { get; set; }
-            public DbSet<Preset> Presets { get; set; }
+            public List<IOformat> Presets { get; set; }
             public DbSet<ShortCourses> ShortCourses { get; set; }
             public Sum Sum { get; set; }
+        }
+        public class IOformat
+        {
+            public int presetId { get; set; }
+            public int themeId { get; set; }
+            public int visitId { get; set; }
+            public string presetName { get; set; }
+            public DateTime dateCreated { get; set; }
+            public List<Boxformat> presetBoxList { get; set; }
+        }
+        public class Boxformat
+        {
+            public int boxId { get; set; }
+            public List<Card> cardList { get; set; }
         }
 
         private static string MakeKey(int pwdLength)

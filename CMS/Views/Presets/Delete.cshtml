@@ -18,13 +18,27 @@
         <div class="card-body">
             <dl class="dl-horizontal">
                 <dt>
+                    @Html.DisplayNameFor(model => model.presetName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.presetName)
+                </dd>
+                <dt>
                     Theme Name
                 </dt>
                 <dd>
                     @{
-                        CMSContext context = new CMSContext();
-                        var them = context.Theme.SingleOrDefault(n => n.themeId == Model.themeId);
-                        var themename = them.themeName;
+                        var themename = "";
+                        try
+                        {
+                            CMSContext context = new CMSContext();
+                            var them = context.Theme.SingleOrDefault(n => n.themeId == Model.themeId);
+                            themename = them.themeName;
+                        }
+                        catch
+                        {
+                            themename = "Not found!";
+                        }
                     }
                     @Html.DisplayFor(modelItem => themename)
                 </dd>
@@ -34,6 +48,33 @@
                 <dd>
                     @Html.DisplayFor(model => model.visitId)
                 </dd>
+                @{
+                    List<Box> boxlist = new List<Box>();
+                    List<Card> cards = new List<Card>();
+                    try
+                    {
+                        CMSContext context1 = new CMSContext();
+                        boxlist = context1.Box.Where(b => b.presetId == Model.presetId).ToList();
+
+                        foreach (Box box in boxlist)
+                        {
+                            var cardlist = context1.Card.Where(b => b.boxId == box.boxId).ToList();
+                            cards.AddRange(cardlist);
+                        }
+
+                    }
+                    catch { }
+                }
+                @if (boxlist.Count > 0)
+                {
+                <dt>
+                    Boxes and Cards
+                </dt>
+                <dd>
+
+                    Have @boxlist.Count boxes and @cards.Count cards.
+                </dd>
+                }
             </dl>
 
             <form asp-action="Delete">

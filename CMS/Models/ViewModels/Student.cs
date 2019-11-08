@@ -29,6 +29,6 @@ namespace CMS.Models.ViewModels
         public DateTime dateCreated { get; set; }
         public byte[] Photo { get; set; }
         public string PhotoType { get; set; }
-
+        public string studentPortfolio { get; set; }
     }
 }

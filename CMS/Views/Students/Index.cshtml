@@ -8,33 +8,63 @@
 <p align="center" style="font-size:50px;">All students info</p>
 <p align="center">
     <a class="btn btn-info" asp-action="Create">Create New</a>
-    <a class="btn btn-info" asp-action="QueryView">Query Student</a>
-</p>
-@*<div class="card text-white bg-secondary mb-3">
-    <div class="card-body">
-        <h3 class="card-title"><i class="fa fa-filter" aria-hidden="true"></i>Search Criteria</h3>
-        <form asp-action="Index" method="post" class="d-flex justify-content-center">
-            @{
-                string fromdate = "";
-                string Enddate = "";
-                try
-                {
-                    fromdate = ViewBag.fromdate.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
-                    Enddate = ViewBag.enddate.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
-                }
-                catch
-                {
+    @*<a class="btn btn-info" asp-action="QueryView">Query Student</a>*@
+    @*<div class="col-sm-4">
+        <div class="input-group">
+            <input type="text" class="form-control" onkeydown="onKeyDown(event)" />
+            <span class="input-group-addon"><a class="srh-btn"><i class="ti-search"></i></a></span>
 
-                }
-            }
-            <span>Date From <input type="date" name="fromdate" value="@fromdate" /></span>
-            <span style="padding-left:50px;">To<input type="date" name="enddate" value="@Enddate" /></span>
-            <span style="padding-left:50px;">Number of rows displayed<input type="number" name="rows" value="@ViewBag.rows" /></span>
-            <span style="padding-left:50px;"><input type="submit" value="Filter" /></span>
-        </form>
-        <h3 class="text-danger">@ViewBag.error</h3>
+        </div>
+    </div>*@
+</p>
+@*<nav class="navbar top-navbar navbar-toggleable-sm navbar-light d-flex flex-lg-row row">
+        <ul class="navbar-nav mr-auto mt-md-0 ">
+            <!--This is search -->
+            <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+            <li class="nav-item hidden-sm-down">
+                <form class="app-search p-l-20">
+                    <input type="text" class="form-control" placeholder="Search for..."> <a class="srh-btn"><i class="ti-search"></i></a>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="form-group">
+        <div class="input-group">
+            <input id="keyWord" name="keyWord" type="text" class="form-control no-padding" style="width: 400px" placeholder="请输入名称">
+            <div class="input-group-btn" style="width:0">
+                <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
+            </div>
+        </div>
+        <button id="btnSearch" type="button" class="btn btn-default" style="margin-left:20px;margin-bottom: 20px">搜 索</button>
     </div>
-</div>*@
+*@
+
+@*<div class="card text-white bg-secondary mb-3">
+        <div class="card-body">
+            <h3 class="card-title"><i class="fa fa-filter" aria-hidden="true"></i>Search Criteria</h3>
+            <form asp-action="Index" method="post" class="d-flex justify-content-center">
+                @{
+                    string fromdate = "";
+                    string Enddate = "";
+                    try
+                    {
+                        fromdate = ViewBag.fromdate.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+                        Enddate = ViewBag.enddate.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                <span>Date From <input type="date" name="fromdate" value="@fromdate" /></span>
+                <span style="padding-left:50px;">To<input type="date" name="enddate" value="@Enddate" /></span>
+                <span style="padding-left:50px;">Number of rows displayed<input type="number" name="rows" value="@ViewBag.rows" /></span>
+                <span style="padding-left:50px;"><input type="submit" value="Filter" /></span>
+            </form>
+            <h3 class="text-danger">@ViewBag.error</h3>
+        </div>
+    </div>*@
 <div class="row">
     <!-- column -->
     <div class="col-sm-12">
@@ -64,7 +94,7 @@
                             rowsum++;
                             <tr>
                                 <td style="line-height:40px;">
-                                    <img src="/Students/ViewPhoto?studentadmin=@item.studentAdmin" style="width: auto;height: auto;max-width: 150px;max-height: 150px;" />
+                                    <img src="/Students/ViewPhoto?studentadmin=@item.studentAdmin" style="width: 150px;height: 150px;" />
 
                                 </td>
                                 <td style="line-height:40px;">
@@ -177,5 +207,77 @@
                 PageSwitch(++page);
             }
 
+    }
+
+    function onKeyDown(event) {
+                       var e = event || window.event || arguments.callee.caller.arguments[0];
+                         if (e && e.keyCode == 27) { // 按 Esc
+                               //要做的事情
+
         }
+                        if (e && e.keyCode == 113) { // 按 F2
+                                //要做的事情
+
+        }
+                       if (e && e.keyCode == 13) { // enter 键
+                              alert("此处回车触发搜索事件");
+
+        }
+
+    }
+
+    /**
+       *  下拉框
+       */
+    (function () {
+        var dataList = {
+            value: []
+        };
+        //init(dataList);
+        @foreach (var item in Model)
+
+        {
+
+
+        }
+                    console.info(dataList);
+                    suggest("keyWord", dataList);
+                    //请求json格式的数据 {value: [key:value,key2:value2]};
+                    //function init(dataList) {
+                    //    $.ajax({
+                    //        type: 'get',
+                    //        async: false,
+                    //        url: '/api/students',
+                    //        success: function (result) {
+                    //            var data = result['data'];
+                    //            for (var i = 0; i < data.length; i++) {
+                    //                var obj = {};
+                    //                obj.name = data[i].name;
+                    //                dataList.value.push(obj);
+                    //            }
+                    //        }
+                    //    });
+                    //    return dataList;
+                    //}
+                    // 插件绑定事件
+                    function suggest(domID, dataList) {
+            $("#" + domID).bsSuggest({
+                        indexId: 1, // data.value 的第几个数据，作为input输入框的显示的内容
+                // indexKey: 2, //data.value 的第几个数据，作为input输入框的内容
+                data: dataList,
+                listAlign: 'auto',
+                listStyle: {
+                                'padding-top': 0, 'max-height': '375px', 'max-width': '400px',
+                    'overflow': 'auto', 'width': '400px',
+                    'transition': '0.3s', '-webkit-transition': '0.3s', '-moz-transition': '0.3s', '-o-transition': '0.3s'
+                           }
+            }).on('onDataRequestSuccess', function (e, result) {
+                console.log('从 json参数中获取，不会触发 onDataRequestSuccess 事件', result);
+            }).on('onSetSelectValue', function (e, keyword, data) {
+                console.log('onSetSelectValue: ', keyword, data);
+            }).on('onUnsetSelectValue', function () {
+                console.log("onUnsetSelectValue");
+            });
+        }
+        }());
 </script>

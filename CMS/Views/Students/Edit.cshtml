@@ -60,7 +60,7 @@
                 <span asp-validation-for="studentName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="projectId" class="control-label" ></label>
+                <label asp-for="projectId" class="control-label"></label>
                 <select asp-for="projectId" class="form-control" id="projectIdval" asp-items="ViewBag.projectSelect">
                     <option id="0" value="0">If have project please select project</option>
                 </select>
@@ -70,6 +70,13 @@
                 <label asp-for="studentBirthday" class="control-label"></label>
                 <input type="date" asp-for="studentBirthday" id="studentBirthdayval" class="form-control" />
                 <span asp-validation-for="studentBirthday" id="studentBirthdayerr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="studentPortfolio" id="studentBirthday form-control" class="control-label"></label>
+                @*<input type="tel" asp-for="studentPortfolio" id="studentBirthdayval" class="form-control" />*@
+                <textarea cols="20" rows="5" style="margin-left:2px;"  class="row form-control" asp-for="studentPortfolio" id="studentPortfolioval">
+                </textarea>
+                <span asp-validation-for="studentPortfolio" id="studentPortfolioerr" class="text-danger"></span>
             </div>
             <input asp-for="dateCreated" hidden="hidden" id="dateCreated" />
             <div class="form-group">
