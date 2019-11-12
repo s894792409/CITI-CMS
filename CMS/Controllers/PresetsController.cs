@@ -80,7 +80,7 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("presetId,themeId,visitId")] Preset preset)
+        public async Task<IActionResult> Create([Bind("presetId,presetName,themeId,visitId")] Preset preset)
         {
             if (ModelState.IsValid)
             {
@@ -125,7 +125,7 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("presetId,dateCreated,themeId,visitId")] Preset preset)
+        public async Task<IActionResult> Edit(int id, [Bind("presetId,presetName,dateCreated,themeId,visitId")] Preset preset)
         {
             if (id != preset.presetId)
             {

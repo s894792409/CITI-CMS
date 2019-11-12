@@ -177,12 +177,12 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\r\n                </dd>\r\n            </dl>\r\n\r\n            ");
             EndContext();
             BeginContext(1318, 278, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cadd8f96a8e493c8d85a3d8acb4175d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d62a83eb89c84681bac88298bb4cd17a", async() => {
                 BeginContext(1344, 18, true);
                 WriteLiteral("\r\n                ");
                 EndContext();
                 BeginContext(1362, 41, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "541c5ab8c66847f7b88d2fa20871df14", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "79da9b0717e74e48a054e08d309fe477", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -207,7 +207,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 WriteLiteral("\r\n                <input type=\"submit\" value=\"Delete\" class=\"btn btn-outline-danger\" />\r\n                ");
                 EndContext();
                 BeginContext(1508, 67, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d399e4b2e02542f09c44227ce765566f", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "740c5e16d8e2404c9a6d485e0e795d59", async() => {
                     BeginContext(1559, 12, true);
                     WriteLiteral("Back to List");
                     EndContext();

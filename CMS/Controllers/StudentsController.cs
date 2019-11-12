@@ -413,6 +413,7 @@ namespace CMS.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool StudentExists(string id)
         {
             return _context.Student.Any(e => e.studentAdmin == id);

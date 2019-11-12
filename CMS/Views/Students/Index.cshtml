@@ -2,69 +2,47 @@
 @using System.IO;
 @using System.Globalization;
 @{
-    ViewData["Title"] = "All students";
+    ViewData["Title"] = "Students";
 }
-
-<p align="center" style="font-size:50px;">All students info</p>
-<p align="center">
+<style>
+    td {
+        /*允许在单词内换行。*/
+        word-break: break-word;
+        /*设置宽度*/
+        width: 200px;
+    }
+    th {
+        /*允许在单词内换行。*/
+        word-break: break-word;
+        /*设置宽度*/
+        width: 100px;
+    }
+</style>
+<link rel="stylesheet" href="~/jquery-ui-1.12.1.custom/jquery-ui.min.css" />
+<p align="center" style="font-size:50px;">Students info</p>
+<p class=" d-flex justify-content-center" >
     <a class="btn btn-info" asp-action="Create">Create New</a>
     @*<a class="btn btn-info" asp-action="QueryView">Query Student</a>*@
     @*<div class="col-sm-4">
-        <div class="input-group">
-            <input type="text" class="form-control" onkeydown="onKeyDown(event)" />
-            <span class="input-group-addon"><a class="srh-btn"><i class="ti-search"></i></a></span>
+            <div class="input-group">
+                <input type="text" class="form-control" id="keyWord" name="keyWord" onkeydown="onKeyDown(event)" />
+                <span class="input-group-addon"><a class="srh-btn"><i class="ti-search"></i></a></span>
 
-        </div>
-    </div>*@
-</p>
-@*<nav class="navbar top-navbar navbar-toggleable-sm navbar-light d-flex flex-lg-row row">
-        <ul class="navbar-nav mr-auto mt-md-0 ">
-            <!--This is search -->
-            <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-            <li class="nav-item hidden-sm-down">
-                <form class="app-search p-l-20">
-                    <input type="text" class="form-control" placeholder="Search for..."> <a class="srh-btn"><i class="ti-search"></i></a>
-                </form>
-            </li>
-        </ul>
-    </nav>
-
-    <div class="form-group">
-        <div class="input-group">
-            <input id="keyWord" name="keyWord" type="text" class="form-control no-padding" style="width: 400px" placeholder="请输入名称">
-            <div class="input-group-btn" style="width:0">
-                <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
+            </div>
+        </div>*@
+    <div class="form-group"style="width:300px;">
+        <div class="input-group" style="max-width:300px;">
+            <input id="keyWord" name="keyWord" type="text" class="form-control no-padding" style="max-width:300px;" onkeydown="onKeyDown(event)" placeholder="Search for student name">
+            <span class="input-group-addon" onclick="search()"><a class="srh-btn" onclick="search()"><i class="ti-search"></i></a></span>
+            <div class="input-group-btn" style="max-width:300px;">
+                <ul class="dropdown-menu dropdown-menu-left"  role="menu"></ul>
             </div>
         </div>
-        <button id="btnSearch" type="button" class="btn btn-default" style="margin-left:20px;margin-bottom: 20px">搜 索</button>
     </div>
-*@
+</p>
 
-@*<div class="card text-white bg-secondary mb-3">
-        <div class="card-body">
-            <h3 class="card-title"><i class="fa fa-filter" aria-hidden="true"></i>Search Criteria</h3>
-            <form asp-action="Index" method="post" class="d-flex justify-content-center">
-                @{
-                    string fromdate = "";
-                    string Enddate = "";
-                    try
-                    {
-                        fromdate = ViewBag.fromdate.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
-                        Enddate = ViewBag.enddate.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
-                    }
-                    catch
-                    {
+    
 
-                    }
-                }
-                <span>Date From <input type="date" name="fromdate" value="@fromdate" /></span>
-                <span style="padding-left:50px;">To<input type="date" name="enddate" value="@Enddate" /></span>
-                <span style="padding-left:50px;">Number of rows displayed<input type="number" name="rows" value="@ViewBag.rows" /></span>
-                <span style="padding-left:50px;"><input type="submit" value="Filter" /></span>
-            </form>
-            <h3 class="text-danger">@ViewBag.error</h3>
-        </div>
-    </div>*@
 <div class="row">
     <!-- column -->
     <div class="col-sm-12">
@@ -93,11 +71,12 @@
                         {
                             rowsum++;
                             <tr>
-                                <td style="line-height:40px;">
+                                <td style="line-height:40px; width:160px;" >
                                     <img src="/Students/ViewPhoto?studentadmin=@item.studentAdmin" style="width: 150px;height: 150px;" />
 
                                 </td>
                                 <td style="line-height:40px;">
+                                    @*@item.studentName*@
                                     @Html.DisplayFor(modelItem => item.studentName)
                                 </td>
                                 <td style="line-height:40px;">
@@ -147,23 +126,28 @@
         </div>
     </div>
 </div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/bootstrap-suggest-plugin/dist/bootstrap-suggest.min.js"></script>
+<script src="~/bootstrap-suggest-plugin/src/bootstrap-suggest.js"></script>
+<script src="~/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script type="text/javascript">
         var table;
         var rowSum;
         var pageSum;
         var page;
+        var searchflag = false;
 
         window.onload = function () {
             table = document.getElementById("table");
             rowSum = table.rows.length;
             showrows = @ViewBag.rows;    //显示的行数
-            pageSum = Math.ceil(rowSum / showrows);
+            pageSum=@tabsum;
             page = 1;
-
+           
             PageSwitch(page);
         }
-        function PageSwitch(newpage) {
-
+    function PageSwitch(newpage) {
+        if (searchflag != true) {
             if (newpage > 0 && newpage <= pageSum) {
                 page = newpage;
                 for (var e = 1; e <= pageSum; e++) {
@@ -196,36 +180,29 @@
                 }
             }
         }
-        function Previous() {
+        }
+    function Previous() {
+        if (searchflag != true) {
             if (page > 1 && page <= pageSum) {
                 PageSwitch(--page);
             }
-
         }
-        function Next() {
+        }
+    function Next() {
+        if (searchflag != true) {
             if (page > 0 && page < pageSum) {
                 PageSwitch(++page);
             }
-
+        }
     }
 
     function onKeyDown(event) {
                        var e = event || window.event || arguments.callee.caller.arguments[0];
-                         if (e && e.keyCode == 27) { // 按 Esc
-                               //要做的事情
-
-        }
-                        if (e && e.keyCode == 113) { // 按 F2
-                                //要做的事情
-
-        }
-                       if (e && e.keyCode == 13) { // enter 键
-                              alert("此处回车触发搜索事件");
-
+        if (e && e.keyCode == 13) { // enter 键
+            search();
         }
 
     }
-
     /**
        *  下拉框
        */
@@ -233,42 +210,39 @@
         var dataList = {
             value: []
         };
-        //init(dataList);
-        @foreach (var item in Model)
-
-        {
-
-
-        }
+        init(dataList);
                     console.info(dataList);
                     suggest("keyWord", dataList);
                     //请求json格式的数据 {value: [key:value,key2:value2]};
-                    //function init(dataList) {
-                    //    $.ajax({
-                    //        type: 'get',
-                    //        async: false,
-                    //        url: '/api/students',
-                    //        success: function (result) {
-                    //            var data = result['data'];
-                    //            for (var i = 0; i < data.length; i++) {
-                    //                var obj = {};
-                    //                obj.name = data[i].name;
-                    //                dataList.value.push(obj);
-                    //            }
-                    //        }
-                    //    });
-                    //    return dataList;
-                    //}
+                    function init(dataList) {
+                        $.ajax({
+                            type: 'get',
+                            async: false,
+                            url: '/api/ProductRest/search?term=Student',
+                            success: function (result) {
+                                console.log(result);
+                                var data = result;
+                                for (var i = 0; i < data.length; i++) {
+                                    var obj = {};
+                                    obj.name = data[i];
+                                    dataList.value.push(obj);
+                                    console.log("obj.name:" + obj.name);
+                                    console.log("datalist:" + dataList[i]);
+                                }
+                            }
+                        });
+                        return dataList;
+                    }
                     // 插件绑定事件
                     function suggest(domID, dataList) {
             $("#" + domID).bsSuggest({
                         indexId: 1, // data.value 的第几个数据，作为input输入框的显示的内容
                 // indexKey: 2, //data.value 的第几个数据，作为input输入框的内容
                 data: dataList,
-                listAlign: 'auto',
+                //listAlign: 'auto',
                 listStyle: {
-                                'padding-top': 0, 'max-height': '375px', 'max-width': '400px',
-                    'overflow': 'auto', 'width': '400px',
+                                'padding-top': 0, 'max-height': '375px', 'max-width': '300px',
+                    'overflow': 'auto', 'width': '300px',
                     'transition': '0.3s', '-webkit-transition': '0.3s', '-moz-transition': '0.3s', '-o-transition': '0.3s'
                            }
             }).on('onDataRequestSuccess', function (e, result) {
@@ -279,5 +253,30 @@
                 console.log("onUnsetSelectValue");
             });
         }
-        }());
+    }());
+    var input = $("#keyWord");
+    function search() {
+        searchflag = true;
+        if (input.val() == "") {
+            searchflag = false;
+            PageSwitch(1);
+            for (var e = 0; e <= pageSum + 1; e++) {
+                document.getElementsByClassName("page-item")[e].style.display = "";
+            }
+        } else {
+            for (var i = 1; i < rowSum; i++) {
+                table.rows[i].style.display = "none";
+            }
+            for (var i = 1; i < rowSum; i++) {
+                var x = document.getElementById('table').rows[i].cells;
+                console.log("table value:" + x[1].innerHTML.replace(/^\s*|\s*$/g, "") + "\n input value:" + input.val());
+                if (x[1].innerHTML.replace(/^\s*|\s*$/g, "") == input.val()) {
+                    table.rows[i].style.display = "";
+                }
+            }
+            for (var e = 0; e <= pageSum + 1; e++) {
+                document.getElementsByClassName("page-item")[e].style.display = "none";
+            }
+        }
+    }
 </script>

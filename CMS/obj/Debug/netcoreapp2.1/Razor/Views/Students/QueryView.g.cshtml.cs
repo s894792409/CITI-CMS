@@ -87,7 +87,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\r\n<p align=\"center\" style=\"font-size:50px;\" >Query Student</p>\r\n<p align=\"center\">\r\n    ");
             EndContext();
             BeginContext(150, 58, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "37cb732c87614fe893f1ded6e2297e49", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "530fea87a41242c4959796fddd5358d1", async() => {
                 BeginContext(194, 10, true);
                 WriteLiteral("Create New");
                 EndContext();
@@ -110,7 +110,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\r\n    ");
             EndContext();
             BeginContext(214, 58, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1e5ecd8673f945ce91f3bfe7baf55587", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e7c3fc9b3e1a4d8da82de05ea6d67ec7", async() => {
                 BeginContext(257, 11, true);
                 WriteLiteral("All Student");
                 EndContext();
@@ -133,12 +133,12 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\r\n</p>\r\n<div style=\"max-width: 25rem;position:absolute;left:0px;right:0px;margin:auto;\">\r\n    ");
             EndContext();
             BeginContext(366, 312, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "94570962787c4ed682477c8d6943d258", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8020a00996945b2beddf5fae77d5493", async() => {
                 BeginContext(398, 126, true);
                 WriteLiteral("\r\n        <p align=\"center\" style=\"font-size:20px\">Please enter the company name of the query:</p>\r\n        <p align=\"center\">");
                 EndContext();
                 BeginContext(524, 43, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "29f1f1bd3d334f68b27bc95673d6a512", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "ff650c4970ea42d99c7999cef0ae5261", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();

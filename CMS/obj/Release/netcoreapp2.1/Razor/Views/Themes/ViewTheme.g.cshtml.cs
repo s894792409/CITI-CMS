@@ -147,7 +147,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\r\n        </dd>\r\n    </dl>\r\n</div>\r\n<div>\r\n    ");
             EndContext();
             BeginContext(766, 90, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "782bb46858b740f5b22b50044b2e5a28", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5afd77a8a921401b88cc6c485345930d", async() => {
                 BeginContext(848, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -183,7 +183,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral(" \r\n    ");
             EndContext();
             BeginContext(863, 71, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9972add8d3404145a2f1fb844fcd7eb2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7047dc00c98d4b2a91dce3608b073c41", async() => {
                 BeginContext(913, 17, true);
                 WriteLiteral("Go to themes list");
                 EndContext();
@@ -206,7 +206,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("  \r\n    ");
             EndContext();
             BeginContext(942, 83, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "939862b2eec949ad911f0fb61f44f8a4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "98280f24099b44bdaf0ed7f372bb344b", async() => {
                 BeginContext(1017, 4, true);
                 WriteLiteral("Back");
                 EndContext();

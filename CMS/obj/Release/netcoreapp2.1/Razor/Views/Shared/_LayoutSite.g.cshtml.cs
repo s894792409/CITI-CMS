@@ -74,7 +74,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("<!DOCTYPE html>\r\n\r\n<html style=\"background:url(/images/bg2.jpg) no-repeat;background-size:cover;z-index:10000000000;\">\r\n");
             EndContext();
             BeginContext(120, 828, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7559c234243c42bf8e8ae75e17877f23", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d0ed40fafb1d4e5085dda9589f316ec4", async() => {
                 BeginContext(126, 74, true);
                 WriteLiteral("\r\n\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>");
                 EndContext();
@@ -138,7 +138,7 @@ WriteAttributeValue("", 357, ((string[])ViewData["Meta"])[2], 357, 34, false);
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(950, 620, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f6a0aa6cabf142568d13bf7abdcfef00", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "db1a2ef3d5b7478ca38d2706f2f1ffa7", async() => {
                 BeginContext(956, 6, true);
                 WriteLiteral("\r\n    ");
                 EndContext();
