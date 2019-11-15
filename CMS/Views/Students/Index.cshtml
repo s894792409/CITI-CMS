@@ -19,28 +19,21 @@
     }
 </style>
 <link rel="stylesheet" href="~/jquery-ui-1.12.1.custom/jquery-ui.min.css" />
-<p align="center" style="font-size:50px;">Students info</p>
-<p class=" d-flex justify-content-center" >
-    <a class="btn btn-info" asp-action="Create">Create New</a>
-    @*<a class="btn btn-info" asp-action="QueryView">Query Student</a>*@
-    @*<div class="col-sm-4">
-            <div class="input-group">
-                <input type="text" class="form-control" id="keyWord" name="keyWord" onkeydown="onKeyDown(event)" />
-                <span class="input-group-addon"><a class="srh-btn"><i class="ti-search"></i></a></span>
-
-            </div>
-        </div>*@
-    <div class="form-group"style="width:300px;">
+<br /><p align="center" style="font-size:50px;">Student</p>
+<div class="row d-flex justify-content-end">
+    <div class="form-group" style="width:300px;">
         <div class="input-group" style="max-width:300px;">
             <input id="keyWord" name="keyWord" type="text" class="form-control no-padding" style="max-width:300px;" onkeydown="onKeyDown(event)" placeholder="Search for student name">
-            <span class="input-group-addon" onclick="search()"><a class="srh-btn" onclick="search()"><i class="ti-search"></i></a></span>
+            <span class="input-group-addon" onclick="search()"><a class="srh-btn" onclick="search()"><i class="ti-search" onclick="search()"></i></a></span>
             <div class="input-group-btn" style="max-width:300px;">
-                <ul class="dropdown-menu dropdown-menu-left"  role="menu"></ul>
+                <ul class="dropdown-menu dropdown-menu-left" role="menu"></ul>
             </div>
         </div>
     </div>
-</p>
-
+    <div style="margin-left:20px;margin-right:18px;">
+        <a class="btn btn-info" asp-action="Create">Create New</a>
+    </div>
+</div>
     
 
 <div class="row">
@@ -89,16 +82,22 @@
                                         }
                                         else
                                         {
-                                            var project = context.Projects.SingleOrDefault(p => p.projectId == item.projectId);
-                                            name = project.projectName;
+                                            try
+                                            {
+                                                var project = context.Projects.SingleOrDefault(p => p.projectId == item.projectId);
+                                                name = project.projectName;
+                                            }
+                                            catch {
+                                                name = "Not found!";
+                                            }
                                         }
                                     }
                                     @Html.DisplayFor(modelItem => name)
                                 </td>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.studentAdmin" class="btn btn-success">Edit</a>
+                                    <a asp-action="Edit" asp-route-id="@item.studentAdmin" class="btn btn-success" style="width:80px;">Edit</a>
                                     @* <a asp-action="Details" asp-route-id="@item.studentAdmin" class="btn btn-info">Details</a>*@
-                                    <a asp-action="Delete" asp-route-id="@item.studentAdmin" class="btn btn-danger">Delete</a>
+                                    <a asp-action="Delete" asp-route-id="@item.studentAdmin" class="btn btn-danger" style="width:80px;">Delete</a>
                                 </td>
                             </tr>
                         }

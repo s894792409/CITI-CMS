@@ -197,18 +197,20 @@ namespace CMS.Controllers
                         cardRemovelist.Add(card);
                     }
 
-                    try
-                    {
+                    
                         for (int i = 0; i < cardRemovelist.Count(); i++)
+                        {
+                        try
                         {
                             _context.Card.Remove(cardRemovelist[i]);
                             await _context.SaveChangesAsync();
                         }
+                        catch
+                        {
+                        }
 
                     }
-                    catch
-                    {
-                    }
+                    
                 }
                 catch (Exception e)
                 {
@@ -218,8 +220,14 @@ namespace CMS.Controllers
             }
             for (int i = 0; i < boxlist.Count(); i++)
             {
-                _context.Box.Remove(boxlist[i]);
-                await _context.SaveChangesAsync();
+                try
+                {
+                    _context.Box.Remove(boxlist[i]);
+                    await _context.SaveChangesAsync();
+                }
+                catch {
+                    break;
+                }
             }
             _context.Preset.Remove(preset);
             await _context.SaveChangesAsync();

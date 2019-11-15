@@ -4,12 +4,13 @@
     ViewData["Title"] = "Delete theme";
 }
 
-<p align="center" style="font-size:50px;" >Delete themes</p>
-
+<br /><p align="center" style="font-size:50px;">Delete themes</p>
+      <hr />
 <h3>Are you sure you want to delete this?</h3>
-    <div class="card border-dark mb-3" style="max-width: 18rem;">
-        <div class="card-header">Theme</div>
-        <div class="card-body">
+<br /><br /><div class="justify-content-center d-flex">
+    <div class="card border-dark mb-3" style="width: 23rem;border:1px solid #808080;">
+        <div class="card-header" align="center">Theme</div>
+        <div class="card-body justify-content-center d-flex">
             <dl class="dl-horizontal">
                 <dt>
                     @Html.DisplayNameFor(model => model.themeName)
@@ -30,13 +31,14 @@
                     @Html.DisplayFor(model => model.fontStyle)
                 </dd>
             </dl>
-
+        </div>
+        <div class=" justify-content-center d-flex">
             <form asp-action="Delete">
                 <input type="hidden" asp-for="themeId" />
                 <input type="submit" value="Delete" class="btn btn-outline-danger" />
                 <a asp-action="Index" class="btn btn-outline-info">Back to List</a>
                 <p class="text-danger">@ViewBag.error</p>
-                
             </form>
-            </div>
         </div>
+    </div>
+</div>

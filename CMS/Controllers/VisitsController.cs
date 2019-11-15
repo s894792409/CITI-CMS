@@ -237,25 +237,6 @@ namespace CMS.Controllers
         {
             return _context.Visits.Any(e => e.VisitId == id);
         }
-        public IActionResult QueryView()
-        {
-            return View();
-        }
-
-
-        public async Task<IActionResult> QueryVisit(Visits visits)
-        {
-
-            //var visit = from m in _context.Visits
-            //              select m;
-
-            //if (!String.IsNullOrEmpty(visits.companyName))
-            //{
-            //    visit = visit.Where(s => s.companyName.Contains(visits.companyName));
-            //}
-
-            return View();
-        }
 
         public IActionResult ImportError()
         {
@@ -464,7 +445,7 @@ namespace CMS.Controllers
                             
                         }
                        // return Content(sb.ToString());
-                        var monthlist = _context.Visits.Where(s => s.StartDate.Year == date.Year && s.StartDate.Month == date.Month);
+                        var monthlist = _context.Visits.Where(s => s.StartDate.Year == date.Year && s.StartDate.Month == date.Month&&s.No!=null && s.No >= 0);
                         int skip=0;
                         if (nolist.LongCount() != monthlist.LongCount() || monthlist.Last().No != nolist.Last()) {
                             for (int i = 0; i < monthlist.LongCount(); i++) {

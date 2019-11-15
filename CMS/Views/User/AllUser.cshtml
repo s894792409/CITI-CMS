@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = "All users";
 }
-<p align="center" style="font-size:50px;margin-top:50px;" class="title">All users</p>
-<p align="center">
+<br /><p align="center" style="font-size:50px;margin-top:50px;" class="title">Users</p>
+<p align="right">
     <a class="btn btn-info" asp-controller="Admin" asp-action="CreateUser">Create New</a>
 </p>
 <div class="row">
@@ -12,14 +12,14 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                         <tr>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserName)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.NormalizedEmail)
+                                @Html.DisplayNameFor(model => model.Email)
 
                             </th>
                             <th>
@@ -29,17 +29,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @{ 
+                            int rowsum = 0;
+                        }
                         @foreach (var item in Model)
                         {
+                           
                             <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.UserName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.NormalizedEmail)
+                                    @Html.DisplayFor(modelItem => item.Email)
                                 </td>
                                 <td>
                                     @{
+                                        rowsum++;
                                         string role = "";
                                         if (item.Admin)
                                         {
@@ -57,9 +62,9 @@
 
                                     @{
                                         var parms = new Dictionary<string, string>
-                                                {
-                                                    { "username", item.UserName }
-                                                };
+                                                                        {
+                                                                            { "username", item.UserName }
+                                                                        };
                                     }
 
                                     <a asp-action="Delete" asp-all-route-data="parms" class="btn btn-danger">Delete</a>
@@ -68,7 +73,94 @@
                         }
                     </tbody>
                 </table>
-                </div>
+                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                    <ul class="pagination" id="pagebutton">
+                        <li class="page-item"><a class="page-link" href="#" onclick="Previous()">Previous</a></li>
+                        @{
+                            int tabsum = (rowsum % ViewBag.rows == 0) ? rowsum / ViewBag.rows : rowsum / ViewBag.rows + 1;
+                            if (tabsum == 0)
+                            {
+                                tabsum = 1;
+                            }
+                        }
+                        @for (var s = 1; s <= tabsum; s++)
+                        {
+                            <li class="page-item"><a class="page-link" href="#" onclick="PageSwitch(@s)" name="ym">@s</a></li>
+
+                        }
+                        <li class="page-item"><a class="page-link" href="#" onclick="Next()">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
             </div>
         </div>
     </div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+        var table;
+        var rowSum;
+        var pageSum;
+    var page;
+    var searchflag = false;
+
+        window.onload = function () {
+            table = document.getElementById("table");
+            rowSum = table.rows.length;
+            showrows = @ViewBag.rows;    //显示的行数
+            pageSum = @tabsum;
+            page = 1;
+
+            PageSwitch(page);
+        }
+        function PageSwitch(newpage) {
+            if (searchflag != true) {
+                if (newpage > 0 && newpage <= pageSum) {
+                    page = newpage;
+                    for (var e = 1; e <= pageSum; e++) {
+                        if (e == newpage) {
+                            //var li = document.getElementById("pagebutton");
+                            //li.classList.add("active");
+                            document.getElementsByClassName("page-item")[e].classList.add("active");
+                        } else {
+                            //var li = document.getElementById("1");
+                            // li.classList.remove("active");
+                            document.getElementsByClassName("page-item")[e].classList.remove("active");
+                        }
+
+                    }
+
+                    for (var i = 1; i < rowSum; i++) {
+                        table.rows[i].style.display = "none";
+                    }
+                    if (newpage == 1) {
+                        for (n = newpage * showrows - showrows; n <= newpage * showrows; n++) {
+                            try {
+                                table.rows[n].style.display = "";
+                            } catch{
+                                break;
+                            }
+                        }
+                    } else {
+                        for (var n = newpage * showrows - showrows + 1; n <= newpage * showrows; n++) {
+                            table.rows[n].style.display = "";
+                        }
+                    }
+                }
+            }
+        }
+    function Previous() {
+        if (searchflag != true) {
+            if (page > 1 && page <= pageSum) {
+                PageSwitch(--page);
+            }
+        }
+        }
+    function Next() {
+        if (searchflag != true) {
+            if (page > 0 && page < pageSum) {
+                PageSwitch(++page);
+            }
+        }
+    }
+</script>

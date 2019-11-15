@@ -13,22 +13,23 @@ namespace CMS.Models.ViewModels
     {
         [Key]
         [Required]
-        [Display(Name = "Student Admin")]
+        [Display(Name = "Admin")]
         public string studentAdmin { get; set; }
         [Required]
-        [Display(Name = "Student Name")]
+        [Display(Name = "Name")]
         public string studentName { get; set; }
         
-        [Display(Name = "Project")]
+        [Display(Name = "NYP Project")]
         public int projectId { get; set; }
         [Required]
-        [Display(Name = "student's Birthday")]
+        [Display(Name = "Birthday")]
         public DateTime studentBirthday { get; set; }
 
         [Display(Name = "Create date")]
         public DateTime dateCreated { get; set; }
         public byte[] Photo { get; set; }
         public string PhotoType { get; set; }
+        [Display(Name = "Portfolio")]
         public string studentPortfolio { get; set; }
     }
 }

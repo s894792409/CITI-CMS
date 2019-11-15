@@ -186,7 +186,7 @@ namespace CMS.Controllers
                             student.PhotoType = file.ContentType;
                             fs.Close();
                         
-                        FileInfo fileInfo = new FileInfo(Path.Combine(path));
+                        FileInfo fileInfo = new FileInfo(path);
                         fileInfo.Delete();
                         student.dateCreated = DateTime.Now;
                         _context.Add(student);
@@ -195,6 +195,7 @@ namespace CMS.Controllers
                     }
                     catch (Exception e)
                     {
+                        success = false;
                         msg = e.Message;
                     }
                 }
@@ -204,6 +205,7 @@ namespace CMS.Controllers
                 }
             }
             catch (Exception e) {
+                success = false;
                 msg = e.Message;
             }
             
@@ -247,11 +249,12 @@ namespace CMS.Controllers
                                 student.Photo = memory.ToArray();
                                 student.PhotoType = file.ContentType;
                             };
-                            FileInfo fileInfo = new FileInfo(Path.Combine(path));
+                            FileInfo fileInfo = new FileInfo(path);
                             fileInfo.Delete();
                         }
                         catch (Exception e)
                         {
+                            success = false;
                             msg = e.Message;
                         }
                     }
@@ -265,7 +268,8 @@ namespace CMS.Controllers
                     success = true;
                 }
                 catch (Exception e) {
-                    msg=e.Message;
+                    success = false;
+                    msg =e.Message;
                 }
             }
             else {
@@ -292,12 +296,12 @@ namespace CMS.Controllers
                 {
                     newImage = ImageCompress(file.OpenReadStream(), tailorInfoEntity);
                     success = true;
-                    message = "保存成功";
+                    message = "Success";
                 }
             }
             catch (Exception ex)
             {
-                message = "保存失败 " + ex.Message + "   " + ex.StackTrace.ToString();
+                message = "Failure" + ex.Message + "   " + ex.StackTrace.ToString();
             }
             return Json(new { success = success, message = message, newImage = newImage });
 
@@ -321,10 +325,17 @@ namespace CMS.Controllers
         }
         [HttpGet]
         public IActionResult ViewPhoto(string studentadmin) {
-           // return Content("studentAdmin:"+studentadmin +" end");
-            Student student= _context.Student.SingleOrDefault(s => s.studentAdmin == studentadmin);
-            MemoryStream ms = new MemoryStream(student.Photo);
-            return new FileStreamResult(ms, student.PhotoType);
+            // return Content("studentAdmin:"+studentadmin +" end");
+            try
+            {
+                Student student = _context.Student.SingleOrDefault(s => s.studentAdmin == studentadmin);
+                MemoryStream ms = new MemoryStream(student.Photo);
+                return new FileStreamResult(ms, student.PhotoType);
+            }
+            catch
+            {
+                return Content("null");
+            }
         }
         // GET: Students/Edit/5
         public async Task<IActionResult> Edit(string id)

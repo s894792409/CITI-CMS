@@ -44,22 +44,24 @@ namespace CMS.Controllers.API
                         respone.Key = user.UserKey;
                         return Ok(respone);
                     }
-                    //else if (info == "RefreshKey") {
-                    //    user.UserKey = MakeKey(15);
-                    //    IdentityResult result2 = await userManager.UpdateAsync(user);
-                    //    if (result2.Succeeded)
-                    //    {
-                    //        Success respone = new Success();
-                    //        respone.Key = user.UserKey;
-                    //        return Ok(respone);
-                    //    }
-                    //    else {
-                    //        Failure failure2 = new Failure();
-                    //        failure2.failure = "failure";
-                    //        return Ok(failure2);
-                    //    }
-                           
-                    //}
+                    else if (info == "RefreshKey")
+                    {
+                        user.UserKey = MakeKey(15);
+                        IdentityResult result2 = await userManager.UpdateAsync(user);
+                        if (result2.Succeeded)
+                        {
+                            Success respone = new Success();
+                            respone.Key = user.UserKey;
+                            return Ok(respone);
+                        }
+                        else
+                        {
+                            Failure failure2 = new Failure();
+                            failure2.failure = "failure";
+                            return Ok(failure2);
+                        }
+
+                    }
                 }
             }
             Failure failure = new Failure();

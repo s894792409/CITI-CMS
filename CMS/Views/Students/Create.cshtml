@@ -8,50 +8,57 @@
 <!-- bootstrap-fileinput -->
 <link href="@Url.Content("~/bootstrap-fileinput/css/fileinput.css")" rel="stylesheet" />
 
-<p align="center" style="font-size:50px;">Create students info</p>
+<br /><p align="center" style="font-size:50px;">Create student's information</p>
 <hr />
-<div class="row">
-    <div class="col-md-4 " >
+<div class="row d-flex justify-content-center">
+    <div class="mb-3" >
         <form asp-action="Create" enctype="multipart/form-data" id="form1" method="post" style="width:100%;align-content:center;">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Student Photo</label><br />
-                <img id="show-img" class="thumbnail" src="~/tapmodo-Jcrop-1902fbc/demos/demo_files/sago.jpg" style="width:150px;height:150px;border:2px solid #808080;">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" type="button">Upload Photo</button>
-                <br /><span class="text-danger" id="photoerr"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="studentAdmin" id="studentAdmin" class="control-label"></label>
-                <input asp-for="studentAdmin" id="studentAdminval" class="form-control" />
-                <span type="text" asp-validation-for="studentAdmin" id="studentAdminerr" class="text-danger">@ViewBag.error</span>
-            </div>
-            <div class="form-group">
-                <label asp-for="studentName" id="studentName" class="control-label"></label>
-                <input asp-for="studentName" id="studentNameval" class="form-control" />
-                <span asp-validation-for="studentName" id="studentNameerr" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="projectId" id="projectId" class="control-label"></label>
-                <select asp-for="projectId" id="projectIdval" class="form-control" asp-items="ViewBag.projectselect">
-                    <option id="0" value="0">If have project please select project</option>
-                </select>
-                <span asp-validation-for="projectId" id="projectIderr" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="studentBirthday" id="studentBirthday" class="control-label"></label>
-                <input type="date" asp-for="studentBirthday" id="studentBirthdayval" class="form-control" />
-                <span asp-validation-for="studentBirthday" id="studentBirthdayerr" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="studentPortfolio" id="studentBirthday form-control" class="control-label"></label>
-                @*<input type="tel" asp-for="studentPortfolio" id="studentBirthdayval" class="form-control" />*@
-                <textarea cols="20" rows="5" style="margin-left:2px;" class="row form-control" asp-for="studentPortfolio" id="studentPortfolioval">
+            <div class="d-flex justify-content-center" style="width:100%;">
+                <div style="width:50%;margin-right:50px;">
+                    <div class="form-group">
+                        <label class="control-label">Student Photo</label><br />
+                        <img id="show-img" class="thumbnail" src="~/images/defaultStuPhoto.jpg" style="width:150px;height:150px;border:2px solid #808080;">
+                        <br /><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" type="button" style="width:150px;margin-top:5px;">Upload Photo</button>
+                        <br /><span class="text-danger" id="photoerr"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="studentAdmin" id="studentAdmin" class="control-label"></label>
+                        <input asp-for="studentAdmin" id="studentAdminval" class="form-control" />
+                        <span type="text" asp-validation-for="studentAdmin" id="studentAdminerr" class="text-danger">@ViewBag.error</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="studentName" id="studentName" class="control-label"></label>
+                        <input asp-for="studentName" id="studentNameval" class="form-control" />
+                        <span asp-validation-for="studentName" id="studentNameerr" class="text-danger"></span>
+                    </div>
+                </div>
+            <div style="width:50%;margin-left:50px;">
+                <div class="form-group">
+                    <label asp-for="projectId" id="projectId" class="control-label"></label>
+                    <select asp-for="projectId" id="projectIdval" class="form-control" asp-items="ViewBag.projectselect">
+                        <option id="0" value="0">If have project please select project</option>
+                    </select>
+                    <span asp-validation-for="projectId" id="projectIderr" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="studentBirthday" id="studentBirthday" class="control-label"></label>
+                    <input type="date" asp-for="studentBirthday" id="studentBirthdayval" class="form-control" />
+                    <span asp-validation-for="studentBirthday" id="studentBirthdayerr" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="studentPortfolio" id="studentBirthday form-control" class="control-label"></label>
+                    @*<input type="tel" asp-for="studentPortfolio" id="studentBirthdayval" class="form-control" />*@
+                    <textarea cols="20" rows="9" style="margin-left:2px;" class="row form-control" asp-for="studentPortfolio" id="studentPortfolioval">
                  Say something
                 </textarea>
-                <span asp-validation-for="studentPortfolio" id="studentPortfolioerr" class="text-danger"></span>
+                    <span asp-validation-for="studentPortfolio" id="studentPortfolioerr" class="text-danger"></span>
+                </div>
+            </div>
             </div>
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="max-width:95%">
+                <br /><br /><br />
                 <div class="modal-dialog" style="max-width:95%">
                     <div class="modal-content" style="">
                         <div class="modal-header">
@@ -74,7 +81,7 @@
                             </div>
                             <div class="col-md-6" style="width:100%;">
                                 <br />
-                                <img id="cut-img" class="thumbnail " src="~/tapmodo-Jcrop-1902fbc/demos/demo_files/sago.jpg" style="margin-left:0px;margin-right:0px;margin:auto;position:center;">
+                                <img id="cut-img" class="thumbnail " src="~/images/defaultStuPhoto.jpg" style="margin-left:0px;margin-right:0px;margin:auto;position:center;">
                             </div>
 
 
@@ -82,17 +89,14 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <input type="button" onclick="check()" value="Create" class="btn btn-info" id="create" />
+            <div class="d-flex justify-content-center" style="width:100%;">
+                <input type="button" value="Create" onclick="check()" class="btn btn-info align-self-center" />
+                <a asp-action="Index" class="btn btn-outline-info" style="margin:15px;">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section scripts{
     <script src="@Url.Content("~/tapmodo-Jcrop-1902fbc/js/jquery.Jcrop.js")"></script>
@@ -117,11 +121,11 @@
                 //初始化上传控件的样式
                 control.fileinput({
                     //language: 'zh', //设置语言
-                    browseLabel: '选择',
+                    browseLabel: 'Select photo',
                     browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
                     browseClass: "btn btn-primary", //按钮样式
                     uploadUrl: uploadUrl, //上传的地址
-                    allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+                    allowedFileExtensions: ['jpg', 'gif', 'png', 'jpeg'],//接收的文件后缀
                     showUpload: true, //是否显示上传按钮
                     showCaption: true,//是否显示标题
                     showPreview: false,//隐藏预览
@@ -159,13 +163,13 @@
             input.on("fileuploaded", function (event, data, previewId, index) {
                 if (data.response.success) {
                     jcorp.destroy();
-                    var str = data.response.message;
+                    //var str = data.response.message;
                     $('#cut-img').removeAttr('style');
                     $('#cut-img').attr('src', data.response.newImage);//Data URI Scheme形式
                     //$('#cut-img').width(data.response.width).height(data.response.height);
                     $('#show-img').attr('src', data.response.newImage);//Data URI Scheme形式
                     photoflag = true;
-                    alert(str);
+                    //alert(str);
                     //$('#cut-img').attr('src', data.response.newImage + "?t=" + Math.random());//加尾巴解决缓存问题
                 }
             });
@@ -174,7 +178,6 @@
                 var img = $('#cut-img');
                 if (input[0].files && input[0].files[0]) {
                     file = input[0].files[0];
-                    formData.append("files", input[0].files[0]);
                     var reader = new FileReader();
                     reader.readAsDataURL(input[0].files[0]);
                     reader.onload = function (e) {
@@ -216,9 +219,8 @@
             //移除图片
             input.on('fileclear', function (event) {
                 console.log("fileclear");
-
                 jcorp.destroy();
-                $('#cut-img').attr('src', '~/tapmodo-Jcrop-1902fbc/demos/demo_files/sago.jpg');
+                $('#cut-img').attr('src', '~/images/defaultStuPhoto.jpg');
             });
         };
 
@@ -270,7 +272,7 @@
                 studentAdminerr.html("");
             }
             if (photoflag == false || tailorInfo == "") {
-                photoerr.html("Please check the photo upload status!");
+                photoerr.html("Image not uploaded correctly!");
                 checkformat = false;
             } else {
                 photoerr.html("");
@@ -283,6 +285,7 @@
                     "studentAdmin": studentAdminval.val(), "studentName": studentNameval.val(), "studentBirthday": studentBirthdayval.val(), "projectId": projectIdval.val(), "studentPortfolio": studentPortfolioval.val()
                 });
                 console.log(stuinfo);
+                formData.append("files", file);
                 formData.append("stuinfo", stuinfo);
                 $.ajax({
                     url: '@Url.Action("CreateData")',
@@ -294,7 +297,7 @@
                     processData: false,
                     success: function (returndata) {
                         if (returndata.success) {
-                            alert("Success! \n" + returndata.msg);
+                            alert("Success! \n");
                             window.location.href = "index";// 可以将其连接到指定的位置
                         } else {
                             alert(returndata.msg);

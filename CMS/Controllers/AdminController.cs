@@ -93,6 +93,7 @@ namespace CMS.Controllers
                     if (user.Role == "Admin") {
                         data.Admin = true;
                     }
+                    data.PhoneNumber = user.PhoneNumber;
                     identityDbContext.Update(data);
                     await identityDbContext.SaveChangesAsync();
                         result = await userManager.AddToRoleAsync(appuser,user.Role);

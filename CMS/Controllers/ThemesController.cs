@@ -113,7 +113,7 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("themeId,themeName,backgroundColor,fontStyle")] Theme theme)
+        public async Task<IActionResult> Edit(int id, [Bind("themeId,themeName,backgroundColor,fontStyle,dateCreated")] Theme theme)
         {
             if (id != theme.themeId)
             {
@@ -168,7 +168,7 @@ namespace CMS.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var use =   _context.Preset.AsNoTracking().Where(s=>s.themeId==id);
-            if (use != null) {
+            if (use.Count() > 0) {
                 ViewBag.error= "This item is currently being used";
                 var theme1 = await _context.Theme.SingleOrDefaultAsync(m => m.themeId == id);
                 return View(theme1);

@@ -17,7 +17,7 @@ namespace CMS.Models.ViewModels
 
         [Required]
         [Display(Name ="Email")]
-        public string NormalizedEmail { get; set; }
+        public string Email { get; set; }
 
         [Required]
         public string PhoneNumber { get; set; }

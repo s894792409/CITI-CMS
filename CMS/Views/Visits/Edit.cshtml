@@ -12,57 +12,63 @@
 </head>
 <body>
 
-    <p align="center" style="font-size:50px;">Edit visit</p>
+    <br /><p align="center" style="font-size:50px;">Edit visit</p>
 <hr />
-<div class="row" style="align-content:center; align-items:center;align-self:center;">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="row" style="width:100%;">
+    <div class="mb-3" style="width:100%;">
+        <form asp-action="Edit" style="width:100%;">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="VisitId" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="d-flex justify-content-center">
+                <div style="margin-right:50px;">
+                    <div class="form-group" style="width:250px;">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="width:250px;">
+                        <label asp-for="StartDate" class="control-label"></label>
+                        <input asp-for="StartDate" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="width:250px;">
+                        <label asp-for="EndDate" class="control-label"></label>
+                        <input asp-for="EndDate" class="form-control" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div style="margin-left:50px;">
+                    <div class="form-group" style="width:250px;">
+                        <label asp-for="Pax" class="control-label"></label>
+                        <input asp-for="Pax" class="form-control" />
+                        <span asp-validation-for="Pax" asp-textfield="true" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="width:250px;">
+                        <label asp-for="SIC" class="control-label"></label>
+                        <input asp-for="SIC" class="form-control" />
+                        <span asp-validation-for="SIC" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="width:250px;">
+                        <label asp-for="Host" class="control-label"></label>
+                        <input asp-for="Host" class="form-control" />
+                        <span asp-validation-for="Host" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control"/>
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pax" class="control-label"></label>
-                <input asp-for="Pax" class="form-control" />
-                <span asp-validation-for="Pax" asp-textfield="true" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SIC" class="control-label"></label>
-                <input asp-for="SIC" class="form-control" />
-                <span asp-validation-for="SIC" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Host" class="control-label"></label>
-                <input asp-for="Host" class="form-control" />
-                <span asp-validation-for="Host" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ForeignVisit" class="control-label"></label>
-                <input asp-for="ForeignVisit" class="form-control" />
+                <div class="d-flex justify-content-center">
+                    <input asp-for="ForeignVisit" style="zoom:190%;" />
+                    <label class="control-label">Please check the box for Foreign Visits.</label>
+                </div>
                 <span asp-validation-for="ForeignVisit" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-info" />
+            <input asp-for="dateCreated" hidden="hidden" />
+            <div class="d-flex justify-content-center" style="width:100%;">
+                <input type="submit" value="Save" class="btn btn-info align-self-center" />
+                <a asp-action="Index" class="btn btn-outline-info" style="margin:15px;">Back to List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 </body>

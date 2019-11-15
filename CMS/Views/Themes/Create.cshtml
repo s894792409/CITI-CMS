@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create theme";
 }
 
-<p align="center" style="font-size:50px;" >Create themes</p>
+<br /><p align="center" style="font-size:50px;" >Create themes</p>
 <hr />
-<div class="row">
+<div class="row d-flex justify-content-center">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -26,13 +26,9 @@
                 <span asp-validation-for="fontStyle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-info" />
+                <input type="submit" value="Create" class="btn btn-info align-self-center" />
+                <a asp-action="Index" class="btn btn-outline-info" style="margin:15px;">Back to List</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

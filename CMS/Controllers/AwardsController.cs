@@ -58,11 +58,15 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("awardId,awardName,awardLevel,noOfRecipients,awardType")] Awards awards)
+        public async Task<IActionResult> Create([Bind("awardId,awardName,awardLevel,noOfRecipients,awardType")] Awards awards,string other)
         {
             if (ModelState.IsValid)
             {
                 awards.dateCreated = DateTime.Now;
+                if (awards.awardLevel == "Other")
+                {
+                    awards.awardLevel = other;
+                }
                 _context.Add(awards);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -106,7 +110,7 @@ namespace CMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("awardId,awardName,awardLevel,noOfRecipients,awardType,dateCreated")] Awards awards)
+        public async Task<IActionResult> Edit(int id, [Bind("awardId,awardName,awardLevel,noOfRecipients,awardType,dateCreated")] Awards awards, string other)
         {
             if (id != awards.awardId)
             {
@@ -117,6 +121,10 @@ namespace CMS.Controllers
             {
                 try
                 {
+                    if (awards.awardLevel == "Other")
+                    {
+                        awards.awardLevel = other;
+                    }
                     _context.Update(awards);
                     await _context.SaveChangesAsync();
                 }

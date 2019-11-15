@@ -34,11 +34,12 @@ namespace CMS.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.rows = 5;
             return View();
         }
         public async Task<IActionResult> AllUser()
         {
-             
+            ViewBag.rows = 5;
             return View(await identityDbContext.AspNetUsers.ToListAsync());
         }
 

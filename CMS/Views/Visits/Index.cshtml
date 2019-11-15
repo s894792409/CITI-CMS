@@ -19,19 +19,23 @@
             width: 2000px;
         }
     </style>
-    <p align="center" style="font-size:50px;">Visits</p>
-    <p align="center">
-        <a class="btn btn-info" asp-action="Create">Create New</a>
+    <br /><p style="font-size:50px;"align="center">Visits</p>
+    <div class="row d-flex justify-content-end">
+
         <div class="form-group" style="width:300px;">
             <div class="input-group" style="max-width:300px;">
                 <input id="keyWord" name="keyWord" type="text" class="form-control no-padding" style="max-width:300px;" onkeydown="onKeyDown(event)" placeholder="Search for company name">
-                <span class="input-group-addon" onclick="search()"><a class="srh-btn" onclick="search()"><i class="ti-search"></i></a></span>
+                <span class="input-group-addon" onclick="search()"><a class="srh-btn" onclick="search()"><i class="ti-search" onclick="search()"></i></a></span>
                 <div class="input-group-btn" style="max-width:300px;">
                     <ul class="dropdown-menu dropdown-menu-left" role="menu"></ul>
                 </div>
             </div>
         </div>
-    </p>
+        <div style="margin-left:20px;margin-right:18px;">
+            <a class="btn btn-info" asp-action="Create">Create New</a>
+        </div>
+        
+    </div>
     <div class="card text-white bg-secondary mb-3">
         <div class="card-body">
             <h3 class="card-title"><i class="fa fa-filter" aria-hidden="true"></i>Search Criteria</h3>
@@ -49,10 +53,10 @@
 
                     }
                 }
-                <span>Date From <input type="date" name="fromdate" value="@fromdate" /></span>
-                <span style="padding-left:50px;">To<input type="date" name="enddate" value="@Enddate" /></span>
-                <span style="padding-left:50px;">Number of rows displayed<input type="number" name="rows" value="@ViewBag.rows" /></span>
-                <span style="padding-left:50px;"><input type="submit" value="Filter" /></span>
+                <div>Date From <input type="date" name="fromdate" value="@fromdate" /></div>
+                <div style="padding-left:50px;">To<input type="date" name="enddate" value="@Enddate" /></div>
+                <div style="padding-left:50px;">Number of rows displayed<input type="number" name="rows" value="@ViewBag.rows" /></div>
+                <div style="padding-left:50px;"><input type="submit" value="Filter" /></div>
             </form>
             <h3 class="text-danger">@ViewBag.error</h3>
         </div>
@@ -246,6 +250,7 @@
             suggest("keyWord", dataList);
             //请求json格式的数据 {value: [key:value,key2:value2]};
             function init(dataList) {
+
                 $.ajax({
                     type: 'get',
                     async: false,

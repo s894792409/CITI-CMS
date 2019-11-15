@@ -4,13 +4,14 @@
     ViewData["Title"] = "Edit theme";
 }
 
-<p align="center" style="font-size:50px;">Edit themes</p>
+<br /><p align="center" style="font-size:50px;">Edit themes</p>
 <hr />
-<div class="row">
+<div class="row d-flex justify-content-center">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="themeId" />
+            <input asp-for="themeId" hidden="hidden" />
+            <input asp-for="dateCreated" hidden="hidden" />
             <div class="form-group">
                 <label asp-for="themeName" class="control-label"></label>
                 <input asp-for="themeName" class="form-control" />
@@ -26,15 +27,12 @@
                 <input asp-for="fontStyle" class="form-control" />
                 <span asp-validation-for="fontStyle" class="text-danger"></span>
             </div>
-            <input asp-for="dateCreated" hidden="hidden" />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-info" />
+                <input type="submit" value="Save" class="btn btn-info align-self-center" />
+                <a asp-action="Index" class="btn btn-outline-info" style="margin:15px;">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 

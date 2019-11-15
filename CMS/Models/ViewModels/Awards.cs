@@ -14,7 +14,7 @@ namespace CMS.Models.ViewModels
         [Display(Name = "Award Name")]
         [Required]
         public string awardName { get; set; }
-        [Display(Name = "Award Level")]
+        [Display(Name = "Achievement")]
         [Required]
         public string awardLevel { get; set; }
         [Display(Name = "Number of Recipients")]
