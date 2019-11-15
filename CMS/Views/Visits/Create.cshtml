@@ -54,13 +54,13 @@
             @*左边的card*@
 
             @*<a asp-action="Export">Export</a>*@
-            <div style="margin-right:40px; ">
-                <div class="card border-secondary mb-3" style="width:100%;border:2px solid #808080;height:520px;">
+            <div style="margin:40px; ">
+                <div class="card border-secondary mb-3" id="leftCard" style="width:100%;border:2px solid #808080;">
                     <div class="card-header">
                         <h2>Mode 1</h2>
                         <h3>Import excel file</h3>
                     </div>
-                    <div class="card-body text-secondary">
+                    <div class="card-body text-secondary" style=" overflow:auto;">
                         <form enctype="multipart/form-data" method="post" asp-action="Import">
                             <div align="center">
                                 <div class="row justify-content-center d-flex">
@@ -103,7 +103,7 @@
         <div align="center" style="width:50%;border-left:2px solid #808080">
             @*右边的card*@
 
-            <div class="card border-secondary mb-3" style="margin-left:40px;width:100%;border:2px solid #808080; height:520px;">
+            <div class="card border-secondary mb-3" style="margin:40px;border:2px solid #808080;" id="rightCard">
                 <div class="card-header">
                     <h2>Mode 2</h2>
                     <h3>Enter access information</h3>
@@ -172,6 +172,20 @@
     </div>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script>
+        window.onload = function () {
+            setHeight();
+        }
+        window.onresize = function () { setHeight() };
+        function setHeight() {
+            try {
+                console.log("resize card");
+                document.getElementById("leftCard").style.height = document.getElementById("rightCard").offsetHeight + "px"; //兼容FF、IE等
+                console.log("finsh");
+            } catch{
+
+            }
+        }
+
         $(".file").on("change", "input[type='file']", function () {
             var filePath = $(this).val();
             if (filePath.indexOf("xlsx") != -1 || filePath.indexOf("xls") != -1) {
@@ -181,7 +195,7 @@
                 $(".showFileName").html(fileName);
                 document.getElementById("subbtn").disabled = "";
             } else {
-                $(".showFileName").html("");
+                $(".showFileName").html("Click left side button to select");
                 $(".fileerrorTip").html("You have not uploaded the file, or the file type you uploaded is incorrect!").show();
                 document.getElementById("subbtn").disabled = "disabled";
                 return false

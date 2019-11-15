@@ -4,71 +4,88 @@
 @{
     ViewData["Title"] = "Import";
 }
+<br />
 @if (ViewBag.error == null)
 {
     <p align="center" style="font-size:50px;">Import Success</p>
-    @*<div style="width:100%;" class="d-flex justify-content-between">
-            <div class="card text-white bg-success mb-3" style="width: 30%;">
-                <div class="card-header">Added</div>
-                <div class="card-body">
-                    <h5 class="card-title">@ViewBag.create data</h5>
-
+    @if (ViewBag.nullrow == null || ViewBag.nullrow == 0)
+    {
+        <div class="d-flex justify-content-center">
+            <div style="width:50%;">
+                <div class="row d-flex justify-content-center">
+                    <div class="card  text-white" style="border:2px solid #808080;width:60%;">
+                        <div class="card-header bg-success">
+                            <h1 class="" align="center" style="margin:5px;">Success</h1>
+                        </div>
+                        <div class="card-body card-success d-flex flex-column">
+                            <div class="card-title" style="font-size:25px;">Successfully imported data!</div>
+                            <div class="d-flex justify-content-center">
+                                <div class="d-flex flex-column">
+                                    <span class="card-text" style="font-size:20px;">added @ViewBag.create data</span>
+                                    <span class="card-text" style="font-size:20px;">updated @ViewBag.update data</span>
+                                    <span class="card-text" style="font-size:20px;">@ViewBag.repeat data already exists</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="card text-white bg-success mb-3" style="width: 30%;">
-                <div class="card-header">Updated</div>
-                <div class="card-body">
-                    <h5 class="card-title">@ViewBag.update data</h5>
-
-                </div>
-            </div>
-
-            <div class="card text-white bg-success mb-3" style="width: 30%;">
-                <div class="card-header">Repeat</div>
-                <div class="card-body">
-                    <h5 class="card-title">@ViewBag.repeat data already exists</h5>
-
-                </div>
-            </div>
-        </div>*@
-    <div class="row d-flex justify-content-center" >
-        <div class="alert alert-success" style="width:40%;padding-right:15px;margin-left:15px;">
-            <h1 class="alert-heading"style="margin:5px;">Success!</h1>
-            <div class="card-body text-secondary d-flex flex-column">
-                <span class="card-text" style="font-size:20px;">You have added @ViewBag.create data</span>
-                <hr />
-                <span class="card-text" style="font-size:20px;">updated @ViewBag.update data</span>
-                <hr />
-                <span class="card-text" style="font-size:20px;">@ViewBag.repeat data already exists</span>
             </div>
         </div>
-
-
-            @*@if (ViewBag.delete != null)
-        {
-            <span style="margin:10px;font-size:20px;" class="mb-0">excel does not contain the following @ViewBag.delete data can be considered to delete</span>
-        }*@
-            @if (ViewBag.nullrow != null)
-            {
-                <div class="alert alert-warning" style="width:40%;margin-left:5%;">
-                    <p style="margin:10px;font-size:20px;" class="mb-0">
-                        Have @ViewBag.nullrow rows that have not been added
-                        , they are:
-                    </p>
-                    <p style="margin:10px;font-size:15px;color:#ff0000">@ViewBag.position</p>
+    }
+    else
+    {
+        <div class="d-flex justify-content-center">
+            <div style="width:50%;">
+                <div class="row d-flex justify-content-center">
+                    <div class="card  text-white" id="successCard" style="border:2px solid #808080;width:60%;">
+                        <div class="card-header bg-success">
+                            <h1 class="" align="center" style="margin:5px;">Success</h1>
+                        </div>
+                        <div class="card-body card-success d-flex flex-column">
+                            <div class="card-title" style="font-size:25px;">Successfully imported data!</div>
+                            <div class="d-flex justify-content-center">
+                                <div class="d-flex flex-column">
+                                    <span class="card-text" style="font-size:20px;">added @ViewBag.create data</span>
+                                    <span class="card-text" style="font-size:20px;">updated @ViewBag.update data</span>
+                                    <span class="card-text" style="font-size:20px;">@ViewBag.repeat data already exists</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            }
+            </div>
 
+            <div style="width:50%; border-left:2px solid #808080">
+                <div class="row d-flex justify-content-center">
+                    <div class="card  text-white" style="border:2px solid #808080;width:60%;" id="warningCard">
+                        <div class="card-header bg-warning">
+                            <h1 class="" align="center" style="margin:5px;">Warning</h1>
+                        </div>
+                        <div class="card-body card-warning d-flex flex-column">
+                            <div class="card-title" style="font-size:25px;">
+                                Have @ViewBag.nullrow rows that have not been added
+                                , they are:
+                            </div>
+                            <div class="d-flex justify-content-center" style="margin-top:0px;">
+                                <div style="margin-top:0px;">
+                                    <p style="font-size:20px;color:#ff0000;margin-top:0px;overflow:auto;">@ViewBag.position</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    }
+    
     @if (ViewBag.delete != 0)
     {
-        <div class="row">
+        <div class="row" style="margin-top:10px;">
             <!-- column -->
             <div class="col-sm-12">
                 <div class="card" style="border:1px solid #808080;">
                     <h3 class="card-header">Excel does not contain the following @ViewBag.delete data can be considered to delete</h3>
-                   
+
                     <div class="table-responsive">
                         <table class="table" id="table">
                             <thead>
@@ -178,3 +195,20 @@ else
     }
 }
 <p class="d-flex justify-content-center"><a asp-controller="Visits" asp-action="index" class="btn btn-outline-info">Back to list</a></p>
+
+<script>
+    window.onload = function() {
+        setHeight();
+    }
+    window.onresize = function () { setHeight() };
+    function setHeight() {
+        try {
+            console.log("resize card");
+            document.getElementById("successCard").style.height = document.getElementById("warningCard").offsetHeight + "px"; //兼容FF、IE等 
+            console.log("finsh");
+        } catch{
+
+        }
+    }
+    
+</script>

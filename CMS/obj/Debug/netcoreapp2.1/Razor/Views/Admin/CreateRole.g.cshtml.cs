@@ -80,7 +80,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("<p align=\"center\" style=\"font-size:50px;margin-top:50px;\" class=\"title\">Create Role</p>\n");
             EndContext();
             BeginContext(88, 60, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "88732585b3234f0c9fda5e6dc96b856a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eaa0da8e8d664cafbc4112583446fc54", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();
@@ -114,12 +114,12 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper.ValidationSumma
             WriteLiteral("</h1>\n    ");
             EndContext();
             BeginContext(191, 306, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d260e7ffccc471caaf127cce8ef0e21", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b22c7f0d2aa24ffa933a241dda0f1b69", async() => {
                 BeginContext(211, 217, true);
                 WriteLiteral("\n        <div class=\"form-group\">\n            <label for=\"name\"></label>\n            <input name=\"name\" class=\"form-control\" />\n        </div>\n        <button type=\"submit\" class=\"btn-primary\">Create</button>\n        ");
                 EndContext();
                 BeginContext(428, 57, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "68ab83a09af64ce69bde69388106bc24", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7846cac392d04f9e9f9776c8bf79d2c4", async() => {
                     BeginContext(475, 6, true);
                     WriteLiteral("Cancel");
                     EndContext();

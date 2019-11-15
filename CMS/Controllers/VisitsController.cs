@@ -288,7 +288,7 @@ namespace CMS.Controllers
                 {
                     foreach (ExcelWorksheet worksheet in package.Workbook.Worksheets)
                     {
-                        List<int> nolist = new List<int>();
+                        List<Visits> newVisitList = new List<Visits>();
                         int sumrow = worksheet.Dimension.Rows;
                         int sumclm = worksheet.Dimension.Columns;
                         ImportInfoCursor infoCursor = new ImportInfoCursor();
@@ -297,48 +297,63 @@ namespace CMS.Controllers
                         {
                             if (row == 1)
                             {
-                                for (int clm = 1; clm <= sumclm; clm++) {
-                                    if (worksheet.Cells[row, clm].Value == null) {
-                                        ViewBag.error = "The header does not contain the necessary information, please check the header." +
-                                                " The content that the header needs to include is:No、Start DateTime、End DateTime、Name、Pax、SIC、Host、Foreign Visit";
-                                        ViewBag.name = worksheet.Name.ToString();
-                                        file.Delete();
-                                         return View();
-                                    }
-                                }
+                                //for (int clm = 1; clm <= sumclm; clm++) {
+                                //    if (worksheet.Cells[row, clm].Value == null) {
+                                //        ViewBag.error = "The header does not contain the necessary information, please check the header." +
+                                //                " The content that the header needs to include is:No、Start DateTime、End DateTime、Name、Pax、SIC、Host、Foreign Visit";
+                                //        ViewBag.name = worksheet.Name.ToString();
+                                //        file.Delete();
+                                //         return View();
+                                //    }
+                                //}
+                                
                                 for (int clm = 1; clm <= sumclm; clm++)
                                 {
-                                    switch (worksheet.Cells[row, clm].Value.ToString())
+                                    try
                                     {
-                                        case "No":
-                                            infoCursor.No = clm;
-                                            break;
+                                        switch (worksheet.Cells[row, clm].Value.ToString())
+                                        {
+                                            case "No":
+                                                infoCursor.No = clm;
+                                                break;
 
-                                        case "Start DateTime":
-                                            infoCursor.StartDate = clm;
-                                            break;
-                                        case "End DateTime":
-                                            infoCursor.EndDate = clm;
-                                            break;
-                                        case "Name":
-                                            infoCursor.Name = clm;
-                                            break;
-                                        case "Pax":
-                                            infoCursor.Pax = clm;
-                                            break;
-                                        case "SIC":
-                                            infoCursor.SIC = clm;
-                                            break;
-                                        case "Host":
-                                            infoCursor.Host = clm;
-                                            break;
-                                        case "Foreign Visit":
-                                            infoCursor.ForeignVisit = clm;
-                                            break;
+                                            case "Start DateTime":
+                                                infoCursor.StartDate = clm;
+                                                break;
+                                            case "End DateTime":
+                                                infoCursor.EndDate = clm;
+                                                break;
+                                            case "Name":
+                                                infoCursor.Name = clm;
+                                                break;
+                                            case "Pax":
+                                                infoCursor.Pax = clm;
+                                                break;
+                                            case "SIC":
+                                                infoCursor.SIC = clm;
+                                                break;
+                                            case "Host":
+                                                infoCursor.Host = clm;
+                                                break;
+                                            case "Foreign Visit":
+                                                infoCursor.ForeignVisit = clm;
+                                                break;
+
+                                        }
+                                    }
+                                    catch
+                                    {
 
                                     }
-
-
+                                }
+                               // bool checkflag = Check(infoCursor, sumclm);
+                                if (Check(infoCursor, sumclm) == false)
+                                {
+                                    ViewBag.error = "The header does not contain the necessary information, please check the header." +
+                                                " The content that the header needs to include is:No、Start DateTime、End DateTime、Name、Pax、SIC、Host、Foreign Visit";
+                                    ViewBag.name = worksheet.Name.ToString();
+                                    file.Delete();
+                                    return View();
                                 }
                             }
                             else
@@ -387,7 +402,7 @@ namespace CMS.Controllers
                                             }
                                             importInfo.dateCreated = DateTime.Now;
 
-                                            nolist.Add((int)importInfo.No);
+                                            newVisitList.Add(importInfo);
                                             date = importInfo.StartDate;
                                             var list = await _context.Visits.AsNoTracking().ToListAsync();
                                             var repeat = list.Where(s => s.Name == importInfo.Name);
@@ -429,7 +444,7 @@ namespace CMS.Controllers
                                         }
                                         else {
                                             nullrow++;
-                                            sb.Append("Worksheet:" + worksheet.Name.ToString() + "\t" + "Row:" + row);
+                                            sb.Append("Worksheet:" + worksheet.Name.ToString() + "\t" + "Row:" + row+"\n");
                                             sb.Append(Environment.NewLine);
                                         }
 
@@ -446,18 +461,34 @@ namespace CMS.Controllers
                         }
                        // return Content(sb.ToString());
                         var monthlist = _context.Visits.Where(s => s.StartDate.Year == date.Year && s.StartDate.Month == date.Month&&s.No!=null && s.No >= 0);
-                        int skip=0;
-                        if (nolist.LongCount() != monthlist.LongCount() || monthlist.Last().No != nolist.Last()) {
-                            for (int i = 0; i < monthlist.LongCount(); i++) {
-                                Visits v = monthlist.ToArray()[i];
-                                if (nolist[i-skip] != v.No) {
-                                    deleteSum++;
-                                    skip++;
-                                    deleteList.Add(v);
+                        //int skip=0;
+                        //if (nolist.LongCount() != monthlist.LongCount() || monthlist.Last().No != nolist.Last()) {
+                        //    for (int i = 0; i < monthlist.LongCount(); i++) {
+                        //        Visits v = monthlist.ToArray()[i];
+                        //        if (nolist[i-skip] != v.No) {
+                        //            deleteSum++;
+                        //            skip++;
+                        //            deleteList.Add(v);
+                        //        }
+                        //    }
+                        //}
+                        foreach (Visits oldvisit in monthlist)
+                        {
+                            bool haveFlag = false;
+                            foreach(Visits newvisit in newVisitList)
+                            {
+                                if (oldvisit.No == newvisit.No && oldvisit.Name == newvisit.Name && oldvisit.StartDate == newvisit.StartDate)
+                                {
+                                    haveFlag = true;
+                                    break;
                                 }
                             }
+                            if (haveFlag == false)
+                            {
+                                deleteList.Add(oldvisit);
+                                deleteSum++;
+                            }
                         }
-
                     }
                    
                     
@@ -465,7 +496,10 @@ namespace CMS.Controllers
             }
             catch(Exception e)
             {
-                
+                ViewBag.error = "Have an unexpected error";
+                ViewBag.name = e.Message.ToString();
+                file.Delete();
+                return View();
             }
             file.Delete();
             ViewBag.create = createSum;
