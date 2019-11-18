@@ -67,36 +67,44 @@
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
                 @*<div class="row page-titles">
-                        <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="text-themecolor m-b-0 m-t-0">@ViewContext.RouteData.Values["controller"].ToString()</h3>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-                                <li class="breadcrumb-item active">@ViewContext.RouteData.Values["controller"].ToString()</li>
-                                <li class="breadcrumb-item active">@ViewContext.RouteData.Values["action"].ToString()</li>
-                            </ol>
-                        </div>
-                    </div>*@
-                <div class="col-md-6 col-8 d-flex justify-content-start " style="width:auto; height:auto; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; background:none;z-index:1000;">
-                    @*<h3 class="text-themecolor m-b-0 m-t-0" style=" align-items:center;">@ViewContext.RouteData.Values["controller"].ToString()</h3>*@
-                    <ol class="breadcrumb" style="width:auto; height:auto; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; background:none;">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="text-themecolor m-b-0 m-t-0">@ViewContext.RouteData.Values["controller"].ToString()</h3>
+                    <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-                        <li class="breadcrumb-item active"><a asp-controller="@ViewContext.RouteData.Values["controller"].ToString()" asp-action="index">@ViewContext.RouteData.Values["controller"].ToString()</a> </li>
+                        <li class="breadcrumb-item active">@ViewContext.RouteData.Values["controller"].ToString()</li>
                         <li class="breadcrumb-item active">@ViewContext.RouteData.Values["action"].ToString()</li>
                     </ol>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="">
-                    <section id="show" class="col-sm-9" style="position:absolute;left:0px;right:0px;margin:auto;max-width:80rem;">@RenderBody()</section>
-                </div>
-
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
+            </div>*@
+                @*<div class="col-md-6 col-8 d-flex justify-content-start " style="width:auto; height:auto; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; background:none;z-index:1000;">
+            <h3 class="text-themecolor m-b-0 m-t-0" style=" align-items:center;">@ViewContext.RouteData.Values["controller"].ToString()</h3>
+                <ol class="breadcrumb" style="width:auto; height:auto; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; background:none;">
+                    <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                    <li class="breadcrumb-item active"><a asp-controller="@ViewContext.RouteData.Values["controller"].ToString()" asp-action="index">@ViewContext.RouteData.Values["controller"].ToString()</a> </li>
+                    <li class="breadcrumb-item active">@ViewContext.RouteData.Values["action"].ToString()</li>
+                </ol>
+            </div>*@
+            <div class="col-md-6 col-8 d-flex justify-content-start " style="width:auto; height:auto; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; background:none;z-index:1000;">
+                @*<h3 class="text-themecolor m-b-0 m-t-0" style=" align-items:center;">@ViewContext.RouteData.Values["controller"].ToString()</h3>*@
+                <ol class="breadcrumb" style="width:auto; height:auto; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; background:none;">
+                    <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                    <li class="breadcrumb-item active"><a asp-controller="@ViewContext.RouteData.Values["controller"].ToString()" asp-action="index">@ViewBag.Controller.ToString()</a> </li>
+                    <li class="breadcrumb-item active">@ViewBag.Title.ToString()</li>
+                </ol>
             </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="">
+                <section id="show" class="col-sm-9" style="position:absolute;left:0px;right:0px;margin:auto;max-width:80rem;">@RenderBody()</section>
+            </div>
+
+            <!-- End PAge Content -->
+            <!-- ============================================================== -->
+        </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->

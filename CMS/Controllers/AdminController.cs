@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using IdentityDbContext = CMS.Models.IdentityDbContext;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace CMS.Controllers
 {
@@ -81,7 +82,8 @@ namespace CMS.Controllers
                 AppUser appuser = new AppUser
                 {
                     UserName = user.UserName,
-                    Email = user.Email
+                    Email = user.Email,
+                    PhoneNumber=user.PhoneNumber
                 };
                 
                 result = await userManager.CreateAsync(appuser, user.Password);
@@ -89,11 +91,12 @@ namespace CMS.Controllers
                 if (result.Succeeded)
                 {
                     var data= await identityDbContext.AspNetUsers.SingleOrDefaultAsync(w => w.UserName == user.UserName);
-                    data.PhoneNumber = user.PhoneNumber;
+                    //data.PhoneNumber = user.PhoneNumber;
                     if (user.Role == "Admin") {
                         data.Admin = true;
                     }
-                    data.PhoneNumber = user.PhoneNumber;
+                    //data.PhoneNumber = ;
+                    await RefreshAsync(data);
                     identityDbContext.Update(data);
                     await identityDbContext.SaveChangesAsync();
                         result = await userManager.AddToRoleAsync(appuser,user.Role);
@@ -139,6 +142,45 @@ namespace CMS.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Login");
+        }
+        private static string MakeKey(int pwdLength)
+
+        {     //声明要返回的字符串    
+
+            string tmpstr = "";
+
+            //密码中包含的字符数组    
+
+            string pwdchars = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_?/-=";
+
+            //数组索引随机数    
+
+            int iRandNum;
+
+            //随机数生成器    
+
+            Random rnd = new Random();
+
+            for (int i = 0; i < pwdLength; i++)
+
+            {      //Random类的Next方法生成一个指定范围的随机数     
+
+                iRandNum = rnd.Next(pwdchars.Length);
+
+                //tmpstr随机添加一个字符     
+
+                tmpstr += pwdchars[iRandNum];
+
+            }
+
+            return tmpstr;
+        }
+
+        public async Task RefreshAsync(UserInfo userInfo)
+        {
+            AppUser user = await userManager.FindByNameAsync(userInfo.UserName);
+            user.UserKey = MakeKey(15);
+            IdentityResult result2 = await userManager.UpdateAsync(user);
         }
     }
 }

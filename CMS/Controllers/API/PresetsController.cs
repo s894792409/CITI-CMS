@@ -58,6 +58,7 @@ namespace CMS.Controllers.API
                                 {
                                     Boxformat boxformat = new Boxformat();
                                     boxformat.boxId = box.boxId;
+                                    boxformat.localBoxId = box.localBoxId;
                                     boxformat.cardList = cardlist.Where(c => c.boxId == box.boxId).ToList();
                                     boxformatlist.Add(boxformat);
                                 }
@@ -121,6 +122,7 @@ namespace CMS.Controllers.API
                             {
                                 Boxformat boxformat = new Boxformat();
                                 boxformat.boxId = box.boxId;
+                                boxformat.localBoxId = box.localBoxId;
                                 boxformat.cardList = cardlist.Where(c => c.boxId == box.boxId).ToList();
                                 boxformatlist.Add(boxformat);
                             }
@@ -218,6 +220,7 @@ namespace CMS.Controllers.API
                             var box = new Box();
                             box.presetId = preset.presetId;
                             box.GUID = Guid.NewGuid().ToString();
+                            box.localBoxId = boxformat.localBoxId;
                             _context.Box.Add(box);
                             await _context.SaveChangesAsync();
                             foreach (Card c in boxformat.cardList)
@@ -229,6 +232,7 @@ namespace CMS.Controllers.API
                                 card.title = c.title;
                                 card.value = c.value;
                                 card.boxId = box1.boxId;
+                                card.cardType = c.cardType;
                                 card.dateCreated = DateTime.Now;
                                 _context.Card.Add(card);
                                 await _context.SaveChangesAsync();
@@ -398,6 +402,7 @@ namespace CMS.Controllers.API
                                 var box = new Box();
                                 box.presetId = preset.presetId;
                                 box.GUID = Guid.NewGuid().ToString();
+                                box.localBoxId = boxformat.localBoxId;
                                 _context.Box.Add(box);
                                 await _context.SaveChangesAsync();
                                 foreach (Card c in boxformat.cardList)
@@ -409,6 +414,7 @@ namespace CMS.Controllers.API
                                     card.title = c.title;
                                     card.value = c.value;
                                     card.boxId = box1.boxId;
+                                    card.cardType = c.cardType;
                                     card.dateCreated = DateTime.Now;
                                     _context.Card.Add(card);
                                     await _context.SaveChangesAsync();
@@ -565,6 +571,7 @@ namespace CMS.Controllers.API
     }
     public class Boxformat {
         public int boxId { get; set; }
+        public string localBoxId { get; set; }
         public List<Card> cardList { get; set; }
     }
 }

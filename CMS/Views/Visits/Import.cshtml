@@ -2,7 +2,16 @@
 @using System.Globalization;
 
 @{
-    ViewData["Title"] = "Import";
+    if(ViewBag.error == null)
+    {
+        ViewData["Title"] = "Success";
+    }
+    else
+    {
+        ViewData["Title"] = "Error";
+    }
+
+    ViewData["Controller"] = "Visit";
 }
 <br />
 @if (ViewBag.error == null)

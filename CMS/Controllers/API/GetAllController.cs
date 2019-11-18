@@ -91,6 +91,7 @@ namespace CMS.Controllers.API
                                 {
                                     Boxformat boxformat = new Boxformat();
                                     boxformat.boxId = box.boxId;
+                                    boxformat.localBoxId = box.localBoxId;
                                     boxformat.cardList = cardlist.Where(c => c.boxId == box.boxId).ToList();
                                     boxformatlist.Add(boxformat);
                                 }
@@ -143,6 +144,7 @@ namespace CMS.Controllers.API
         public class Boxformat
         {
             public int boxId { get; set; }
+            public string localBoxId { get; set; }
             public List<Card> cardList { get; set; }
         }
 

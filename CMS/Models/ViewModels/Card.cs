@@ -8,6 +8,7 @@ namespace CMS.Models.ViewModels
     public class Card
     {
         public int cardId { get; set; }
+        public string cardType { get; set; }
         public string title { get; set; }
         public string color { get; set; }
         public string value { get; set; }

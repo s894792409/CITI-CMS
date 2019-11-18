@@ -10,5 +10,6 @@ namespace CMS.Models.ViewModels
         public int boxId { get; set; }
         public int presetId { get; set; }
         public string GUID { get; set; }
+        public string localBoxId { get; set; }
     }
 }

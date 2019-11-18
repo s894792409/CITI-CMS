@@ -87,7 +87,7 @@
                 <!-- toggle and nav items -->
                 <!-- ============================================================== -->
                 @*<ul class="navbar-nav mr-auto mt-md-0 ">
-             <!--This is search --> 
+             <!--This is search -->
             <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
             <li class="nav-item hidden-sm-down">
                 <form class="app-search p-l-20">
@@ -95,23 +95,31 @@
                 </form>
             </li>
         </ul>*@
-        <!-- ============================================================== -->
-        <!-- User profile and search -->
-        <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- User profile and search -->
+                <!-- ============================================================== -->
                 @*<div class="col-md-6 col-8 d-flex justify-content-start " style="width:auto; height:auto; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;">
-                    @*<h3 class="text-themecolor m-b-0 m-t-0" style=" align-items:center;">@ViewContext.RouteData.Values["controller"].ToString()</h3>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-                        <li class="breadcrumb-item active">@ViewContext.RouteData.Values["controller"].ToString()</li>
-                        <li class="breadcrumb-item active">@ViewContext.RouteData.Values["action"].ToString()</li>
-                    </ol>
-                </div>*@
+            @*<h3 class="text-themecolor m-b-0 m-t-0" style=" align-items:center;">@ViewContext.RouteData.Values["controller"].ToString()</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                <li class="breadcrumb-item active">@ViewContext.RouteData.Values["controller"].ToString()</li>
+                <li class="breadcrumb-item active">@ViewContext.RouteData.Values["action"].ToString()</li>
+            </ol>
+        </div>*@
 
                 <ul class="navbar-nav my-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wecome,@Model.UserName</a>
-                    </li>
+                    @*<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wecome,@Model.UserName</a>
+
+        </li>*@
                 </ul>
+                <div class="nav-item dropdown">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle text-white waves-effect waves-dark" aria-haspopup="true" aria-expanded="false" href="#">Wecome,@Model.UserName</a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <li align="center"><a asp-controller="User" asp-action="Logout">Logout</a></li>
+                        <li align="center"><a class="waves-effect" asp-controller="User" asp-action="Edit">Edit account info</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
@@ -185,7 +193,7 @@
                         </ul>
                     </li>
                     <li class="studentIcon">
-                        <a class="waves-effect"><i class="fa fa-mortar-board m-r-10" aria-hidden="true"></i>student</a>
+                        <a class="waves-effect"><i class="fa fa-mortar-board m-r-10" aria-hidden="true"></i>Student</a>
                         <ul>
                             <li>
                                 <a class="waves-effect" asp-controller="Students" asp-action="Index">All Students</a>

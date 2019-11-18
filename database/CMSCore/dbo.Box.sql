@@ -1,7 +1,22 @@
-﻿CREATE TABLE [dbo].[Box] (
-    [boxId]    INT           IDENTITY (1, 1) NOT NULL,
-    [presetId] INT           NULL,
-    [GUID]     VARCHAR (MAX) NULL,
-    PRIMARY KEY CLUSTERED ([boxId] ASC)
-);
+USE [CMSCore]
+GO
+
+/****** Object:  Table [dbo].[Box]    Script Date: 2019/11/18 18:20:17 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Box](
+	[boxId] [int] IDENTITY(1,1) NOT NULL,
+	[presetId] [int] NULL,
+	[GUID] [varchar](max) NULL,
+	[localBoxId] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[boxId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
 
