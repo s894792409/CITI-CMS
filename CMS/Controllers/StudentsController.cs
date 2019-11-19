@@ -172,20 +172,18 @@ namespace CMS.Controllers
                         string filename = $"{ Guid.NewGuid()}.png";
                         string path = Path.Combine(webrootpath, filename).ToString();
                         Image<Rgba64> image = Image.Load<Rgba64>(file.OpenReadStream());
-                        
-                            Rectangle rectangle = new Rectangle(tailorInfoEntity.CoordinateX, tailorInfoEntity.CoordinateY, tailorInfoEntity.CoordinateWidth, tailorInfoEntity.CoordinateHeight);
-                            image.Mutate(x => x
-                                 .Crop(rectangle)
-                                 .Resize(tailorInfoEntity.CoordinateWidth, tailorInfoEntity.CoordinateHeight)
-                                 );
-                            image.Save(path);
-                            FileStream fs = new FileStream(path, FileMode.Open);
-                            MemoryStream memory = new MemoryStream();
-                            fs.CopyTo(memory);
-                            student.Photo = memory.ToArray();
-                            student.PhotoType = file.ContentType;
-                            fs.Close();
-                        
+                        Rectangle rectangle = new Rectangle(tailorInfoEntity.CoordinateX, tailorInfoEntity.CoordinateY, tailorInfoEntity.CoordinateWidth, tailorInfoEntity.CoordinateHeight);
+                        image.Mutate(x => x
+                        .Crop(rectangle)
+                        .Resize(tailorInfoEntity.CoordinateWidth, tailorInfoEntity.CoordinateHeight)
+                        );
+                        image.Save(path);
+                        FileStream fs = new FileStream(path, FileMode.Open);
+                        MemoryStream memory = new MemoryStream();
+                        fs.CopyTo(memory);
+                        student.Photo = memory.ToArray();
+                        student.PhotoType = file.ContentType;
+                        fs.Close();
                         FileInfo fileInfo = new FileInfo(path);
                         fileInfo.Delete();
                         student.dateCreated = DateTime.Now;
@@ -325,7 +323,6 @@ namespace CMS.Controllers
         }
         [HttpGet]
         public IActionResult ViewPhoto(string studentadmin) {
-            // return Content("studentAdmin:"+studentadmin +" end");
             try
             {
                 Student student = _context.Student.SingleOrDefault(s => s.studentAdmin == studentadmin);
