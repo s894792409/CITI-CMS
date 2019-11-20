@@ -20,7 +20,7 @@
             width: 2000px;
         }
     </style>
-    <br /><p style="font-size:50px;"align="center">Visits</p>
+    <br /><p style="font-size:50px;" align="center">Visits</p>
     <div class="row d-flex justify-content-end">
 
         <div class="form-group" style="width:300px;">
@@ -35,7 +35,7 @@
         <div style="margin-left:20px;margin-right:18px;">
             <a class="btn btn-info" asp-action="Create">Create New</a>
         </div>
-        
+
     </div>
     <div class="card text-white bg-secondary mb-3">
         <div class="card-body">
@@ -137,7 +137,7 @@
                                     <td>
 
                                         <a asp-action="Edit" asp-route-id="@item.VisitId" class="btn btn-success" style="width:80px;">Edit</a>
-                                        <a asp-action="Delete" asp-route-id="@item.VisitId" class="btn btn-danger"style="width:80px;">Delete</a>
+                                        <a asp-action="Delete" asp-route-id="@item.VisitId" class="btn btn-danger" style="width:80px;">Delete</a>
                                     </td>
                                 </tr>
                             }
@@ -165,6 +165,9 @@
 
             </div>
         </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <input type="button" onclick="reset()" value="reset" class="btn btn-outline-primary" id="reset" hidden="hidden" />
     </div>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/bootstrap-suggest-plugin/dist/bootstrap-suggest.min.js"></script>
@@ -207,9 +210,11 @@
                         table.rows[i].style.display = "none";
                     }
                     if (newpage == 1) {
-                        for (n = newpage * showrows - showrows; n <= newpage * showrows; n++) {
-                            table.rows[n].style.display = "";
-                        }
+                        try {
+                            for (n = newpage * showrows - showrows; n <= newpage * showrows; n++) {
+                                table.rows[n].style.display = "";
+                            }
+                        } catch{}
                     } else {
                         for (var n = newpage * showrows - showrows + 1; n <= newpage * showrows; n++) {
                             table.rows[n].style.display = "";
@@ -276,6 +281,9 @@
                     indexId: 1, // data.value 的第几个数据，作为input输入框的显示的内容
                     // indexKey: 2, //data.value 的第几个数据，作为input输入框的内容
                     data: dataList,
+                    ignorecase: true,
+                    inputBgColor: '#fff',
+                    inputWarnColor: '#fff',
                     //listAlign: 'auto',
                     listStyle: {
                         'padding-top': 0, 'max-height': '375px', 'max-width': '300px',
@@ -297,9 +305,11 @@
             if (input.val() == "") {
                 searchflag = false;
                 PageSwitch(1);
-                for (var e = 0; e <= pageSum + 1; e++) {
-                    document.getElementsByClassName("page-item")[e].style.display = "none";
-                }
+                //for (var e = 0; e <= pageSum + 1; e++) {
+                //    document.getElementsByClassName("page-item")[e].style.display = "";
+                //}
+                document.getElementById("pagebutton").style.display = "";
+                document.getElementById("reset").hidden = "hidden";
             } else {
                 for (var i = 1; i < rowSum; i++) {
                     table.rows[i].style.display = "none";
@@ -311,10 +321,17 @@
                         table.rows[i].style.display = "";
                     }
                 }
-                for (var e = 0; e <= pageSum + 1; e++) {
-                    document.getElementsByClassName("page-item")[e].style.display = "none";
-                }
+                //for (var e = 0; e <= pageSum + 1; e++) {
+                //    document.getElementsByClassName("page-item")[e].style.display = "none";
+                //}
+                document.getElementById("pagebutton").style.display = "none";
+                document.getElementById("reset").hidden = "";
+
             }
+        }
+        function reset() {
+            input.val("");
+            search();
         }
     </script>
 </body>

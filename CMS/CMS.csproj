@@ -6,12 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\bootstrap-suggest-plugin\.git\**" />
     <Compile Remove="wwwroot\css\NewFolder\**" />
     <Compile Remove="wwwroot\js\lib\**" />
+    <Content Remove="wwwroot\bootstrap-suggest-plugin\.git\**" />
     <Content Remove="wwwroot\css\NewFolder\**" />
     <Content Remove="wwwroot\js\lib\**" />
+    <EmbeddedResource Remove="wwwroot\bootstrap-suggest-plugin\.git\**" />
     <EmbeddedResource Remove="wwwroot\css\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\js\lib\**" />
+    <None Remove="wwwroot\bootstrap-suggest-plugin\.git\**" />
     <None Remove="wwwroot\css\NewFolder\**" />
     <None Remove="wwwroot\js\lib\**" />
   </ItemGroup>
@@ -49,7 +53,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\bootstrap-suggest-plugin\.git\objects\info\" />
     <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 
@@ -224,47 +227,6 @@
     <None Include="wwwroot\bootstrap-fileinput\themes\gly\theme.min.js" />
     <None Include="wwwroot\bootstrap-suggest-plugin\.eslintrc" />
     <None Include="wwwroot\bootstrap-suggest-plugin\.gitignore" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\config" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\description" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\FETCH_HEAD" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\HEAD" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\hooks\applypatch-msg.sample" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\hooks\commit-msg.sample" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\hooks\fsmonitor-watchman.sample" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\hooks\post-update.sample" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\hooks\pre-applypatch.sample" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\hooks\pre-commit.sample" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\hooks\pre-push.sample" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\hooks\pre-rebase.sample" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\hooks\pre-receive.sample" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\hooks\prepare-commit-msg.sample" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\hooks\update.sample" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\index" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\info\exclude" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\logs\HEAD" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\logs\refs\heads\master" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\logs\refs\remotes\origin\HEAD" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\logs\refs\remotes\upstream\gh-pages" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\logs\refs\remotes\upstream\master" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\objects\pack\pack-5fcfe379e96f05d5e18cb6fc43c3408fb803bdbe.idx" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\objects\pack\pack-5fcfe379e96f05d5e18cb6fc43c3408fb803bdbe.pack" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\objects\pack\pack-920cca312a0621451faec0ef516b1337299ee6ce.idx" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\objects\pack\pack-920cca312a0621451faec0ef516b1337299ee6ce.pack" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\packed-refs" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\heads\master" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\remotes\origin\HEAD" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\remotes\upstream\gh-pages" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\remotes\upstream\master" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\tags\0.1.10" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\tags\0.1.13" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\tags\0.1.14" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\tags\0.1.17" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\tags\0.1.18" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\tags\0.1.20" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\tags\0.1.21" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\tags\0.1.22" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\tags\0.1.23" />
-    <None Include="wwwroot\bootstrap-suggest-plugin\.git\refs\tags\0.1.24" />
     <None Include="wwwroot\bootstrap-suggest-plugin\demo\demo.js" />
     <None Include="wwwroot\bootstrap-suggest-plugin\dist\bootstrap-suggest.min.js" />
     <None Include="wwwroot\bootstrap-suggest-plugin\Gruntfile.js" />
