@@ -54,6 +54,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Upload\" />
+    <Folder Include="wwwroot\Log\" />
   </ItemGroup>
 
   <ItemGroup>

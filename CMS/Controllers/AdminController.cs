@@ -12,6 +12,9 @@ using IdentityDbContext = CMS.Models.IdentityDbContext;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using System.Globalization;
 
 namespace CMS.Controllers
 {
@@ -22,13 +25,15 @@ namespace CMS.Controllers
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
         private readonly IdentityDbContext identityDbContext;
+        private IHostingEnvironment _hostingEnvironment;
 
-        public AdminController(RoleManager<IdentityRole> roleMgr, UserManager<AppUser> userMrg, SignInManager<AppUser> signMgr)
+        public AdminController(RoleManager<IdentityRole> roleMgr, UserManager<AppUser> userMrg, SignInManager<AppUser> signMgr, IHostingEnvironment hostingEnvironment)
         {
             roleManager = roleMgr;
             userManager = userMrg;
             signInManager = signMgr;
             identityDbContext = new IdentityDbContext();
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
@@ -100,6 +105,8 @@ namespace CMS.Controllers
                     identityDbContext.Update(data);
                     await identityDbContext.SaveChangesAsync();
                         result = await userManager.AddToRoleAsync(appuser,user.Role);
+                    string action = $"create user '{user.UserName}' role:{user.Role}";
+                    await insertLogAsync(action);
                     return Redirect("/User/AllUser");
                     //ViewBag.Result = "User Created";
                 }
@@ -181,6 +188,50 @@ namespace CMS.Controllers
             AppUser user = await userManager.FindByNameAsync(userInfo.UserName);
             user.UserKey = MakeKey(15);
             IdentityResult result2 = await userManager.UpdateAsync(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> checkPassword()
+        {
+            bool success = false;
+
+            string password = Request.Form["Password"];
+            AppUser user = await userManager.GetUserAsync(HttpContext.User);
+            var roles = await userManager.GetRolesAsync(user);
+            if (roles.FirstOrDefault() == "Admin")
+            {
+                Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, password, false, false);
+                if (result.Succeeded)
+                {
+                    success = true;
+                }
+            }
+            return Json(new { success = success });
+        }
+        [HttpPost]
+        public async Task insertLogAsync(string action)
+        {
+            string webrootpath = _hostingEnvironment.WebRootPath;
+            string filename = $"{DateTime.Now.Date.ToString("dd MMM yyyy", DateTimeFormatInfo.InvariantInfo)}.txt";
+            string path = Path.Combine(webrootpath,"Log", filename).ToString();
+            FileInfo file = new FileInfo(path);
+            if (file.Exists)
+            {
+                StreamWriter sw = file.AppendText();
+                string time = DateTime.Now.ToString("dd MMM yyyy,hh:mm:ss", DateTimeFormatInfo.InvariantInfo);
+                AppUser user = await userManager.GetUserAsync(HttpContext.User);
+                sw.WriteLine($"[{time}] {user.UserName} {action}");
+                sw.Close();
+            }
+            else
+            {
+               // await file.Create();
+                StreamWriter sw = file.CreateText();
+                string time = DateTime.Now.ToString("dd MMM yyyy,hh:mm:ss", DateTimeFormatInfo.InvariantInfo);
+                AppUser user = await userManager.GetUserAsync(HttpContext.User);
+                sw.WriteLine($"[{time}] {user.UserName} {action}");
+                sw.Close();
+            }
         }
     }
 }
