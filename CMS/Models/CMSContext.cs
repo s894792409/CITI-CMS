@@ -66,6 +66,10 @@ namespace CMS.Models
 
         public DbSet<CMS.Models.User> User { get; set; }
 
- 
+        public DbSet<CMS.Models.ViewModels.ImportInfo> ImportInfo { get; set; }
+        public DbSet<CMS.Models.ViewModels.Box> Box { get; set; }
+        public DbSet<CMS.Models.ViewModels.Card> Card { get; set; }
+
+
     }
 }

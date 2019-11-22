@@ -24,9 +24,11 @@ namespace CMS.Controllers
         // GET: ShortCourses
         public async Task<IActionResult> Index()
         {
+            ViewBag.rows = 5;
             return View(await _context.ShortCourses.ToListAsync());
         }
 
+        
         // GET: ShortCourses/Details/5
         public async Task<IActionResult> Details(int? id)
         {

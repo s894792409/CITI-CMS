@@ -6,12 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\bootstrap-suggest-plugin\.git\**" />
     <Compile Remove="wwwroot\css\NewFolder\**" />
     <Compile Remove="wwwroot\js\lib\**" />
+    <Content Remove="wwwroot\bootstrap-suggest-plugin\.git\**" />
     <Content Remove="wwwroot\css\NewFolder\**" />
     <Content Remove="wwwroot\js\lib\**" />
+    <EmbeddedResource Remove="wwwroot\bootstrap-suggest-plugin\.git\**" />
     <EmbeddedResource Remove="wwwroot\css\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\js\lib\**" />
+    <None Remove="wwwroot\bootstrap-suggest-plugin\.git\**" />
     <None Remove="wwwroot\css\NewFolder\**" />
     <None Remove="wwwroot\js\lib\**" />
   </ItemGroup>
@@ -19,7 +23,9 @@
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.3.1" />
     <PackageReference Include="bootstrap.sass" Version="4.3.1" />
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.13" />
+    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="2.1.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="2.8.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.11">
@@ -27,6 +33,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0007" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0004" />
     <PackageReference Include="System.Drawing.Common" Version="4.5.0-rc1" />
   </ItemGroup>
 
@@ -35,6 +43,7 @@
     
     <!--for asynchronous view component-->
     <PackageReference Include="System.Net.Http" Version="4.3.2" />
+    <PackageReference Include="UEditor.Core" Version="1.0.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +54,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Upload\" />
+    <Folder Include="wwwroot\Log\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -135,6 +145,97 @@
     <None Include="wwwroot\assets\plugins\sticky-kit-master\dist\sticky-kit.js" />
     <None Include="wwwroot\assets\plugins\sticky-kit-master\dist\sticky-kit.min.js" />
     <None Include="wwwroot\assets\plugins\styleswitcher\jQuery.style.switcher.js" />
+    <None Include="wwwroot\bootstrap-fileinput\.github\CODE_OF_CONDUCT.md" />
+    <None Include="wwwroot\bootstrap-fileinput\.github\config.yml" />
+    <None Include="wwwroot\bootstrap-fileinput\.github\CONTRIBUTING.md" />
+    <None Include="wwwroot\bootstrap-fileinput\.github\FUNDING.yml" />
+    <None Include="wwwroot\bootstrap-fileinput\.github\ISSUE_TEMPLATE.md" />
+    <None Include="wwwroot\bootstrap-fileinput\.github\PULL_REQUEST_TEMPLATE.md" />
+    <None Include="wwwroot\bootstrap-fileinput\.github\stale.yml" />
+    <None Include="wwwroot\bootstrap-fileinput\.gitignore" />
+    <None Include="wwwroot\bootstrap-fileinput\.npmignore" />
+    <None Include="wwwroot\bootstrap-fileinput\CHANGE.md" />
+    <None Include="wwwroot\bootstrap-fileinput\js\fileinput.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\fileinput.min.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\ar.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\az.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\bg.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\ca.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\cr.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\cs.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\da.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\de.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\el.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\es.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\et.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\fa.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\fi.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\fr.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\gl.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\he.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\hu.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\id.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\it.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\ja.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\ka.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\kr.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\kz.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\LANG.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\lt.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\nl.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\no.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\pl.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\pt-BR.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\pt.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\ro.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\ru.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\sk.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\sl.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\sv.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\th.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\tr.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\uk.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\uz.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\vi.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\zh-TW.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\locales\zh.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\plugins\piexif.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\plugins\piexif.min.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\plugins\purify.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\plugins\purify.min.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\plugins\sortable.js" />
+    <None Include="wwwroot\bootstrap-fileinput\js\plugins\sortable.min.js" />
+    <None Include="wwwroot\bootstrap-fileinput\LICENSE.md" />
+    <None Include="wwwroot\bootstrap-fileinput\nuget\build.bat" />
+    <None Include="wwwroot\bootstrap-fileinput\nuget\Package.nuspec" />
+    <None Include="wwwroot\bootstrap-fileinput\README.md" />
+    <None Include="wwwroot\bootstrap-fileinput\scss\fileinput-rtl.scss" />
+    <None Include="wwwroot\bootstrap-fileinput\scss\fileinput.scss" />
+    <None Include="wwwroot\bootstrap-fileinput\scss\themes\explorer-fas\theme.scss" />
+    <None Include="wwwroot\bootstrap-fileinput\scss\themes\explorer-fa\theme.scss" />
+    <None Include="wwwroot\bootstrap-fileinput\scss\themes\explorer\theme.scss" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\explorer-fas\theme.js" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\explorer-fas\theme.min.js" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\explorer-fa\theme.js" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\explorer-fa\theme.min.js" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\explorer\theme.js" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\explorer\theme.min.js" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\fas\theme.js" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\fas\theme.min.js" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\fa\theme.js" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\fa\theme.min.js" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\gly\theme.js" />
+    <None Include="wwwroot\bootstrap-fileinput\themes\gly\theme.min.js" />
+    <None Include="wwwroot\bootstrap-suggest-plugin\.eslintrc" />
+    <None Include="wwwroot\bootstrap-suggest-plugin\.gitignore" />
+    <None Include="wwwroot\bootstrap-suggest-plugin\demo\demo.js" />
+    <None Include="wwwroot\bootstrap-suggest-plugin\dist\bootstrap-suggest.min.js" />
+    <None Include="wwwroot\bootstrap-suggest-plugin\Gruntfile.js" />
+    <None Include="wwwroot\bootstrap-suggest-plugin\README.md" />
+    <None Include="wwwroot\bootstrap-suggest-plugin\src\bootstrap-suggest.js" />
+    <None Include="wwwroot\jquery-ui-1.12.1.custom\external\jquery\jquery.js" />
+    <None Include="wwwroot\jquery-ui-1.12.1.custom\jquery-ui.js" />
+    <None Include="wwwroot\jquery-ui-1.12.1.custom\jquery-ui.min.js" />
     <None Include="wwwroot\scss\app.scss" />
     <None Include="wwwroot\scss\colors\blue-dark.scss" />
     <None Include="wwwroot\scss\colors\blue.scss" />
@@ -558,6 +659,12 @@
     <None Include="wwwroot\site\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <None Include="wwwroot\site\fonts\icomoon\icomoon.svg" />
     <None Include="wwwroot\site\js\modernizr-2.6.2.min.js" />
+    <None Include="wwwroot\tapmodo-Jcrop-1902fbc\demos\crop.php" />
+    <None Include="wwwroot\tapmodo-Jcrop-1902fbc\js\jquery.color.js" />
+    <None Include="wwwroot\tapmodo-Jcrop-1902fbc\js\jquery.Jcrop.js" />
+    <None Include="wwwroot\tapmodo-Jcrop-1902fbc\js\jquery.Jcrop.min.js" />
+    <None Include="wwwroot\tapmodo-Jcrop-1902fbc\js\jquery.min.js" />
+    <None Include="wwwroot\tapmodo-Jcrop-1902fbc\README.md" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="http://json.schemastore.org/appveyor" /></VisualStudio></ProjectExtensions>

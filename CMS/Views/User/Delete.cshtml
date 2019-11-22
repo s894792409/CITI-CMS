@@ -2,53 +2,107 @@
 
 @{
     ViewData["Title"] = "Delete user";
+    ViewData["Controller"] = "User";
 }
 
-<h2>Delete</h2>
-
+<br /><p align="center" style="font-size:50px;">Delete user</p>
+      <hr />
 <h3>Are you sure you want to delete this?</h3>
-<div class="card border-dark mb-3" style="max-width: 18rem;">
-    <div class="card-header">Theme</div>
-    <div class="card-body">
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.UserName)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.UserName)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.NormalizedEmail)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.NormalizedEmail)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Admin)
-            </dt>
-            <dd>
-                @{
-                        string role = "";
-                        if (Model.Admin)
-                        {
-                            role = "Admin";
+<br /><br />
+      <div class="d-flex justify-content-center">
+          <div class="card border-dark mb-3" style="max-width: 18rem;border:1px solid #808080;">
+              <div class="card-header" align="center">User information</div>
+              <div class="card-body">
+                  <dl class="dl-horizontal">
+                      <dt>
+                          @Html.DisplayNameFor(model => model.UserName)
+                      </dt>
+                      <dd>
+                          @Html.DisplayFor(model => model.UserName)
+                      </dd>
+                      <dt>
+                          @Html.DisplayNameFor(model => model.Email)
+                      </dt>
+                      <dd>
+                          @Html.DisplayFor(model => model.Email)
+                      </dd>
+                      <dt>
+                          @Html.DisplayNameFor(model => model.Admin)
+                      </dt>
+                      <dd>
+                          @{
+                              string role = "";
+                              if (Model.Admin)
+                              {
+                                  role = "Admin";
+                              }
+                              else
+                              {
+                                  role = "User";
+                              }
+                          }
+                          @Html.DisplayFor(modelItem => role)
+
+                      </dd>
+                  </dl>
+
+                  <form asp-action="Delete" id="delete">
+                      <input type="hidden" asp-for="UserName" />
+                      <input type="button" value="Delete" class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal" />
+                      <a asp-action="AllUser" class="btn btn-outline-info">Back to List</a>
+
+                  </form>
+                  <h1 class="text-danger">@ViewBag.error</h1>
+              </div>
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <br /><br /><br />
+                  <div class="modal-dialog">
+                      <div class="modal-content d-flex justify-content-center" style="">
+                          <div class="modal-header">
+                              <p style="font-size:30px;width:100%;" align="center">Confirm password</p>
+                          </div>
+                          <div class="modal-body">
+                              <div class="card" style="padding:30px;">
+                                  <div class="form-group">
+                                      <label class="control-label">Please enter the password of the currently logged in account:</label>
+                                      <input type="password" id="confim" class="form-control" />
+                                      <span type="text" id="confimerr" class="text-danger">@ViewBag.error</span>
+                                  </div>
+                                  <div class="d-flex justify-content-center">
+                                      <input type="button" value="submit" onclick="checkPassword()" />
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+@section scripts{ 
+              <script>
+                  function checkPassword() {
+                      var formData = new FormData();
+                      formData.append("Password", $("#confim").val());
+                      $.ajax({
+                    url: '@Url.Action("checkPassword")',
+                          type: 'POST',
+                          data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (returndata) {
+                        if (returndata.success) {
+                            document.getElementById("delete").submit();
+                            //alert("Success! \n" + returndata.success);
+                        } else {
+                            $("#confimerr").html("Invalid password");
+                            //alert("Error! \n" + returndata.success);
                         }
-                        else
-                        {
-                            role = "User";
-                        }
+                    },
+                    error: function (returndata) {
+                        alert(returndata.msg);
+
                     }
-                    @Html.DisplayFor(modelItem => role)
-                
-            </dd>
-        </dl>
-
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="UserName" />
-            <input type="submit" value="Delete" class="btn btn-outline-danger" />
-            <a asp-action="AllUser" class="btn btn-outline-info">Back to List</a>
-
-        </form>
-        <h1 class="text-danger">@ViewBag.error</h1>
-    </div>
-    </div>
+                });
+                  }
+              </script>
+    }

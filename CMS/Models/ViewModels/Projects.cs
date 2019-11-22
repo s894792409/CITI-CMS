@@ -20,8 +20,7 @@ namespace CMS.Models.ViewModels
         [Required]
         [Display(Name = "Number Of Students")]
         public int noOfStudents { get; set; }
-        [Required]
-        [Display(Name = "Created Date")]
+        [Display(Name = "Create date")]
         public DateTime dateCreated { get; set; }
 
     }

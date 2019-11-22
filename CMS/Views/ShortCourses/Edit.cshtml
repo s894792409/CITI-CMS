@@ -2,11 +2,12 @@
 
 @{
     ViewData["Title"] = "Edit short courses";
+    ViewData["Controller"] = "short course";
 }
 
-<p align="center" style="font-size:50px;margin-top:50px;" class="title">Edit short courses</p>
+<br /><p align="center" style="font-size:50px;margin-top:50px;" class="title">Edit short courses</p>
 <hr />
-<div class="row">
+<div class="row d-flex justify-content-center">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -31,15 +32,11 @@
                 <input asp-for="courseVenue" class="form-control" />
                 <span asp-validation-for="courseVenue" class="text-danger"></span>
             </div>
-            <input asp-for="dateCreated" class="form-control" style="display: none;"/>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <input asp-for="dateCreated" hidden="hidden" />
+            <div class="form-group d-flex justify-content-center">
+                <input type="submit" value="Save" class="btn btn-info align-self-center" />
+                <a asp-action="Index" class="btn btn-outline-info" style="margin-left:15px;">Back to List</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

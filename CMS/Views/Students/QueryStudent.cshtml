@@ -4,7 +4,7 @@
      ViewData["Title"] = "Query Student";
 }
 
-<p align="center" style="font-size:50px;margin-top:50px;" class="title">Search result</p>
+<p align="center" style="font-size:50px;" >Search result</p>
 <p align="center">
     <a class="btn btn-info" asp-action="Create">Create New</a>
     <a class="btn btn-info" asp-action="Index">All Students</a>
@@ -24,12 +24,6 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.projectId)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.studentYear)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.dateCreated)
-                            </th>
                             <th></th>
                         </tr>
                     </thead>
@@ -42,16 +36,6 @@
                                 </td>
                                 <td style="line-height:40px;">
                                     @Html.DisplayFor(modelItem => item.projectId)
-                                </td>
-                                <td style="line-height:40px;">
-                                    @Html.DisplayFor(modelItem => item.studentYear)
-                                </td>
-                                <td style="line-height:40px;">
-                                    @using System.Globalization;
-                                    @{
-                                        string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                                    }
-                                    @Html.DisplayFor(modelItem => datecreated)
                                 </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.studentAdmin" class="btn btn-success">Edit</a>

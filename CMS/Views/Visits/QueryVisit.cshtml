@@ -12,7 +12,7 @@
     <title>QueryVisit</title>
 </head>
 <body>
-    <p align="center" style="font-size:50px;margin-top:50px;" class="title">Search result</p>
+    <p align="center" style="font-size:50px;" >Search result</p>
     <p align="center">
         <a class="btn btn-info" asp-action="Create">Create New</a>
         <a class="btn btn-info" asp-action="Index">All Visits</a>
@@ -26,93 +26,76 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.companyName)
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Name)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.companyTypeId)
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.StartDate)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.noOfPax)
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.EndDate)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.visitDate)
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Pax)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.visitTypeId)
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.SIC)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.dateCreated)
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Host)
                                 </th>
-                                <th></th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.ForeignVisit)
+                                </th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody data-spy="scroll" data-target="#navbar-example2" data-offset="0">
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td style="line-height:40px;">
-                                        @Html.DisplayFor(modelItem => item.companyName)
+                                        @Html.DisplayFor(modelItem => item.Name)
                                     </td>
                                     <td style="line-height:40px;">
                                         @{
-                                            var _context = new CMSContext();
-                                            string companytype = null;
-                                            var CompanyTypelist = _context.CompanyType.FromSql("SELECT companyTypeId, companyType FROM CompanyType").ToList();
+                                            string startdate = item.StartDate.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
+                                        }
+                                        @Html.DisplayFor(modelItem => startdate)
+                                    </td>
+                                    <td style="line-height:40px;">
+                                        @{
 
-                                            foreach (CompanyType companyType in CompanyTypelist)
-                                            {
-                                                if (companyType.companyTypeId == item.companyTypeId)
-                                                {
-                                                    companytype = companyType.companyType;
-                                                    break;
-                                                }
-                                            }
+                                            string enddate = item.EndDate.Equals("") ? item.EndDate?.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo) : "NIL";
                                         }
-                                        @Html.DisplayFor(modelItem => companytype)
+                                        @Html.DisplayFor(modelItem => enddate)
                                     </td>
                                     <td style="line-height:40px;">
-                                        @Html.DisplayFor(modelItem => item.noOfPax)
+                                        @Html.DisplayFor(modelItem => item.Pax)
                                     </td>
                                     <td style="line-height:40px;">
-                                        @{
-                                            string date = item.visitDate.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                                        }
-                                        @Html.DisplayFor(modelItem => date)
+                                        @Html.DisplayFor(modelItem => item.SIC)
+                                    </td>
+                                    <td style="line-height:40px;">
+                                        @Html.DisplayFor(modelItem => item.Host)
                                     </td>
                                     <td style="line-height:40px;">
                                         @{
-                                            //var _context = new CMSContext();
-                                            string visitType = null;
-                                            var visitTypelist = _context.VisitType.FromSql("SELECT visitTypeId, visitType FROM VisitType").ToList();
-
-                                            foreach (VisitType visitTypes in visitTypelist)
-                                            {
-                                                if (visitTypes.visitTypeId == item.visitTypeId)
-                                                {
-                                                    visitType = visitTypes.visitType;
-                                                    break;
-                                                }
-                                            }
+                                            string foreignVisit = item.ForeignVisit ? "Yes" : "No";
                                         }
-                                        @Html.DisplayFor(modelItem => visitType)
-                                    </td>
-                                    <td style="line-height:40px;">
-                                        @{
-                                            string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                                        }
-                                        @Html.DisplayFor(modelItem => datecreated)
+                                        @Html.DisplayFor(modelItem => foreignVisit)
                                     </td>
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.visitId" class="btn btn-success">Edit</a>
-                                        @*<a asp-action="Details" asp-route-id="@item.visitId" class="btn btn-info">Details</a> *@
-                                        <a asp-action="Delete" asp-route-id="@item.visitId" class="btn btn-danger">Delete</a>
+
+                                        <a asp-action="Edit" asp-route-id="@item.VisitId" class="btn btn-success">Edit</a>
+                                        @*<a asp-action="Details" asp-route-id="@item.visitId" class="btn btn-info">Details</a>*@
+                                        <a asp-action="Delete" asp-route-id="@item.VisitId" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
-                    </div>
+                </div>
                 </div>
             </div>
         </div>

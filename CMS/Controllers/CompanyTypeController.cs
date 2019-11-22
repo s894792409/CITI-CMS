@@ -150,14 +150,14 @@ namespace CMS.Controllers
            
             foreach (Visits visits in Visitlist)
             {
-                if (visits.companyTypeId == id)
-                {
-                    ViewBag.error = "This item is currently being used";
-                    CompanyType type = new CompanyType();
-                    type.companyType = companyType;
-                    type.companyTypeId = id;
-                    return View(type);
-                }
+                //if (visits.companyTypeId == id)
+                //{
+                //    ViewBag.error = "This item is currently being used";
+                //    CompanyType type = new CompanyType();
+                //    type.companyType = companyType;
+                //    type.companyTypeId = id;
+                //    return View(type);
+                //}
             }
             var companytype = await _context.CompanyType.SingleOrDefaultAsync(m => m.companyTypeId == id);
             _context.CompanyType.Remove(companytype);

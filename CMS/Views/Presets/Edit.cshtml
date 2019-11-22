@@ -1,6 +1,8 @@
 ﻿@model CMS.Models.ViewModels.Preset
 @{
     ViewData["Meta"] = new string[3] { "Edit Preset", "MetaKeyword", "MetaDescription" };
+    ViewData["Title"] = "Edit Preset";
+    ViewData["Controller"] = "Preset";
 }
 <!DOCTYPE html>
 
@@ -9,15 +11,21 @@
     <title>Edit</title>
 </head>
 <body>
-    <p align="center" style="font-size:50px;margin-top:50px;" class="title">Edit presets</p>
+    <br /> <p align="center" style="font-size:50px;" >Edit preset</p>
     <hr />
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <div class="col-md-4">
-            <form asp-action="Edit">
+            <form asp-action="Edit" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="presetId" />
+                <input asp-for="presetId" hidden="hidden" />
+                <input asp-for="dateCreated" hidden="hidden" />
                 <div class="form-group">
-                    <label asp-for="themeId" class="control-label">Theme Name</label>
+                    <label asp-for="presetName" class="control-label">presetName</label>
+                    <input asp-for="presetName" class="form-control" />
+                    <span asp-validation-for="presetName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="themeId" class="control-label"></label>
                     <select asp-for="themeId" class="form-control" asp-items="@ViewBag.namelist "></select>
                     <span asp-validation-for="themeId" class="text-danger"></span>
                 </div>
@@ -26,17 +34,12 @@
                     <select asp-for="visitId" class="form-control" asp-items="@ViewBag.selectlist "></select>
                     <span asp-validation-for="visitId" class="text-danger"></span>
                 </div>
-                <input asp-for="dateCreated" class="form-control" style="display: none;" />
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                <div class="form-group d-flex justify-content-center">
+                    <input type="submit" value="Save" class="btn btn-info align-self-center" />
+                    <a asp-action="Index" class="btn btn-outline-info" style="margin:15px;">Back to List</a>
                 </div>
             </form>
         </div>
     </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
-
 </body>
 </html>

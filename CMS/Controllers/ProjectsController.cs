@@ -24,8 +24,11 @@ namespace CMS.Controllers
         // GET: Projects
         public async Task<IActionResult> Index()
         {
+            ViewBag.rows = 5;
             return View(await _context.Projects.ToListAsync());
         }
+
+       
         public IActionResult QueryView()
         {
             return View();
@@ -76,8 +79,8 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                projects.noOfStudents = 0;
                 projects.dateCreated = DateTime.Now;
+                projects.noOfStudents = 0;
                 _context.Add(projects);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

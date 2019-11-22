@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using CMS.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using System.Globalization;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CMS.Controllers
 {
@@ -21,8 +24,9 @@ namespace CMS.Controllers
         private IPasswordHasher<AppUser> passwordHasher;
         private SignInManager<AppUser> signInManager;
         private IdentityDbContext identityDbContext;
+        private IHostingEnvironment _hostingEnvironment;
 
-        public UserController(UserManager<AppUser> userMgr, IUserValidator<AppUser> userValid, IPasswordValidator<AppUser> passValid, IPasswordHasher<AppUser> passwordHash, SignInManager<AppUser> signMgr)
+        public UserController(UserManager<AppUser> userMgr, IUserValidator<AppUser> userValid, IPasswordValidator<AppUser> passValid, IPasswordHasher<AppUser> passwordHash, SignInManager<AppUser> signMgr,IHostingEnvironment hosting)
         {
             userManager = userMgr;
             userValidator = userValid;
@@ -30,15 +34,17 @@ namespace CMS.Controllers
             passwordHasher = passwordHash;
             signInManager = signMgr;
             identityDbContext = new IdentityDbContext();
+            _hostingEnvironment = hosting;
         }
 
         public IActionResult Index()
         {
+            ViewBag.rows = 5;
             return View();
         }
         public async Task<IActionResult> AllUser()
         {
-             
+            ViewBag.rows = 5;
             return View(await identityDbContext.AspNetUsers.ToListAsync());
         }
 
@@ -238,7 +244,53 @@ namespace CMS.Controllers
             var user = await identityDbContext.AspNetUsers.SingleOrDefaultAsync(s => s.UserName == username);
             identityDbContext.AspNetUsers.Remove(user);
             await identityDbContext.SaveChangesAsync();
+            string action = $"delete user '{user.UserName}'";
+            await insertLogAsync(action);
             return RedirectToAction(nameof(AllUser));
+        }
+        [HttpPost]
+        public async Task<IActionResult> checkPassword()
+        {
+            bool success = false;
+            
+            string password = Request.Form["Password"];
+            AppUser user = await userManager.GetUserAsync(HttpContext.User);
+            var roles = await userManager.GetRolesAsync(user);
+            if (roles.FirstOrDefault() == "Admin")
+            {
+                Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, password, false, false);
+                if (result.Succeeded)
+                {
+                    success = true;
+                }
+            }
+            return Json(new { success = success });
+        }
+
+        [HttpPost]
+        public async Task insertLogAsync(string action)
+        {
+            string webrootpath = _hostingEnvironment.WebRootPath;
+            string filename = $"{DateTime.Now.Date.ToString("dd MMM yyyy", DateTimeFormatInfo.InvariantInfo)}.txt";
+            string path = Path.Combine(webrootpath, "Log", filename).ToString();
+            FileInfo file = new FileInfo(path);
+            if (file.Exists)
+            {
+                StreamWriter sw = file.AppendText();
+                string time = DateTime.Now.ToString("dd MMM yyyy,hh:mm:ss", DateTimeFormatInfo.InvariantInfo);
+                AppUser user = await userManager.GetUserAsync(HttpContext.User);
+                sw.WriteLine($"[{time}] {user.UserName} {action}");
+                sw.Close();
+            }
+            else
+            {
+                // await file.Create();
+                StreamWriter sw = file.CreateText();
+                string time = DateTime.Now.ToString("dd MMM yyyy,hh:mm:ss", DateTimeFormatInfo.InvariantInfo);
+                AppUser user = await userManager.GetUserAsync(HttpContext.User);
+                sw.WriteLine($"[{time}] {user.UserName} {action}");
+                sw.Close();
+            }
         }
     }
 }

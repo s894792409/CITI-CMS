@@ -1,19 +1,64 @@
 ﻿@model IEnumerable<CMS.Models.ViewModels.ShortCourses>
-
+@using System.Globalization;
 @{
     ViewData["Title"] = "All short courses";
+    ViewData["Controller"] = "short course";
 }
-<p align="center" style="font-size:50px;margin-top:50px;" class="title">All short courses</p>
-<p align="center">
-    <a class="btn btn-info" asp-action="Create">Create New</a>
-    <a class="btn btn-info" asp-action="QueryView">Query short courses</a>
-</p>
+<style>
+    td {
+        /*允许在单词内换行。*/
+        word-break: break-word;
+        /*设置宽度*/
+        width: 100px;
+    }
+</style>
+<br />
+<p align="center" style="font-size:50px;">Short courses</p>
+<div class="row d-flex justify-content-end">
+    <div class="form-group" style="width:300px;">
+        <div class="input-group" style="max-width:300px;">
+            <input id="keyWord" name="keyWord" type="text" class="form-control no-padding" style="max-width:300px;" onkeydown="onKeyDown(event)" placeholder="Search for courses name">
+            <span class="input-group-addon" onclick="search()"><a class="srh-btn" onclick="search()"><i class="ti-search" onclick="search()"></i></a></span>
+            <div class="input-group-btn" style="max-width:300px;">
+                <ul class="dropdown-menu dropdown-menu-left" role="menu"></ul>
+            </div>
+        </div>
+    </div>
+    <div style="margin-left:20px;margin-right:18px;">
+        <a class="btn btn-info" asp-action="Create">Create New</a>
+    </div>
+</div>
+@*<div class="card text-white bg-secondary mb-3">
+        <div class="card-body">
+            <h3 class="card-title"><i class="fa fa-filter" aria-hidden="true"></i>Search Criteria</h3>
+            <form asp-action="Index" method="post" class="d-flex justify-content-center">
+                @{
+                    string fromdate = "";
+                    string Enddate = "";
+                    try
+                    {
+                        fromdate = ViewBag.fromdate.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+                        Enddate = ViewBag.enddate.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                <span>Date From <input type="date" name="fromdate" value="@fromdate" /></span>
+                <span style="padding-left:50px;">To<input type="date" name="enddate" value="@Enddate" /></span>
+                <span style="padding-left:50px;">Number of rows displayed<input type="number" name="rows" value="@ViewBag.rows" /></span>
+                <span style="padding-left:50px;"><input type="submit" value="Filter" /></span>
+            </form>
+            <h3 class="text-danger">@ViewBag.error</h3>
+        </div>
+    </div>*@
 <div class="row">
     <!-- column -->
     <div class="col-sm-12">
         <div class="card">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                         <tr>
                             <th>
@@ -28,15 +73,16 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.courseVenue)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.dateCreated)
-                            </th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
+                        @{
+                            var rowsum = 0;
+                        }
                         @foreach (var item in Model)
                         {
+                            rowsum++;
                             <tr>
                                 <td style="line-height:40px;">
                                     @Html.DisplayFor(modelItem => item.courseName)
@@ -50,23 +96,200 @@
                                 <td style="line-height:40px;">
                                     @Html.DisplayFor(modelItem => item.courseVenue)
                                 </td>
-                                <td style="line-height:40px;">
-                                    @using System.Globalization;
-                                    @{
-                                        string datecreated = item.dateCreated.ToString("dd MMM yyyy,hh:mm", DateTimeFormatInfo.InvariantInfo);
-                                    }
-                                    @Html.DisplayFor(modelItem => datecreated)
-                                </td>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.courseId" class="btn btn-success">Edit</a>
+                                    <a asp-action="Edit" asp-route-id="@item.courseId" class="btn btn-success" style="width:80px;">Edit</a>
                                     @*<a asp-action="Details" asp-route-id="@item.courseId" class="btn btn-info">Details</a>*@
-                                    <a asp-action="Delete" asp-route-id="@item.courseId" class="btn btn-danger">Delete</a>
+                                    <a asp-action="Delete" asp-route-id="@item.courseId" class="btn btn-danger" style="width:80px;">Delete</a>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
-                </div>
+                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                    <ul class="pagination" id="pagebutton">
+                        <li class="page-item"><a class="page-link" href="#" onclick="Previous()">Previous</a></li>
+                        @{
+                            int tabsum = (rowsum % ViewBag.rows == 0) ? rowsum / ViewBag.rows : rowsum / ViewBag.rows + 1;
+                            if (tabsum == 0)
+                            {
+                                tabsum = 1;
+                            }
+                        }
+                        @for (var s = 1; s <= tabsum; s++)
+                        {
+                            <li class="page-item"><a class="page-link" href="#" onclick="PageSwitch(@s)" name="ym">@s</a></li>
+
+                        }
+                        <li class="page-item"><a class="page-link" href="#" onclick="Next()">Next</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
+</div>
+<div class="d-flex justify-content-center">
+    <input type="button" onclick="reset()" value="reset" class="btn btn-outline-primary" id="reset" hidden="hidden" />
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/bootstrap-suggest-plugin/dist/bootstrap-suggest.min.js"></script>
+<script src="~/bootstrap-suggest-plugin/src/bootstrap-suggest.js"></script>
+<script src="~/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script type="text/javascript">
+        var table;
+        var rowSum;
+        var pageSum;
+    var page;
+    var searchflag = false;
+
+        window.onload = function () {
+            table = document.getElementById("table");
+            rowSum = table.rows.length;
+            showrows = @ViewBag.rows;    //显示的行数
+            pageSum = @tabsum;
+            page = 1;
+
+            PageSwitch(page);
+        }
+        function PageSwitch(newpage) {
+            if (searchflag != true) {
+                if (newpage > 0 && newpage <= pageSum) {
+                    page = newpage;
+                    for (var e = 1; e <= pageSum; e++) {
+                        if (e == newpage) {
+                            //var li = document.getElementById("pagebutton");
+                            //li.classList.add("active");
+                            document.getElementsByClassName("page-item")[e].classList.add("active");
+                        } else {
+                            //var li = document.getElementById("1");
+                            // li.classList.remove("active");
+                            document.getElementsByClassName("page-item")[e].classList.remove("active");
+                        }
+
+                    }
+
+                    for (var i = 1; i < rowSum; i++) {
+                        table.rows[i].style.display = "none";
+                    }
+                    if (newpage == 1) {
+                        try {
+                            for (n = newpage * showrows - showrows; n <= newpage * showrows; n++) {
+                                table.rows[n].style.display = "";
+                            }
+                        } catch{}
+                    } else {
+                        for (var n = newpage * showrows - showrows + 1; n <= newpage * showrows; n++) {
+                            table.rows[n].style.display = "";
+                        }
+                    }
+                }
+            }
+        }
+    function Previous() {
+        if (searchflag != true) {
+            if (page > 1 && page <= pageSum) {
+                PageSwitch(--page);
+            }
+        }
+        }
+    function Next() {
+        if (searchflag != true) {
+            if (page > 0 && page < pageSum) {
+                PageSwitch(++page);
+            }
+        }
+    }
+    function onKeyDown(event) {
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if (e && e.keyCode == 13) { // enter 键
+            search();
+        }
+
+    }
+    /**
+       *  下拉框
+       */
+    (function () {
+        var dataList = {
+            value: []
+        };
+        init(dataList);
+        console.info(dataList);
+        suggest("keyWord", dataList);
+        //请求json格式的数据 {value: [key:value,key2:value2]};
+        function init(dataList) {
+            $.ajax({
+                type: 'get',
+                async: false,
+                url: '/api/ProductRest/search?term=ShortCourses',
+                success: function (result) {
+                    console.log(result);
+                    var data = result;
+                    for (var i = 0; i < data.length; i++) {
+                        var obj = {};
+                        obj.name = data[i];
+                        dataList.value.push(obj);
+                        console.log("obj.name:" + obj.name);
+                        console.log("datalist:" + dataList[i]);
+                    }
+                }
+            });
+            return dataList;
+        }
+        // 插件绑定事件
+        function suggest(domID, dataList) {
+            $("#" + domID).bsSuggest({
+                indexId: 1, // data.value 的第几个数据，作为input输入框的显示的内容
+                // indexKey: 2, //data.value 的第几个数据，作为input输入框的内容
+                data: dataList,
+                ignorecase: true,
+                inputBgColor: '#fff',
+                inputWarnColor: '#fff', 
+                //listAlign: 'auto',
+                listStyle: {
+                    'padding-top': 0, 'max-height': '375px', 'max-width': '300px',
+                    'overflow': 'auto', 'width': '300px',
+                    'transition': '0.3s', '-webkit-transition': '0.3s', '-moz-transition': '0.3s', '-o-transition': '0.3s'
+                }
+            }).on('onDataRequestSuccess', function (e, result) {
+                console.log('从 json参数中获取，不会触发 onDataRequestSuccess 事件', result);
+            }).on('onSetSelectValue', function (e, keyword, data) {
+                console.log('onSetSelectValue: ', keyword, data);
+            }).on('onUnsetSelectValue', function () {
+                console.log("onUnsetSelectValue");
+            });
+        }
+    }());
+    var input = $("#keyWord");
+    function search() {
+        searchflag = true;
+        if (input.val() == "") {
+            searchflag = false;
+            PageSwitch(1);
+            //for (var e = 0; e <= pageSum + 1; e++) {
+            //    document.getElementsByClassName("page-item")[e].style.display = "";
+            //}
+            document.getElementById("pagebutton").style.display = "";
+            document.getElementById("reset").hidden = "hidden";
+        } else {
+            for (var i = 1; i < rowSum; i++) {
+                table.rows[i].style.display = "none";
+            }
+            for (var i = 1; i < rowSum; i++) {
+                var x = document.getElementById('table').rows[i].cells;
+                //console.log("table value:" + x[1].innerHTML.replace(/^\s*|\s*$/g, "") + "\n input value:" + input.val());
+                if (x[0].innerHTML.replace(/^\s*|\s*$/g, "") == input.val()) {
+                    table.rows[i].style.display = "";
+                }
+            }
+            //for (var e = 0; e <= pageSum + 1; e++) {
+            //    document.getElementsByClassName("page-item")[e].style.display = "none";
+            //}
+            document.getElementById("pagebutton").style.display = "none";
+            document.getElementById("reset").hidden = "";
+        }
+    }
+    function reset() {
+        input.val("");
+        search();
+    }
+</script>

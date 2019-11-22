@@ -145,14 +145,14 @@ namespace CMS.Controllers
 
             foreach (Visits visits in Visitlist)
             {
-                if (visits.visitTypeId == id)
-                {
-                    ViewBag.error = "This item is currently being used";
-                    VisitType type = new VisitType();
-                    type.visitType = visitType;
-                    type.visitTypeId = id;
-                    return View(type);
-                }
+                //if (visits.visitTypeId == id)
+                //{
+                //    ViewBag.error = "This item is currently being used";
+                //    VisitType type = new VisitType();
+                //    type.visitType = visitType;
+                //    type.visitTypeId = id;
+                //    return View(type);
+                //}
             }
             var visitType1 = await _context.VisitType.SingleOrDefaultAsync(m => m.visitTypeId == id);
             _context.VisitType.Remove(visitType1);

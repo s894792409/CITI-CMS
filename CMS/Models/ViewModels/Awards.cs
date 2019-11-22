@@ -14,7 +14,7 @@ namespace CMS.Models.ViewModels
         [Display(Name = "Award Name")]
         [Required]
         public string awardName { get; set; }
-        [Display(Name = "Award Level")]
+        [Display(Name = "Achievement")]
         [Required]
         public string awardLevel { get; set; }
         [Display(Name = "Number of Recipients")]
@@ -23,9 +23,7 @@ namespace CMS.Models.ViewModels
         [Display(Name = "Award Type")]
         [Required]
         public string awardType { get; set; }
-        [Display(Name = "Created Date ")]
-        [Required]
+        [Display(Name ="Create date")]
         public DateTime dateCreated { get; set; }
-
     }
 }

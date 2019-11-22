@@ -2,54 +2,88 @@
 
 @{
     ViewData["Title"] = "Edit award";
+    ViewData["Controller"] = "Award";
 }
 
-<p align="center" style="font-size:50px;margin-top:50px;" class="title">Edit awards</p>
+<br /><p align="center" style="font-size:50px;" >Edit award</p>
 <hr />
-<div class="row">
+<div class="row d-flex justify-content-center">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" id="form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="awardId" />
-            <div class="form-group">
-                <label asp-for="awardName" class="control-label"></label>
-                <input asp-for="awardName" class="form-control" />
-                <span asp-validation-for="awardName" class="text-danger"></span>
+            <input asp-for="awardId" hidden="hidden" />
+            <input asp-for="dateCreated" hidden="hidden" />
+            <div class="">
+                <div>
+                    <div class="form-group">
+                        <label asp-for="awardName" class="control-label"></label>
+                        <input asp-for="awardName" class="form-control" />
+                        <span asp-validation-for="awardName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="awardLevel" class="control-label"></label>
+                        <select asp-for="awardLevel" class="form-control" id="awardselect" onchange="checklevel()">
+                            <option value="Gold">Gold</option>
+                            <option value="Silver">Silver</option>
+                            <option value="Bronze">Bronze</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input type="text" style="display:none;" class="form-control" id="other" name="other" placeholder="Enter your Achievement" />
+                        <span asp-validation-for="awardLevel" id="awardLevelErr" class="text-danger"></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label asp-for="noOfRecipients" class="control-label"></label>
+                        <input asp-for="noOfRecipients" class="form-control" />
+                        <span asp-validation-for="noOfRecipients" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="awardType" class="control-label"></label>
+                        <select asp-for="awardType" class="form-control">
+                            <option value="Academic">Academic</option>
+                            <option value="Non-Academic">Non-Academic</option>
+                            <option value="Competition">Competition</option>
+                            <option value="School award">School award</option>
+                        </select>
+                        <span asp-validation-for="awardType" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="awardLevel" class="control-label"></label>
-                <select asp-for="awardLevel" class="form-control">
-                    <option value="First">First</option>
-                    <option value="Second">Second</option>
-                    <option value="Third">Third</option>
-                    <option value="NIL">NIL</option>
-                </select>
-                <span asp-validation-for="awardLevel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="noOfRecipients" class="control-label"></label>
-                <input asp-for="noOfRecipients" class="form-control" />
-                <span asp-validation-for="noOfRecipients" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="awardType" class="control-label"></label>
-                <select asp-for="awardType" class="form-control">
-                    <option value="Academic">Academic</option>
-                    <option value="Non-Academic">Non-Academic</option>
-                    <option value="Competition">Competition</option>
-                    <option value="Shool award">Shool award</option>
-                </select>
-                <span asp-validation-for="awardType" class="text-danger"></span>
-            </div>
-            <input asp-for="dateCreated" class="form-control" style="display: none;" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="form-group d-flex justify-content-center">
+                <input type="button" value="Save" onclick="checktype()" class="btn btn-info align-self-center" />
+                <a asp-action="Index" class="btn btn-outline-info" style="margin-left:15px;">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+<script>
+    var otherflag = false;
+    function checklevel() {
+        var select = document.getElementById("awardselect");
+        var index = select.selectedIndex;
+        var choose = select.options[index].value;
+        if (choose == "Other") {
+            otherflag = true;
+            document.getElementById("other").style.display = "";
+        } else {
+            otherflag = false;
+            document.getElementById("other").style.display = "none";
+        }
+    }
+    function checktype() {
+        var othercontent = document.getElementById("other");
+        if (otherflag == true) {
+            if (othercontent.value == "") {
+                document.getElementById("awardLevelErr").innerText = "Enter your Achievement!";
+                othercontent.focus();
+            } else {
+                document.getElementById("awardLevelErr").innerText = "";
+                document.getElementById("form").submit();
+            }
+        } else {
+            document.getElementById("form").submit();
+        }
+    }
+</script>
