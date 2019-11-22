@@ -1,40 +1,33 @@
-USE [CMSCoreIdentity]
-GO
+﻿CREATE TABLE [dbo].[AspNetUsers] (
+    [Id]                   NVARCHAR (450)     NOT NULL,
+    [AccessFailedCount]    INT                NULL,
+    [Age]                  INT                NULL,
+    [ConcurrencyStamp]     NVARCHAR (MAX)     NULL,
+    [Country]              INT                NULL,
+    [Email]                NVARCHAR (256)     NULL,
+    [EmailConfirmed]       BIT                NULL,
+    [LockoutEnabled]       BIT                NULL,
+    [LockoutEnd]           DATETIMEOFFSET (7) NULL,
+    [NormalizedEmail]      NVARCHAR (256)     NULL,
+    [NormalizedUserName]   NVARCHAR (256)     NULL,
+    [PasswordHash]         NVARCHAR (MAX)     NULL,
+    [PhoneNumber]          NVARCHAR (MAX)     NULL,
+    [PhoneNumberConfirmed] BIT                NULL,
+    [SecurityStamp]        NVARCHAR (MAX)     NULL,
+    [TwoFactorEnabled]     BIT                NULL,
+    [UserName]             NVARCHAR (256)     NULL,
+    [Admin]                BIT                CONSTRAINT [DF_AspNetUsers_Admin] DEFAULT ((0)) NULL,
+    [UserKey]              VARCHAR (MAX)      NULL,
+    CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
 
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 2019/11/4 15:50:39 ******/
-SET ANSI_NULLS ON
-GO
 
-SET QUOTED_IDENTIFIER ON
 GO
+CREATE NONCLUSTERED INDEX [EmailIndex]
+    ON [dbo].[AspNetUsers]([NormalizedEmail] ASC);
 
-CREATE TABLE [dbo].[AspNetUsers](
-	[Id] [nvarchar](450) NOT NULL,
-	[AccessFailedCount] [int] NULL,
-	[Age] [int] NULL,
-	[ConcurrencyStamp] [nvarchar](max) NULL,
-	[Country] [int] NULL,
-	[Email] [nvarchar](256) NULL,
-	[EmailConfirmed] [bit] NULL,
-	[LockoutEnabled] [bit] NULL,
-	[LockoutEnd] [datetimeoffset](7) NULL,
-	[NormalizedEmail] [nvarchar](256) NULL,
-	[NormalizedUserName] [nvarchar](256) NULL,
-	[PasswordHash] [nvarchar](max) NULL,
-	[PhoneNumber] [nvarchar](max) NULL,
-	[PhoneNumberConfirmed] [bit] NULL,
-	[SecurityStamp] [nvarchar](max) NULL,
-	[TwoFactorEnabled] [bit] NULL,
-	[UserName] [nvarchar](256) NULL,
-	[Admin] [bit] NULL,
-	[UserKey] [varchar](max) NULL,
- CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
 
-ALTER TABLE [dbo].[AspNetUsers] ADD  CONSTRAINT [DF_AspNetUsers_Admin]  DEFAULT ((0)) FOR [Admin]
 GO
+CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
+    ON [dbo].[AspNetUsers]([NormalizedUserName] ASC) WHERE ([NormalizedUserName] IS NOT NULL);
 

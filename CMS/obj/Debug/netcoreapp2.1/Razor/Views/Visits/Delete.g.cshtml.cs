@@ -100,7 +100,7 @@ using System.Globalization;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(222, 42, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5c1f4527b454cbea0093439c674126c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fa42b6067f7b430b879460ed4b9f15b2", async() => {
                 BeginContext(228, 29, true);
                 WriteLiteral("\r\n    <title>Delete</title>\r\n");
                 EndContext();
@@ -120,7 +120,7 @@ using System.Globalization;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(266, 3562, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "81e64c6b76a349ff8981c9200a24ebc0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c1cb60f81a384e22a1db6c0037fa1cc5", async() => {
                 BeginContext(272, 649, true);
                 WriteLiteral(@"
     <br /><p align=""center"" style=""font-size:50px;"">Delete visit</p>
@@ -307,12 +307,12 @@ using System.Globalization;
                 WriteLiteral("</dt>\r\n                    </dl>\r\n                </div>\r\n                ");
                 EndContext();
                 BeginContext(3412, 359, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "83e18dc2eed14f3db4d8fbff87ccdfa1", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5083faeb621a48419c1dd5b0a559477b", async() => {
                     BeginContext(3476, 22, true);
                     WriteLiteral("\r\n                    ");
                     EndContext();
                     BeginContext(3498, 41, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "05a6a0ab5f1248ee9bb2f699649cb764", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4076080aa8af4672ba146a62d6656f39", async() => {
                     }
                     );
                     __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -337,7 +337,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                     WriteLiteral("\r\n                    <input type=\"submit\" value=\"Delete\" class=\"btn btn-outline-danger\" style=\"margin-right:20px;\" />\r\n                    ");
                     EndContext();
                     BeginContext(3679, 67, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9288c275a85c4760b4e659e058c06c22", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c36d3cf241e24d7099f3cd61445dd2aa", async() => {
                         BeginContext(3730, 12, true);
                         WriteLiteral("Back to List");
                         EndContext();

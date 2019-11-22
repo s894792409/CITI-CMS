@@ -21,9 +21,9 @@
                     <div class="form-group">
                         <label asp-for="awardLevel" class="control-label"></label>
                         <select asp-for="awardLevel" class="form-control" id="awardselect" onchange="checklevel()">
-                            <option value="First">First Winner</option>
-                            <option value="Second">Second Winner</option>
-                            <option value="Third">Third Winner</option>
+                            <option value="Gold">Gold</option>
+                            <option value="Silver">Silver</option>
+                            <option value="Bronze">Bronze</option>
                             <option value="Other">Other</option>
                         </select>
                         <input type="text" style="display:none;" class="form-control" id="other" name="other" placeholder="Enter your Achievement"/>
@@ -42,7 +42,7 @@
                             <option value="Academic">Academic</option>
                             <option value="Non-Academic">Non-Academic</option>
                             <option value="Competition">Competition</option>
-                            <option value="Shool award">Shool award</option>
+                            <option value="School award">School award</option>
                         </select>
                         <span asp-validation-for="awardType" class="text-danger"></span>
                     </div>
